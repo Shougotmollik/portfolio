@@ -1,21 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-
-const testimonials = [
-  {
-    quote:
-      "One of the most talented Flutter developers I've worked with. His ability to translate complex designs into smooth, performant mobile experiences is exceptional.",
-    name: "Alexandra Chen",
-    role: "Product Manager, TechVista Solutions",
-  },
-  {
-    quote:
-      "He not only delivered ahead of schedule but also suggested architectural improvements that significantly reduced our crash rate.",
-    name: "Marcus Rivera",
-    role: "CTO, AppForge Inc.",
-  },
-];
+import { testimonialsData } from "@/data/testimonials";
 
 const containerVariants = {
   hidden: {},
@@ -38,9 +24,11 @@ export default function Testimonials() {
           transition={{ duration: 0.4, ease: "easeOut" }}
           className="mb-16 md:mb-24 max-w-3xl"
         >
-          <p className="text-sm font-medium text-accent tracking-wider uppercase mb-5">Testimonials</p>
+          <p className="text-sm font-medium text-accent tracking-wider uppercase mb-5">
+            {testimonialsData.label}
+          </p>
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05] text-text-light">
-            Kind words.
+            {testimonialsData.headline}
           </h2>
         </motion.div>
 
@@ -51,7 +39,7 @@ export default function Testimonials() {
           viewport={{ once: true, amount: 0.2 }}
           className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16"
         >
-          {testimonials.map((t) => (
+          {testimonialsData.testimonials.map((t) => (
             <motion.blockquote key={t.name} variants={quoteVariants}>
               <p className="text-base md:text-lg text-text-muted leading-relaxed italic">
                 &ldquo;{t.quote}&rdquo;

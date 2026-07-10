@@ -3,12 +3,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import PhoneFrame from "@/components/ui/PhoneFrame";
-
-const heroImages = [
-  "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=800&fit=crop",
-  "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=800&fit=crop",
-  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=800&fit=crop",
-];
+import { heroData } from "@/data/hero";
 
 export default function Hero() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -52,7 +47,7 @@ export default function Hero() {
           transition={{ duration: 0.4, ease: "easeOut", delay: 0.05 }}
           className="text-sm font-medium text-accent tracking-wider uppercase mb-5"
         >
-          Flutter Mobile Engineer
+          {heroData.roleLabel}
         </motion.p>
 
         <motion.h1
@@ -61,8 +56,8 @@ export default function Hero() {
           transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
           className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-semibold tracking-tight leading-[0.95] text-balance max-w-5xl text-text-light"
         >
-          Shougot{" "}
-          <span className="text-accent">Mollik</span>
+          {heroData.heading.first}{" "}
+          <span className="text-accent">{heroData.heading.accent}</span>
         </motion.h1>
 
         <motion.p
@@ -71,8 +66,7 @@ export default function Hero() {
           transition={{ duration: 0.4, ease: "easeOut", delay: 0.15 }}
           className="mt-5 text-base sm:text-lg md:text-xl text-text-muted max-w-xl leading-relaxed"
         >
-          Building high-performance cross-platform mobile experiences
-          with Flutter &amp; Dart.
+          {heroData.subtitle}
         </motion.p>
 
         <motion.div
@@ -82,17 +76,17 @@ export default function Hero() {
           className="mt-8 flex flex-col sm:flex-row items-center gap-4"
         >
           <a
-            href="/resume.pdf"
+            href={heroData.ctaPrimary.href}
             download
             className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-text-light text-light-base text-sm font-semibold hover:opacity-85 transition-all duration-300"
           >
-            Download Resume
+            {heroData.ctaPrimary.label}
           </a>
           <a
-            href="#contact"
+            href={heroData.ctaSecondary.href}
             className="inline-flex items-center justify-center px-8 py-3 rounded-full border border-border-light text-text-light text-sm font-semibold hover:bg-text-light hover:text-light-base transition-all duration-300"
           >
-            Contact Me
+            {heroData.ctaSecondary.label}
           </a>
         </motion.div>
       </motion.div>
@@ -107,7 +101,7 @@ export default function Hero() {
             style={{ rotate: -8, transformOrigin: "bottom center" }}
           >
             <div className="opacity-70 scale-[0.65] sm:scale-[0.7] md:scale-[0.75]">
-              <PhoneFrame imageUrl={heroImages[0]} color="#5B7FDE" />
+              <PhoneFrame imageUrl={heroData.phoneImages[0]} color="#5B7FDE" />
             </div>
           </motion.div>
 
@@ -115,7 +109,7 @@ export default function Hero() {
             className="absolute left-1/2 -translate-x-1/2 bottom-0 w-[105px] sm:w-[130px] md:w-[155px] lg:w-[180px] z-[3]"
             style={{ rotate: 0, transformOrigin: "bottom center" }}
           >
-            <PhoneFrame imageUrl={heroImages[1]} color="#5B7FDE" />
+            <PhoneFrame imageUrl={heroData.phoneImages[1]} color="#5B7FDE" />
           </motion.div>
 
           <motion.div
@@ -123,7 +117,7 @@ export default function Hero() {
             style={{ rotate: 8, transformOrigin: "bottom center" }}
           >
             <div className="opacity-70 scale-[0.65] sm:scale-[0.7] md:scale-[0.75]">
-              <PhoneFrame imageUrl={heroImages[2]} color="#5B7FDE" />
+              <PhoneFrame imageUrl={heroData.phoneImages[2]} color="#5B7FDE" />
             </div>
           </motion.div>
         </div>

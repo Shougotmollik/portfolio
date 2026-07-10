@@ -1,14 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ComponentType } from "react";
 import { motion } from "framer-motion";
 import { GithubIcon, LinkedinIcon, XIcon } from "@/components/ui/Icons";
+import { contactData } from "@/data/contact";
 
-const socials = [
-  { label: "GitHub", icon: GithubIcon, href: "https://github.com" },
-  { label: "LinkedIn", icon: LinkedinIcon, href: "https://linkedin.com" },
-  { label: "X / Twitter", icon: XIcon, href: "https://twitter.com" },
-];
+const iconMap: Record<string, ComponentType<{ size?: number }>> = {
+  Github: GithubIcon,
+  Linkedin: LinkedinIcon,
+  X: XIcon,
+};
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -30,9 +31,11 @@ export default function Contact() {
           transition={{ duration: 0.4, ease: "easeOut" }}
           className="mb-16 md:mb-24 max-w-3xl"
         >
-          <p className="text-sm font-medium text-accent tracking-wider uppercase mb-5">Contact</p>
+          <p className="text-sm font-medium text-accent tracking-wider uppercase mb-5">
+            {contactData.label}
+          </p>
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05] text-text-dark">
-            Let&apos;s work together.
+            {contactData.headline}
           </h2>
         </motion.div>
 
@@ -45,19 +48,44 @@ export default function Contact() {
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <input id="name" type="text" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  className="w-full bg-transparent border-b border-border-dark px-0 py-3 text-base text-text-dark placeholder:text-text-muted outline-none focus:border-accent transition-colors duration-200" placeholder="Your name" />
+                <input
+                  id="name"
+                  type="text"
+                  required
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  className="w-full bg-transparent border-b border-border-dark px-0 py-3 text-base text-text-dark placeholder:text-text-muted outline-none focus:border-accent transition-colors duration-200"
+                  placeholder={contactData.formPlaceholders.name}
+                />
               </div>
               <div>
-                <input id="email" type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  className="w-full bg-transparent border-b border-border-dark px-0 py-3 text-base text-text-dark placeholder:text-text-muted outline-none focus:border-accent transition-colors duration-200" placeholder="Your email" />
+                <input
+                  id="email"
+                  type="email"
+                  required
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  className="w-full bg-transparent border-b border-border-dark px-0 py-3 text-base text-text-dark placeholder:text-text-muted outline-none focus:border-accent transition-colors duration-200"
+                  placeholder={contactData.formPlaceholders.email}
+                />
               </div>
               <div>
-                <textarea id="message" required rows={4} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  className="w-full bg-transparent border-b border-border-dark px-0 py-3 text-base text-text-dark placeholder:text-text-muted outline-none focus:border-accent transition-colors duration-200 resize-none" placeholder="Your message" />
+                <textarea
+                  id="message"
+                  required
+                  rows={4}
+                  value={form.message}
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  className="w-full bg-transparent border-b border-border-dark px-0 py-3 text-base text-text-dark placeholder:text-text-muted outline-none focus:border-accent transition-colors duration-200 resize-none"
+                  placeholder={contactData.formPlaceholders.message}
+                />
               </div>
-              <motion.button type="submit" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-text-dark text-dark-base text-sm font-semibold hover:opacity-85 transition-all duration-300">
+              <motion.button
+                type="submit"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-text-dark text-dark-base text-sm font-semibold hover:opacity-85 transition-all duration-300"
+              >
                 {submitted ? "Message sent" : "Send Message"}
               </motion.button>
             </form>
@@ -71,26 +99,52 @@ export default function Contact() {
             className="space-y-10"
           >
             <div>
-              <h3 className="text-xs font-semibold text-text-muted tracking-widest uppercase mb-4">Email</h3>
-              <a href="mailto:hello@shougot.dev" className="text-base md:text-lg text-text-dark hover:text-accent transition-colors duration-200">hello@shougot.dev</a>
+              <h3 className="text-xs font-semibold text-text-muted tracking-widest uppercase mb-4">
+                Email
+              </h3>
+              <a
+                href={`mailto:${contactData.emailAddress}`}
+                className="text-base md:text-lg text-text-dark hover:text-accent transition-colors duration-200"
+              >
+                {contactData.emailAddress}
+              </a>
             </div>
+
             <div>
-              <h3 className="text-xs font-semibold text-text-muted tracking-widest uppercase mb-4">Location</h3>
-              <p className="text-base md:text-lg text-text-muted">Remote / Worldwide</p>
+              <h3 className="text-xs font-semibold text-text-muted tracking-widest uppercase mb-4">
+                Location
+              </h3>
+              <p className="text-base md:text-lg text-text-muted">
+                {contactData.location}
+              </p>
             </div>
+
             <div>
-              <h3 className="text-xs font-semibold text-text-muted tracking-widest uppercase mb-4">Social</h3>
+              <h3 className="text-xs font-semibold text-text-muted tracking-widest uppercase mb-4">
+                Social
+              </h3>
               <div className="flex gap-5">
-                {socials.map((social) => (
-                  <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer"
-                    className="text-text-muted hover:text-text-dark transition-colors duration-200" aria-label={social.label}>
-                    <social.icon size={22} />
-                  </a>
-                ))}
+                {contactData.socials.map((social) => {
+                  const Icon = iconMap[social.icon];
+                  if (!Icon) return null;
+                  return (
+                    <a
+                      key={social.label}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-text-muted hover:text-text-dark transition-colors duration-200"
+                      aria-label={social.label}
+                    >
+                      <Icon size={22} />
+                    </a>
+                  );
+                })}
               </div>
             </div>
+
             <p className="text-sm text-text-muted/60 leading-relaxed">
-              Currently open to freelance projects and full-time opportunities. I typically respond within 24 hours.
+              {contactData.footerText}
             </p>
           </motion.div>
         </div>

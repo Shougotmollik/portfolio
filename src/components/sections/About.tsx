@@ -1,12 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-
-const stats = [
-  { value: "4+", label: "Years of Experience" },
-  { value: "15+", label: "Projects Delivered" },
-  { value: "10+", label: "App Store Launches" },
-];
+import { aboutData } from "@/data/about";
 
 export default function About() {
   return (
@@ -19,9 +14,11 @@ export default function About() {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
           >
-            <p className="text-sm font-medium text-accent tracking-wider uppercase mb-5">About</p>
+            <p className="text-sm font-medium text-accent tracking-wider uppercase mb-5">
+              {aboutData.label}
+            </p>
             <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05] text-text-dark">
-              I build mobile apps that people love to use.
+              {aboutData.headline}
             </h2>
           </motion.div>
 
@@ -32,18 +29,11 @@ export default function About() {
             transition={{ duration: 0.4, ease: "easeOut", delay: 0.08 }}
             className="space-y-8"
           >
-            <p className="text-base md:text-lg text-text-muted leading-relaxed">
-              I specialize in Flutter and Dart, building production-grade apps
-              used by thousands of users. From crafting beautiful UIs to
-              integrating complex backend services, I handle the full mobile
-              development lifecycle.
-            </p>
-            <p className="text-base md:text-lg text-text-muted leading-relaxed">
-              My expertise spans state management (Bloc, Riverpod, Provider),
-              Firebase, REST &amp; GraphQL APIs, and native platform integration.
-              I believe in clean architecture, pixel-perfect execution, and
-              end-to-end delivery.
-            </p>
+            {aboutData.paragraphs.map((p, i) => (
+              <p key={i} className="text-base md:text-lg text-text-muted leading-relaxed">
+                {p}
+              </p>
+            ))}
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -52,9 +42,11 @@ export default function About() {
               transition={{ duration: 0.4, ease: "easeOut", delay: 0.15 }}
               className="flex flex-wrap gap-8 pt-4"
             >
-              {stats.map((stat) => (
+              {aboutData.stats.map((stat) => (
                 <div key={stat.label}>
-                  <span className="text-3xl sm:text-4xl font-semibold text-text-dark tracking-tight">{stat.value}</span>
+                  <span className="text-3xl sm:text-4xl font-semibold text-text-dark tracking-tight">
+                    {stat.value}
+                  </span>
                   <p className="text-sm text-text-muted mt-1">{stat.label}</p>
                 </div>
               ))}

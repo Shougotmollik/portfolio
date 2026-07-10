@@ -2,14 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
-  { label: "Projects", href: "#projects" },
-  { label: "Experience", href: "#experience" },
-  { label: "Contact", href: "#contact" },
-];
+import { siteData } from "@/data/site";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -35,11 +28,11 @@ export default function Navbar() {
             href="#hero"
             className="text-base font-semibold tracking-tight text-text-light transition-colors duration-300"
           >
-            Shougot Mollik
+            {siteData.name}
           </a>
 
           <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
+            {siteData.navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
@@ -70,7 +63,7 @@ export default function Navbar() {
             className="md:hidden border-t border-border-light bg-light-base/95 backdrop-blur-xl"
           >
             <div className="px-6 py-6 space-y-1">
-              {navLinks.map((link) => (
+              {siteData.navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}

@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useRef, useState } from "react";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { GithubIcon, PlayStoreIcon, AppStoreIcon } from "@/components/ui/Icons";
 import PhoneFrame from "@/components/ui/PhoneFrame";
 import MouseParallax from "@/components/ui/MouseParallax";
@@ -143,6 +143,21 @@ function CaseStudyCard({
 }
 
 export default function Projects() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const smooth = useSpring(scrollYProgress, {
+    stiffness: 150,
+    damping: 20,
+    restDelta: 0.001,
+  });
+
+  const bg1Drift = useTransform(smooth, [0, 1], [0, -120]);
+  const bg2Drift = useTransform(smooth, [0, 1], [0, -80]);
+  const headingDrift = useTransform(smooth, [0, 1], [50, -50]);
+
   const [lightbox, setLightbox] = useState<LightboxState | null>(null);
   const { projects } = projectsData;
 
@@ -161,27 +176,39 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="section-dark py-32 md:py-44 relative overflow-hidden">
-      <div className="absolute top-1/4 left-1/2 w-[600px] h-[600px] glow-accent pointer-events-none" />
-      <div className="absolute bottom-1/4 right-0 w-[400px] h-[400px] glow-clay pointer-events-none" />
+    <section
+      id="projects"
+      ref={sectionRef}
+      className="section-dark py-32 md:py-44 relative overflow-hidden"
+    >
+      <motion.div
+        className="absolute top-1/4 left-1/2 w-[600px] h-[600px] glow-accent pointer-events-none"
+        style={{ y: bg1Drift, willChange: "transform" }}
+      />
+      <motion.div
+        className="absolute bottom-1/4 right-0 w-[400px] h-[400px] glow-clay pointer-events-none"
+        style={{ y: bg2Drift, willChange: "transform" }}
+      />
 
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-          className="mb-16 md:mb-24"
-        >
-          <p className="text-sm font-medium text-accent tracking-wider uppercase mb-5">
-            {projectsData.label}
-          </p>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05] text-text-dark max-w-3xl">
-            {projectsData.headline}
-          </h2>
-          <p className="mt-6 text-base md:text-lg text-text-muted max-w-2xl leading-relaxed">
-            {projectsData.subtitle}
-          </p>
+        <motion.div style={{ y: headingDrift, willChange: "transform" }}>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            className="mb-16 md:mb-24"
+          >
+            <p className="text-sm font-medium text-accent tracking-wider uppercase mb-5">
+              {projectsData.label}
+            </p>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05] text-text-dark max-w-3xl">
+              {projectsData.headline}
+            </h2>
+            <p className="mt-6 text-base md:text-lg text-text-muted max-w-2xl leading-relaxed">
+              {projectsData.subtitle}
+            </p>
+          </motion.div>
         </motion.div>
 
         <div className="space-y-8 md:space-y-12">

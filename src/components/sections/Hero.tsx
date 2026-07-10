@@ -17,11 +17,15 @@ export default function Hero() {
     restDelta: 0.001,
   });
 
-  const bgY = useTransform(smooth, [0, 1], [0, -120]);
-  const groupY = useTransform(smooth, [0, 1], [0, -50]);
-  const groupScale = useTransform(smooth, [0, 0.5, 1], [1, 1.02, 0.88]);
-  const headlineY = useTransform(smooth, [0, 1], [0, 30]);
-  const headlineOpacity = useTransform(smooth, [0, 0.25], [1, 0]);
+  const bgY = useTransform(smooth, [0, 1], [0, -280]);
+  const groupY = useTransform(smooth, [0, 1], [0, -80]);
+  const groupScale = useTransform(smooth, [0, 0.5, 1], [1, 1.05, 0.75]);
+  const headlineY = useTransform(smooth, [0, 1], [0, 70]);
+  const headlineOpacity = useTransform(smooth, [0, 0.35], [1, 0]);
+
+  const phoneLeftY = useTransform(smooth, [0, 1], [0, -20]);
+  const phoneCenterY = useTransform(smooth, [0, 1], [0, -50]);
+  const phoneRightY = useTransform(smooth, [0, 1], [0, -80]);
 
   return (
     <section
@@ -98,7 +102,7 @@ export default function Hero() {
         <div className="relative w-[220px] sm:w-[280px] md:w-[340px] lg:w-[400px] h-[140px] sm:h-[170px] md:h-[200px] lg:h-[240px]">
           <motion.div
             className="absolute left-0 bottom-0 w-[88px] sm:w-[110px] md:w-[130px] lg:w-[150px] z-[1]"
-            style={{ rotate: -8, transformOrigin: "bottom center" }}
+            style={{ y: phoneLeftY, rotate: -8, transformOrigin: "bottom center", willChange: "transform" }}
           >
             <div className="opacity-70 scale-[0.65] sm:scale-[0.7] md:scale-[0.75]">
               <PhoneFrame imageUrl={heroData.phoneImages[0]} color="#5B7FDE" />
@@ -107,14 +111,14 @@ export default function Hero() {
 
           <motion.div
             className="absolute left-1/2 -translate-x-1/2 bottom-0 w-[105px] sm:w-[130px] md:w-[155px] lg:w-[180px] z-[3]"
-            style={{ rotate: 0, transformOrigin: "bottom center" }}
+            style={{ y: phoneCenterY, rotate: 0, transformOrigin: "bottom center", willChange: "transform" }}
           >
             <PhoneFrame imageUrl={heroData.phoneImages[1]} color="#5B7FDE" />
           </motion.div>
 
           <motion.div
             className="absolute right-0 bottom-0 w-[88px] sm:w-[110px] md:w-[130px] lg:w-[150px] z-[1]"
-            style={{ rotate: 8, transformOrigin: "bottom center" }}
+            style={{ y: phoneRightY, rotate: 8, transformOrigin: "bottom center", willChange: "transform" }}
           >
             <div className="opacity-70 scale-[0.65] sm:scale-[0.7] md:scale-[0.75]">
               <PhoneFrame imageUrl={heroData.phoneImages[2]} color="#5B7FDE" />

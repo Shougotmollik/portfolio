@@ -43,10 +43,10 @@ export default function About() {
             style={{ y: headingDrift, scale: headingScale, willChange: "transform" }}
           >
             <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              initial={{ opacity: 0.001, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
+              transition={{ stiffness: 200, damping: 20, mass: 1, delay: 0.1, type: "spring" }}
             >
               <p className="text-sm font-medium text-accent tracking-wider uppercase mb-5">
                 {aboutData.label}
@@ -61,10 +61,10 @@ export default function About() {
             style={{ y: textDrift, scale: textScale, willChange: "transform" }}
           >
             <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              initial={{ opacity: 0.001, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.4, ease: "easeOut", delay: 0.08 }}
+              transition={{ stiffness: 200, damping: 20, mass: 1, delay: 0.15, type: "spring" }}
               className="space-y-8"
             >
               {aboutData.paragraphs.map((p, i) => (
@@ -74,10 +74,10 @@ export default function About() {
               ))}
 
               <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
+                initial={{ opacity: 0.001, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.4, ease: "easeOut", delay: 0.15 }}
+                transition={{ stiffness: 200, damping: 20, mass: 1, delay: 0.2, type: "spring" }}
                 className="flex flex-wrap gap-8 pt-4"
               >
                 {aboutData.stats.map((stat) => (

@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { GithubIcon, PlayStoreIcon, AppStoreIcon } from "@/components/ui/Icons";
 import PhoneFrame from "@/components/ui/PhoneFrame";
+import { use3DTilt } from "@/hooks/use3DTilt";
 import { projectsData } from "@/data/projects";
 
 function ProjectDetailModal({
@@ -161,6 +162,33 @@ function ProjectDetailModal({
   );
 }
 
+type Card3DProps = React.ComponentPropsWithoutRef<typeof motion.div> & {
+  children: React.ReactNode;
+  onClick?: () => void;
+};
+
+function Card3D({ children, onClick, ...props }: Card3DProps) {
+  const { ref, glareRef } = use3DTilt<HTMLDivElement>();
+  return (
+    <motion.div
+      ref={ref}
+      onClick={onClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") onClick?.(); }}
+      className="glass-dark rounded-2xl overflow-hidden inner-highlight text-left group cursor-pointer relative"
+      style={{ transformStyle: "preserve-3d" }}
+      {...props}
+    >
+      {children}
+      <div
+        ref={glareRef}
+        className="absolute inset-0 rounded-2xl pointer-events-none z-10 opacity-0 transition-opacity duration-200"
+      />
+    </motion.div>
+  );
+}
+
 export default function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -199,10 +227,10 @@ export default function Projects() {
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         <motion.div style={{ y: headingDrift, willChange: "transform" }}>
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0.001, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
+            transition={{ damping: 20, delay: 0.1, mass: 1, stiffness: 200, type: "spring" }}
             className="mb-16 md:mb-24"
           >
             <p className="text-sm font-medium text-accent tracking-wider uppercase mb-5">
@@ -217,16 +245,15 @@ export default function Projects() {
           </motion.div>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5" style={{ perspective: "1200px" }}>
           {projects.map((project, i) => (
-            <motion.button
+            <Card3D
               key={project.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.45, ease: "easeOut", delay: i * 0.05 }}
               onClick={() => setSelected(i)}
-              className="glass-dark rounded-2xl overflow-hidden inner-highlight text-left group cursor-pointer relative"
+              initial={{ opacity: 0.001, scale: 0.85, y: 40, rotate: -2 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0, rotate: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ stiffness: 200, damping: 20, mass: 1, delay: i * 0.08, type: "spring" }}
             >
               <div
                 className="absolute -top-24 -right-24 w-48 h-48 rounded-full opacity-[0.1] pointer-events-none"
@@ -246,7 +273,7 @@ export default function Projects() {
                   View details
                 </span>
               </div>
-            </motion.button>
+            </Card3D>
           ))}
         </div>
       </div>

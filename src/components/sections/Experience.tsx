@@ -10,8 +10,8 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 16 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0, 0, 0.58, 1] as const } },
+  hidden: { opacity: 0.001, y: 30 },
+  show: { opacity: 1, y: 0, transition: { stiffness: 200, damping: 20, mass: 1, type: "spring" as const } },
 };
 
 export default function Experience() {
@@ -37,15 +37,23 @@ export default function Experience() {
       ref={sectionRef}
       className="section-dark py-32 md:py-44 relative overflow-hidden"
     >
+      <motion.div
+        className="absolute top-0 -left-32 w-[500px] h-[500px] glow-accent pointer-events-none"
+        style={{ y: headingDrift, opacity: headingScale ? undefined : undefined }}
+      />
+      <motion.div
+        className="absolute bottom-0 -right-32 w-[400px] h-[400px] glow-clay pointer-events-none"
+        style={{ y: itemsDrift }}
+      />
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         <motion.div
           style={{ y: headingDrift, scale: headingScale, willChange: "transform" }}
         >
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
+            <motion.div
+              initial={{ opacity: 0.001, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ stiffness: 200, damping: 20, mass: 1, delay: 0.1, type: "spring" }}
             className="mb-16 md:mb-24 max-w-3xl"
           >
             <p className="text-sm font-medium text-accent tracking-wider uppercase mb-5">

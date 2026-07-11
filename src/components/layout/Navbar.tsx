@@ -33,13 +33,21 @@ export default function Navbar() {
 
           <nav className="hidden md:flex items-center gap-8">
             {siteData.navLinks.map((link) => (
-              <a
+              <motion.a
                 key={link.href}
                 href={link.href}
-                className="text-[13px] font-medium text-text-muted hover:text-text-light transition-colors duration-200 tracking-wide"
+                className="text-[13px] font-medium text-text-muted hover:text-text-light transition-colors duration-200 tracking-wide relative"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 {link.label}
-              </a>
+                <motion.span
+                  className="absolute -bottom-1 left-0 right-0 h-px bg-accent origin-left"
+                  initial={{ scaleX: 0 }}
+                  whileHover={{ scaleX: 1 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                />
+              </motion.a>
             ))}
           </nav>
 

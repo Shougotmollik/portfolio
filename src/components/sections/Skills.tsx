@@ -10,8 +10,8 @@ const containerVariants = {
 };
 
 const groupVariants = {
-  hidden: { opacity: 0, y: 16 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0, 0, 0.58, 1] as const } },
+  hidden: { opacity: 0.001, y: 30 },
+  show: { opacity: 1, y: 0, transition: { stiffness: 200, damping: 20, mass: 1, type: "spring" as const } },
 };
 
 export default function Skills() {
@@ -54,11 +54,11 @@ export default function Skills() {
         <motion.div
           style={{ y: headingDrift, scale: headingScale, willChange: "transform" }}
         >
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
+            <motion.div
+              initial={{ opacity: 0.001, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ stiffness: 200, damping: 20, mass: 1, delay: 0.1, type: "spring" }}
             className="mb-16 md:mb-24 max-w-3xl"
           >
             <p className="text-sm font-medium text-accent tracking-wider uppercase mb-5">

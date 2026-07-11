@@ -1,6 +1,7 @@
 "use client";
 
 import { type ComponentType } from "react";
+import { motion } from "framer-motion";
 import { GithubIcon, LinkedinIcon, XIcon } from "@/components/ui/Icons";
 import { siteData } from "@/data/site";
 
@@ -27,16 +28,19 @@ export default function Footer() {
                 const Icon = iconMap[social.icon];
                 if (!Icon) return null;
                 return (
-                  <a
+                  <motion.a
                     key={social.label}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-text-muted hover:text-text-dark transition-colors duration-200"
                     aria-label={social.label}
+                    whileHover={{ scale: 1.2, y: -2 }}
+                    whileTap={{ scale: 0.9 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
                   >
                     <Icon size={20} />
-                  </a>
+                  </motion.a>
                 );
               })}
             </div>

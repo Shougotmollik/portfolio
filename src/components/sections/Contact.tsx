@@ -3,6 +3,7 @@
 import { useRef, useState, type ComponentType } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { GithubIcon, LinkedinIcon, XIcon } from "@/components/ui/Icons";
+import Magnetic from "@/components/ui/Magnetic";
 import { contactData } from "@/data/contact";
 
 const iconMap: Record<string, ComponentType<{ size?: number }>> = {
@@ -60,10 +61,10 @@ export default function Contact() {
           style={{ y: headingDrift, scale: headingScale, willChange: "transform" }}
         >
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0.001, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
+            transition={{ stiffness: 200, damping: 20, mass: 1, delay: 0.1, type: "spring" }}
             className="mb-16 md:mb-24 max-w-3xl"
           >
             <p className="text-sm font-medium text-accent tracking-wider uppercase mb-5">
@@ -80,10 +81,10 @@ export default function Contact() {
             style={{ y: formDrift, scale: formScale, willChange: "transform" }}
           >
             <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              initial={{ opacity: 0.001, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.4, ease: "easeOut", delay: 0.08 }}
+              transition={{ stiffness: 200, damping: 20, mass: 1, delay: 0.15, type: "spring" }}
             >
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
@@ -119,14 +120,16 @@ export default function Contact() {
                     placeholder={contactData.formPlaceholders.message}
                   />
                 </div>
-                <motion.button
-                  type="submit"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-text-dark text-dark-base text-sm font-semibold hover:opacity-85 transition-all duration-300"
-                >
-                  {submitted ? "Message sent" : "Send Message"}
-                </motion.button>
+                <Magnetic strength={0.15}>
+                  <motion.button
+                    type="submit"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-text-dark text-dark-base text-sm font-semibold hover:opacity-85 transition-all duration-300"
+                  >
+                    {submitted ? "Message sent" : "Send Message"}
+                  </motion.button>
+                </Magnetic>
               </form>
             </motion.div>
           </motion.div>
@@ -135,10 +138,10 @@ export default function Contact() {
             style={{ y: infoDrift, scale: infoScale, willChange: "transform" }}
           >
             <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              initial={{ opacity: 0.001, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.4, ease: "easeOut", delay: 0.15 }}
+              transition={{ stiffness: 200, damping: 20, mass: 1, delay: 0.2, type: "spring" }}
               className="space-y-10"
             >
               <div>
@@ -171,16 +174,19 @@ export default function Contact() {
                     const Icon = iconMap[social.icon];
                     if (!Icon) return null;
                     return (
-                      <a
+                      <motion.a
                         key={social.label}
                         href={social.href}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-text-muted hover:text-text-dark transition-colors duration-200"
                         aria-label={social.label}
+                        whileHover={{ scale: 1.2, y: -2 }}
+                        whileTap={{ scale: 0.9 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 15 }}
                       >
                         <Icon size={22} />
-                      </a>
+                      </motion.a>
                     );
                   })}
                 </div>

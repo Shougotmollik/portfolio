@@ -3,6 +3,8 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import PhoneFrame from "@/components/ui/PhoneFrame";
+import FloatingParticles from "@/components/ui/FloatingParticles";
+import Magnetic from "@/components/ui/Magnetic";
 import { heroData } from "@/data/hero";
 
 export default function Hero() {
@@ -41,23 +43,43 @@ export default function Hero() {
         <div className="absolute bottom-1/3 -right-32 w-[400px] h-[400px] rounded-full opacity-[0.03] bg-accent/20" />
       </motion.div>
 
+      <FloatingParticles count={35} />
+
+      <div
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[40vh] pointer-events-none"
+        style={{
+          background: `
+            linear-gradient(
+              180deg,
+              transparent 0%,
+              rgba(91, 127, 222, 0.015) 40%,
+              rgba(91, 127, 222, 0.03) 100%
+            )
+          `,
+          WebkitMaskImage: "linear-gradient(180deg, transparent 0%, black 40%)",
+          maskImage: "linear-gradient(180deg, transparent 0%, black 40%)",
+          transform: "perspective(400px) rotateX(60deg) scaleY(2.5)",
+          transformOrigin: "bottom center",
+        }}
+      />
+
       <motion.div
         className="flex flex-col items-center text-center px-6 sm:px-8 pt-20 pb-0 relative z-10"
         style={{ y: headlineY, opacity: headlineOpacity, willChange: "transform" }}
       >
         <motion.p
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0.001, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, ease: "easeOut", delay: 0.05 }}
+          transition={{ stiffness: 200, damping: 20, mass: 1, delay: 0.05, type: "spring" }}
           className="text-sm font-medium text-accent tracking-wider uppercase mb-5"
         >
           {heroData.roleLabel}
         </motion.p>
 
         <motion.h1
-          initial={{ opacity: 0, y: 14 }}
+          initial={{ opacity: 0.001, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
+          transition={{ stiffness: 200, damping: 20, mass: 1, delay: 0.1, type: "spring" }}
           className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-semibold tracking-tight leading-[0.95] text-balance max-w-5xl text-text-light"
         >
           {heroData.heading.first}{" "}
@@ -65,33 +87,37 @@ export default function Hero() {
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0.001, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, ease: "easeOut", delay: 0.15 }}
+          transition={{ stiffness: 200, damping: 20, mass: 1, delay: 0.15, type: "spring" }}
           className="mt-5 text-base sm:text-lg md:text-xl text-text-muted max-w-xl leading-relaxed"
         >
           {heroData.subtitle}
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0.001, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, ease: "easeOut", delay: 0.2 }}
+          transition={{ stiffness: 200, damping: 20, mass: 1, delay: 0.2, type: "spring" }}
           className="mt-8 flex flex-col sm:flex-row items-center gap-4"
         >
-          <a
-            href={heroData.ctaPrimary.href}
-            download
-            className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-text-light text-light-base text-sm font-semibold hover:opacity-85 transition-all duration-300"
-          >
-            {heroData.ctaPrimary.label}
-          </a>
-          <a
-            href={heroData.ctaSecondary.href}
-            className="inline-flex items-center justify-center px-8 py-3 rounded-full border border-border-light text-text-light text-sm font-semibold hover:bg-text-light hover:text-light-base transition-all duration-300"
-          >
-            {heroData.ctaSecondary.label}
-          </a>
+          <Magnetic>
+            <a
+              href={heroData.ctaPrimary.href}
+              download
+              className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-text-light text-light-base text-sm font-semibold hover:opacity-85 transition-all duration-300"
+            >
+              {heroData.ctaPrimary.label}
+            </a>
+          </Magnetic>
+          <Magnetic strength={0.2}>
+            <a
+              href={heroData.ctaSecondary.href}
+              className="inline-flex items-center justify-center px-8 py-3 rounded-full border border-border-light text-text-light text-sm font-semibold hover:bg-text-light hover:text-light-base transition-all duration-300"
+            >
+              {heroData.ctaSecondary.label}
+            </a>
+          </Magnetic>
         </motion.div>
       </motion.div>
 
@@ -99,10 +125,12 @@ export default function Hero() {
         className="relative flex items-center justify-center mt-10 md:mt-14 mb-8"
         style={{ y: groupY, scale: groupScale, willChange: "transform" }}
       >
-        <div className="relative w-[220px] sm:w-[280px] md:w-[340px] lg:w-[400px] h-[140px] sm:h-[170px] md:h-[200px] lg:h-[240px]">
+        <div className="relative w-[220px] sm:w-[280px] md:w-[340px] lg:w-[400px] h-[160px] sm:h-[190px] md:h-[220px] lg:h-[260px]">
           <motion.div
             className="absolute left-0 bottom-0 w-[88px] sm:w-[110px] md:w-[130px] lg:w-[150px] z-[1]"
             style={{ y: phoneLeftY, rotate: -8, transformOrigin: "bottom center", willChange: "transform" }}
+            animate={{ y: [0, -4, 0] }}
+            transition={{ duration: 3, ease: "easeInOut", repeat: Infinity, delay: 0.3 }}
           >
             <div className="opacity-70 scale-[0.65] sm:scale-[0.7] md:scale-[0.75]">
               <PhoneFrame imageUrl={heroData.phoneImages[0]} color="#5B7FDE" />
@@ -112,6 +140,8 @@ export default function Hero() {
           <motion.div
             className="absolute left-1/2 -translate-x-1/2 bottom-0 w-[105px] sm:w-[130px] md:w-[155px] lg:w-[180px] z-[3]"
             style={{ y: phoneCenterY, rotate: 0, transformOrigin: "bottom center", willChange: "transform" }}
+            animate={{ y: [0, -6, 0] }}
+            transition={{ duration: 3.5, ease: "easeInOut", repeat: Infinity }}
           >
             <PhoneFrame imageUrl={heroData.phoneImages[1]} color="#5B7FDE" />
           </motion.div>
@@ -119,6 +149,8 @@ export default function Hero() {
           <motion.div
             className="absolute right-0 bottom-0 w-[88px] sm:w-[110px] md:w-[130px] lg:w-[150px] z-[1]"
             style={{ y: phoneRightY, rotate: 8, transformOrigin: "bottom center", willChange: "transform" }}
+            animate={{ y: [0, -4, 0] }}
+            transition={{ duration: 2.8, ease: "easeInOut", repeat: Infinity, delay: 0.6 }}
           >
             <div className="opacity-70 scale-[0.65] sm:scale-[0.7] md:scale-[0.75]">
               <PhoneFrame imageUrl={heroData.phoneImages[2]} color="#5B7FDE" />

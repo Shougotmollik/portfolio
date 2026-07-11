@@ -45,6 +45,12 @@
     line-height: 1.6;
   }
 
+  @media (hover: hover) and (pointer: fine) {
+    html, body, body * {
+      cursor: none !important;
+    }
+  }
+
   ::selection {
     background-color: var(--color-accent);
     color: #fff;

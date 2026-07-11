@@ -5,14 +5,26 @@ interface PhoneFrameProps {
   gradient?: string;
   color?: string;
   imageUrl?: string;
+  radius?: string;
+  compact?: boolean;
 }
 
-export default function PhoneFrame({ children, gradient, color = "#5B7FDE", imageUrl }: PhoneFrameProps) {
+export default function PhoneFrame({ children, gradient, color = "#5B7FDE", imageUrl, radius = "2.5rem", compact }: PhoneFrameProps) {
+  const innerRadius = `calc(${radius} - 4px)`;
+  const inset = compact ? "2px" : "4px";
   return (
-    <div className="relative w-full aspect-[9/19] max-w-[260px] mx-auto">
-      <div className="absolute inset-0 rounded-[2.5rem] border-[2px] border-border-dark overflow-hidden shadow-sm">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[110px] h-[26px] bg-white/[0.06] rounded-b-2xl z-10" />
-        <div className="absolute inset-[4px] rounded-[2.3rem] overflow-hidden bg-dark-base">
+    <div className={`relative w-full aspect-[9/19] ${compact ? "" : "max-w-[260px]"} mx-auto`}>
+      <div
+        className="absolute inset-0 border-[2px] border-border-dark overflow-hidden shadow-sm"
+        style={{ borderRadius: radius }}
+      >
+        {!compact && (
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[110px] h-[26px] bg-white/[0.06] rounded-b-2xl z-10" />
+        )}
+        <div
+          className="absolute overflow-hidden bg-dark-base"
+          style={{ borderRadius: innerRadius, inset }}
+        >
           {imageUrl ? (
             <img
               src={imageUrl}

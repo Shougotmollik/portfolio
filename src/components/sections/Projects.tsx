@@ -1,144 +1,163 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { GithubIcon, PlayStoreIcon, AppStoreIcon } from "@/components/ui/Icons";
 import PhoneFrame from "@/components/ui/PhoneFrame";
-import MouseParallax from "@/components/ui/MouseParallax";
-import Lightbox from "@/components/ui/Lightbox";
 import { projectsData } from "@/data/projects";
 
-interface LightboxState {
-  projectIndex: number;
-  imageIndex: number;
-}
-
-function CaseStudyCard({
+function ProjectDetailModal({
   project,
   index,
-  onImageClick,
+  onClose,
 }: {
   project: (typeof projectsData.projects)[0];
   index: number;
-  onImageClick: (projectIndex: number, imageIndex: number) => void;
+  onClose: () => void;
 }) {
+  const [selectedImage, setSelectedImage] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const html = document.documentElement;
+    html.style.overflow = "hidden";
+    return () => { html.style.overflow = ""; };
+  }, []);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const handler = (e: WheelEvent) => {
+      if (el.contains(e.target as Node)) {
+        e.preventDefault();
+        el.scrollTop += e.deltaY;
+      }
+    };
+    window.addEventListener("wheel", handler, { passive: false });
+    return () => window.removeEventListener("wheel", handler);
+  }, []);
+
   return (
-    <MouseParallax maxRotate={2}>
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.45, ease: "easeOut", delay: index * 0.06 }}
-        className="glass-dark rounded-2xl overflow-hidden inner-highlight relative"
+    <div className="fixed inset-0 z-50 section-dark backdrop-blur-sm">
+      <div
+        ref={scrollRef}
+        className="h-full overflow-y-auto"
+        onClick={onClose}
       >
-        <div
-          className="absolute -top-32 -right-32 w-64 h-64 rounded-full opacity-[0.1] pointer-events-none"
-          style={{ background: project.color }}
-        />
+        <div className="flex items-center justify-center p-6 sm:p-10 min-h-full">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            className="glass-dark rounded-2xl overflow-hidden inner-highlight w-full max-w-5xl relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div
+              className="absolute -top-32 -right-32 w-64 h-64 rounded-full opacity-[0.12] pointer-events-none"
+              style={{ background: project.color }}
+            />
 
-        <div className="flex flex-col lg:flex-row gap-0">
-          <div className="w-full lg:w-[45%] flex-shrink-0 p-6 md:p-8 lg:p-10 flex items-center justify-center bg-dark-alt/50">
             <button
-              onClick={() => onImageClick(index, 0)}
-              className="w-full max-w-[280px] aspect-square cursor-pointer group"
-              aria-label="Open main image"
+              onClick={onClose}
+              className="absolute top-5 right-5 z-20 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-white/70 hover:text-white hover:bg-white/20 transition-all"
+              aria-label="Close"
             >
-              <div className="w-full h-full flex items-center justify-center">
-                <div className="scale-[0.85]">
-                  <PhoneFrame imageUrl={project.images[0]} color={project.color} />
-                </div>
-              </div>
-              <div className="text-center mt-2 text-[11px] text-text-muted/50 opacity-0 group-hover:opacity-100 transition-opacity">
-                Click to expand
-              </div>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
             </button>
-          </div>
 
-          <div className="flex-1 p-6 md:p-8 lg:p-10 relative z-10 flex flex-col justify-center">
-            <p className="text-xs font-semibold text-accent tracking-widest uppercase mb-2">
-              {String(index + 1).padStart(2, "0")}
-            </p>
+            <div className="p-6 md:p-6 lg:p-8">
+              <p className="text-xs font-semibold text-accent tracking-widest uppercase mb-1">
+                {String(index + 1).padStart(2, "0")}
+              </p>
+              <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold tracking-tight text-text-dark leading-[1.08]">
+                {project.name}
+              </h3>
+              <p className="mt-1 text-sm text-text-muted leading-relaxed max-w-xl">
+                {project.tagline}
+              </p>
+            </div>
 
-            <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight text-text-dark leading-[1.08]">
-              {project.name}
-            </h3>
-
-            <p className="mt-2 text-sm md:text-base text-text-muted leading-relaxed max-w-xl">
-              {project.tagline}
-            </p>
-
-            <div className="mt-6 space-y-4">
-              <div>
-                <h4 className="text-[11px] font-semibold text-text-muted tracking-widest uppercase mb-1">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-0">
+              <div className="p-4 md:p-5 lg:p-6">
+                <h4 className="text-[11px] font-semibold text-text-muted tracking-widest uppercase mb-2">
                   The Problem
                 </h4>
-                <p className="text-sm text-text-muted/80 leading-relaxed">{project.problem}</p>
+                <p className="text-xs text-text-muted/80 leading-relaxed">{project.problem}</p>
               </div>
-              <div>
-                <h4 className="text-[11px] font-semibold text-text-muted tracking-widest uppercase mb-1">
+
+              <div className="p-4 md:p-5 lg:p-6 flex items-center justify-center bg-dark-alt/50">
+                <div className="w-full max-w-[200px]">
+                  <PhoneFrame imageUrl={project.images[selectedImage]} color={project.color} />
+                </div>
+              </div>
+
+              <div className="p-4 md:p-5 lg:p-6">
+                <h4 className="text-[11px] font-semibold text-text-muted tracking-widest uppercase mb-2">
                   What I Built
                 </h4>
-                <p className="text-sm text-text-muted/80 leading-relaxed">{project.built}</p>
+                <p className="text-xs text-text-muted/80 leading-relaxed">{project.built}</p>
               </div>
             </div>
 
-            <div className="mt-5 flex flex-wrap gap-2">
-              {project.tech.map((t) => (
-                <div
-                  key={t.name}
-                  className="tag-clay inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium"
+            <div className="px-6 md:px-6 lg:px-8 pb-6 md:pb-6 lg:pb-8 space-y-4 pt-6 md:pt-6 lg:pt-8">
+              <div className="flex gap-2">
+                {project.images.map((img, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setSelectedImage(i)}
+                    style={{ width: "30px" }}
+                    className={`transition-all duration-200 ${selectedImage === i ? "brightness-110 scale-110" : "opacity-60 hover:opacity-90"}`}
+                  >
+                    <PhoneFrame imageUrl={img} color={project.color} radius="1rem" compact />
+                  </button>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2">
+                {project.tech.map((t) => (
+                  <div
+                    key={t.name}
+                    className="tag-clay inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium"
+                  >
+                    <img src={t.icon} alt="" className="w-3 h-3" />
+                    {t.name}
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/40 text-accent text-xs font-semibold hover:bg-accent hover:text-white transition-all duration-300"
                 >
-                  <img src={t.icon} alt="" className="w-3.5 h-3.5" />
-                  {t.name}
-                </div>
-              ))}
+                  <GithubIcon size={14} /> GitHub
+                </a>
+                <a
+                  href={project.playStore}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/40 text-accent text-xs font-semibold hover:bg-accent hover:text-white transition-all duration-300"
+                >
+                  <PlayStoreIcon size={14} /> Google Play
+                </a>
+                <a
+                  href={project.appStore}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/40 text-accent text-xs font-semibold hover:bg-accent hover:text-white transition-all duration-300"
+                >
+                  <AppStoreIcon size={14} /> App Store
+                </a>
+              </div>
             </div>
-
-            <div className="mt-5 flex flex-wrap gap-3">
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/40 text-accent text-xs font-semibold hover:bg-accent hover:text-white transition-all duration-300"
-              >
-                <GithubIcon size={14} /> GitHub
-              </a>
-              <a
-                href={project.playStore}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/40 text-accent text-xs font-semibold hover:bg-accent hover:text-white transition-all duration-300"
-              >
-                <PlayStoreIcon size={14} /> Google Play
-              </a>
-              <a
-                href={project.appStore}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/40 text-accent text-xs font-semibold hover:bg-accent hover:text-white transition-all duration-300"
-              >
-                <AppStoreIcon size={14} /> App Store
-              </a>
-            </div>
-          </div>
+          </motion.div>
         </div>
-
-        <div className="px-6 md:px-8 lg:px-10 pb-6 md:pb-8 lg:pb-10">
-          <div className="grid grid-cols-3 gap-2">
-            {project.images.slice(1).map((img, i) => (
-              <button
-                key={i}
-                onClick={() => onImageClick(index, i + 1)}
-                className="h-24 md:h-28 rounded-lg overflow-hidden border border-border-dark cursor-pointer hover:border-accent/40 transition-colors group"
-                aria-label={`Open screenshot ${i + 2}`}
-              >
-                <img src={img} alt="" className="w-full h-full object-cover" loading="lazy" />
-              </button>
-            ))}
-          </div>
-        </div>
-      </motion.div>
-    </MouseParallax>
+      </div>
+    </div>
   );
 }
 
@@ -158,24 +177,11 @@ export default function Projects() {
   const bg2Drift = useTransform(smooth, [0, 1], [0, -80]);
   const headingDrift = useTransform(smooth, [0, 1], [50, -50]);
 
-  const [lightbox, setLightbox] = useState<LightboxState | null>(null);
+  const [selected, setSelected] = useState<number | null>(null);
   const { projects } = projectsData;
 
-  const currentProject = lightbox !== null ? projects[lightbox.projectIndex] : null;
-
-  const handleNext = () => {
-    if (!lightbox || !currentProject) return;
-    const next = (lightbox.imageIndex + 1) % currentProject.images.length;
-    setLightbox({ ...lightbox, imageIndex: next });
-  };
-
-  const handlePrev = () => {
-    if (!lightbox || !currentProject) return;
-    const prev = (lightbox.imageIndex - 1 + currentProject.images.length) % currentProject.images.length;
-    setLightbox({ ...lightbox, imageIndex: prev });
-  };
-
   return (
+    <>
     <section
       id="projects"
       ref={sectionRef}
@@ -211,28 +217,48 @@ export default function Projects() {
           </motion.div>
         </motion.div>
 
-        <div className="space-y-8 md:space-y-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {projects.map((project, i) => (
-            <CaseStudyCard
+            <motion.button
               key={project.id}
-              project={project}
-              index={i}
-              onImageClick={(pi, ii) => setLightbox({ projectIndex: pi, imageIndex: ii })}
-            />
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.45, ease: "easeOut", delay: i * 0.05 }}
+              onClick={() => setSelected(i)}
+              className="glass-dark rounded-2xl overflow-hidden inner-highlight text-left group cursor-pointer relative"
+            >
+              <div
+                className="absolute -top-24 -right-24 w-48 h-48 rounded-full opacity-[0.1] pointer-events-none"
+                style={{ background: project.color }}
+              />
+              <div className="p-5 flex flex-col items-center">
+                <PhoneFrame imageUrl={project.images[0]} color={project.color} />
+                <h3 className="mt-4 text-lg font-semibold tracking-tight text-text-dark text-center">
+                  {project.name}
+                </h3>
+                <p className="mt-1 text-sm text-text-muted text-center leading-relaxed line-clamp-2">
+                  {project.tagline}
+                </p>
+              </div>
+              <div className="pb-4 text-center">
+                <span className="text-[11px] font-medium text-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  View details
+                </span>
+              </div>
+            </motion.button>
           ))}
         </div>
       </div>
 
-      {currentProject && lightbox && (
-        <Lightbox
-          images={currentProject.images}
-          currentIndex={lightbox.imageIndex}
-          open={lightbox !== null}
-          onClose={() => setLightbox(null)}
-          onNext={handleNext}
-          onPrev={handlePrev}
+    </section>
+      {selected !== null && (
+        <ProjectDetailModal
+          project={projects[selected]}
+          index={selected}
+          onClose={() => setSelected(null)}
         />
       )}
-    </section>
+    </>
   );
 }

@@ -15,6 +15,14 @@ export const metadata: Metadata = {
     "Software Engineer",
   ],
   authors: [{ name: "Shougot Mollik" }],
+  icons: {
+    icon: [
+      {
+        url: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="%23D9491F"/><text x="16" y="22" text-anchor="middle" fill="%23F3EBE4" font-size="18" font-family="system-ui" font-weight="700">S</text></svg>',
+        type: "image/svg+xml",
+      },
+    ],
+  },
   openGraph: {
     title: "Shougot Mollik — Flutter Mobile Engineer",
     description:

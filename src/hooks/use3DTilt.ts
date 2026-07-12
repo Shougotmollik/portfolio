@@ -47,7 +47,10 @@ export function use3DTilt<T extends HTMLElement>({
       if (glare && glareRef.current) {
         const glareX = (x / rect.width) * 100;
         const glareY = (y / rect.height) * 100;
-        glareRef.current.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.06) 0%, transparent 60%)`;
+        glareRef.current.style.background = `
+          radial-gradient(circle at ${glareX}% ${glareY}%, rgba(217,73,31,0.08) 0%, transparent 50%),
+          radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.06) 0%, transparent 60%)
+        `;
         glareRef.current.style.opacity = "1";
       }
     },
@@ -61,7 +64,7 @@ export function use3DTilt<T extends HTMLElement>({
     const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
     if (isTouch) return;
 
-    el.style.transition = "transform 0.2s ease-out";
+    el.style.transition = "transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)";
     el.style.transformStyle = "preserve-3d";
     el.style.willChange = "transform";
 

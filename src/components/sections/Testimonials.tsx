@@ -11,7 +11,7 @@ const containerVariants = {
 
 const quoteVariants = {
   hidden: { opacity: 0.001, y: 30 },
-  show: { opacity: 1, y: 0, transition: { stiffness: 200, damping: 20, mass: 1, type: "spring" as const } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const } },
 };
 
 export default function Testimonials() {
@@ -37,7 +37,7 @@ export default function Testimonials() {
     <section
       id="testimonials"
       ref={sectionRef}
-      className="section-light py-32 md:py-44 relative overflow-hidden"
+      className="section-light py-20 md:py-28 relative overflow-hidden"
     >
       <motion.div
         className="absolute top-0 right-0 w-[400px] h-[400px] pointer-events-none"
@@ -60,13 +60,13 @@ export default function Testimonials() {
               initial={{ opacity: 0.001, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ stiffness: 200, damping: 20, mass: 1, delay: 0.1, type: "spring" }}
-            className="mb-16 md:mb-24 max-w-3xl"
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="mb-10 md:mb-14 max-w-3xl"
           >
-            <p className="text-sm font-medium text-accent tracking-wider uppercase mb-5">
+            <p className="text-xs font-semibold tracking-[0.1em] uppercase mb-5 text-accent">
               {testimonialsData.label}
             </p>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05] text-text-light">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-[-0.02em] leading-[1.05] text-text-light">
               {testimonialsData.headline}
             </h2>
           </motion.div>

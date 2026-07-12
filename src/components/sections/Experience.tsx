@@ -11,7 +11,7 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { opacity: 0.001, y: 30 },
-  show: { opacity: 1, y: 0, transition: { stiffness: 200, damping: 20, mass: 1, type: "spring" as const } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const } },
 };
 
 export default function Experience() {
@@ -35,14 +35,14 @@ export default function Experience() {
     <section
       id="experience"
       ref={sectionRef}
-      className="section-dark py-32 md:py-44 relative overflow-hidden"
+      className="section-dark py-20 md:py-28 relative overflow-hidden"
     >
       <motion.div
         className="absolute top-0 -left-32 w-[500px] h-[500px] glow-accent pointer-events-none"
-        style={{ y: headingDrift, opacity: headingScale ? undefined : undefined }}
+        style={{ y: headingDrift }}
       />
       <motion.div
-        className="absolute bottom-0 -right-32 w-[400px] h-[400px] glow-clay pointer-events-none"
+        className="absolute bottom-0 -right-32 w-[400px] h-[400px] glow-accent pointer-events-none"
         style={{ y: itemsDrift }}
       />
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
@@ -53,13 +53,13 @@ export default function Experience() {
               initial={{ opacity: 0.001, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ stiffness: 200, damping: 20, mass: 1, delay: 0.1, type: "spring" }}
-            className="mb-16 md:mb-24 max-w-3xl"
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="mb-10 md:mb-14 max-w-3xl"
           >
-            <p className="text-sm font-medium text-accent tracking-wider uppercase mb-5">
+            <p className="text-xs font-semibold tracking-[0.1em] uppercase mb-5 text-accent">
               {experienceData.label}
             </p>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05] text-text-dark">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-[-0.02em] leading-[1.05] text-text-dark">
               {experienceData.headline}
             </h2>
           </motion.div>

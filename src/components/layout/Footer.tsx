@@ -33,7 +33,7 @@ export default function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-text-muted hover:text-text-dark transition-colors duration-200"
+                    className="text-text-muted hover:text-accent transition-colors duration-200"
                     aria-label={social.label}
                     whileHover={{ scale: 1.2, y: -2 }}
                     whileTap={{ scale: 0.9 }}

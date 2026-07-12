@@ -1,14 +1,32 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import PhoneFrame from "@/components/ui/PhoneFrame";
 import FloatingParticles from "@/components/ui/FloatingParticles";
 import Magnetic from "@/components/ui/Magnetic";
 import { heroData } from "@/data/hero";
 
+function splitWords(text: string) {
+  const words = text.split(" ");
+  return words.map((word, i) => (
+    <span key={i} className="inline-block overflow-hidden align-top">
+      <motion.span
+        className="inline-block"
+        initial={{ y: "100%" }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 + i * 0.04 }}
+      >
+        {word}
+      </motion.span>
+      {i < words.length - 1 ? "\u00A0" : ""}
+    </span>
+  ));
+}
+
 export default function Hero() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const phoneGroupRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
@@ -23,24 +41,36 @@ export default function Hero() {
   const groupY = useTransform(smooth, [0, 1], [0, -80]);
   const groupScale = useTransform(smooth, [0, 0.5, 1], [1, 1.05, 0.75]);
   const headlineY = useTransform(smooth, [0, 1], [0, 70]);
-  const headlineOpacity = useTransform(smooth, [0, 0.35], [1, 0]);
 
   const phoneLeftY = useTransform(smooth, [0, 1], [0, -20]);
   const phoneCenterY = useTransform(smooth, [0, 1], [0, -50]);
   const phoneRightY = useTransform(smooth, [0, 1], [0, -80]);
 
+  const mouseX = useMotionValue(0.5);
+  const mouseY = useMotionValue(0.5);
+  const springMX = useSpring(mouseX, { stiffness: 50, damping: 20 });
+  const springMY = useSpring(mouseY, { stiffness: 50, damping: 20 });
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!sectionRef.current) return;
+    const rect = sectionRef.current.getBoundingClientRect();
+    mouseX.set((e.clientX - rect.left) / rect.width);
+    mouseY.set((e.clientY - rect.top) / rect.height);
+  };
+
   return (
     <section
       id="hero"
       ref={sectionRef}
+      onMouseMove={handleMouseMove}
       className="section-light relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
     >
       <motion.div
         className="absolute inset-0 pointer-events-none"
         style={{ y: bgY }}
       >
-        <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] rounded-full opacity-[0.04] bg-accent/20" />
-        <div className="absolute bottom-1/3 -right-32 w-[400px] h-[400px] rounded-full opacity-[0.03] bg-accent/20" />
+        <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] rounded-full opacity-[0.06] bg-accent/30 blur-[80px]" />
+        <div className="absolute bottom-1/3 -right-32 w-[400px] h-[400px] rounded-full opacity-[0.04] bg-accent/20 blur-[80px]" />
       </motion.div>
 
       <FloatingParticles count={35} />
@@ -52,8 +82,8 @@ export default function Hero() {
             linear-gradient(
               180deg,
               transparent 0%,
-              rgba(91, 127, 222, 0.015) 40%,
-              rgba(91, 127, 222, 0.03) 100%
+              rgba(232, 131, 77, 0.025) 40%,
+              rgba(217, 73, 31, 0.05) 100%
             )
           `,
           WebkitMaskImage: "linear-gradient(180deg, transparent 0%, black 40%)",
@@ -65,31 +95,39 @@ export default function Hero() {
 
       <motion.div
         className="flex flex-col items-center text-center px-6 sm:px-8 pt-20 pb-0 relative z-10"
-        style={{ y: headlineY, opacity: headlineOpacity, willChange: "transform" }}
+        style={{ y: headlineY, willChange: "transform" }}
       >
         <motion.p
           initial={{ opacity: 0.001, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ stiffness: 200, damping: 20, mass: 1, delay: 0.05, type: "spring" }}
-          className="text-sm font-medium text-accent tracking-wider uppercase mb-5"
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.05 }}
+          className="text-xs font-semibold tracking-[0.1em] uppercase mb-5 text-accent"
         >
           {heroData.roleLabel}
         </motion.p>
 
-        <motion.h1
-          initial={{ opacity: 0.001, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ stiffness: 200, damping: 20, mass: 1, delay: 0.1, type: "spring" }}
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-semibold tracking-tight leading-[0.95] text-balance max-w-5xl text-text-light"
-        >
-          {heroData.heading.first}{" "}
-          <span className="text-accent">{heroData.heading.accent}</span>
-        </motion.h1>
+        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-[-0.02em] leading-[0.95] text-balance max-w-5xl text-text-light relative inline-block">
+          <span className="inline-flex flex-wrap justify-center gap-x-[0.3em]">
+            <span className="inline-flex flex-wrap justify-center">
+              {splitWords(heroData.heading.first)}
+            </span>
+            <span className="inline-flex flex-wrap justify-center bg-gradient-to-r from-[#D9491F] to-[#E8834D] bg-clip-text text-transparent">
+              {splitWords(heroData.heading.accent)}
+            </span>
+          </span>
+          <motion.span
+            className="absolute inset-0 pointer-events-none bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12"
+            initial={{ x: "-100%" }}
+            animate={{ x: "200%" }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.8 }}
+            style={{ WebkitMaskImage: "linear-gradient(90deg, transparent, black, transparent)", maskImage: "linear-gradient(90deg, transparent, black, transparent)" }}
+          />
+        </h1>
 
         <motion.p
           initial={{ opacity: 0.001, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ stiffness: 200, damping: 20, mass: 1, delay: 0.15, type: "spring" }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
           className="mt-5 text-base sm:text-lg md:text-xl text-text-muted max-w-xl leading-relaxed"
         >
           {heroData.subtitle}
@@ -98,65 +136,116 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0.001, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ stiffness: 200, damping: 20, mass: 1, delay: 0.2, type: "spring" }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
           className="mt-8 flex flex-col sm:flex-row items-center gap-4"
         >
           <Magnetic>
-            <a
+            <motion.a
               href={heroData.ctaPrimary.href}
               download
-              className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-text-light text-light-base text-sm font-semibold hover:opacity-85 transition-all duration-300"
+              className="relative overflow-hidden inline-flex items-center justify-center px-8 py-3 rounded-full bg-accent text-light-base text-sm font-semibold transition-shadow duration-300"
+              whileHover={{ scale: 1.03, boxShadow: "0 0 24px rgba(217,73,31,0.35)" }}
+              whileTap={{ scale: 0.97 }}
             >
               {heroData.ctaPrimary.label}
-            </a>
+              <motion.span
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -skew-x-12 pointer-events-none"
+                initial={{ x: "-120%" }}
+                whileHover={{ x: "220%" }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              />
+            </motion.a>
           </Magnetic>
           <Magnetic strength={0.2}>
-            <a
+            <motion.a
               href={heroData.ctaSecondary.href}
-              className="inline-flex items-center justify-center px-8 py-3 rounded-full border border-border-light text-text-light text-sm font-semibold hover:bg-text-light hover:text-light-base transition-all duration-300"
+              className="relative overflow-hidden inline-flex items-center justify-center px-8 py-3 rounded-full border border-border-light text-text-light text-sm font-semibold transition-shadow duration-300"
+              whileHover={{ scale: 1.03, boxShadow: "0 0 24px rgba(217,73,31,0.35)" }}
+              whileTap={{ scale: 0.97 }}
             >
               {heroData.ctaSecondary.label}
-            </a>
+              <motion.span
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12 pointer-events-none"
+                initial={{ x: "-120%" }}
+                whileHover={{ x: "220%" }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              />
+            </motion.a>
           </Magnetic>
         </motion.div>
       </motion.div>
 
+      <div className="relative z-10" ref={phoneGroupRef}>
+        <motion.div
+          className="absolute -inset-20 pointer-events-none"
+          style={{
+            background: `radial-gradient(600px circle at ${springMX} ${springMY}, rgba(232,131,77,0.12) 0%, transparent 60%)`,
+          }}
+        />
+      </div>
+
       <motion.div
-        className="relative flex items-center justify-center mt-10 md:mt-14 mb-8"
+        className="relative flex items-center justify-center mt-10 md:mt-14 mb-8 z-10"
         style={{ y: groupY, scale: groupScale, willChange: "transform" }}
       >
         <div className="relative w-[220px] sm:w-[280px] md:w-[340px] lg:w-[400px] h-[160px] sm:h-[190px] md:h-[220px] lg:h-[260px]">
           <motion.div
             className="absolute left-0 bottom-0 w-[88px] sm:w-[110px] md:w-[130px] lg:w-[150px] z-[1]"
             style={{ y: phoneLeftY, rotate: -8, transformOrigin: "bottom center", willChange: "transform" }}
-            animate={{ y: [0, -4, 0] }}
-            transition={{ duration: 3, ease: "easeInOut", repeat: Infinity, delay: 0.3 }}
+            animate={{ y: [0, -5, 0, 5, 0] }}
+            transition={{ duration: 5, ease: [0.22, 1, 0.36, 1], repeat: Infinity, repeatType: "mirror" }}
           >
             <div className="opacity-70 scale-[0.65] sm:scale-[0.7] md:scale-[0.75]">
-              <PhoneFrame imageUrl={heroData.phoneImages[0]} color="#5B7FDE" />
+              <PhoneFrame imageUrl={heroData.phoneImages[0]} color="#D9491F" />
             </div>
           </motion.div>
 
           <motion.div
             className="absolute left-1/2 -translate-x-1/2 bottom-0 w-[105px] sm:w-[130px] md:w-[155px] lg:w-[180px] z-[3]"
             style={{ y: phoneCenterY, rotate: 0, transformOrigin: "bottom center", willChange: "transform" }}
-            animate={{ y: [0, -6, 0] }}
-            transition={{ duration: 3.5, ease: "easeInOut", repeat: Infinity }}
+            animate={{ y: [0, 6, 0, -4, 0] }}
+            transition={{ duration: 6, ease: [0.22, 1, 0.36, 1], repeat: Infinity, repeatType: "mirror" }}
           >
-            <PhoneFrame imageUrl={heroData.phoneImages[1]} color="#5B7FDE" />
+            <PhoneFrame imageUrl={heroData.phoneImages[1]} color="#D9491F" />
           </motion.div>
 
           <motion.div
             className="absolute right-0 bottom-0 w-[88px] sm:w-[110px] md:w-[130px] lg:w-[150px] z-[1]"
             style={{ y: phoneRightY, rotate: 8, transformOrigin: "bottom center", willChange: "transform" }}
-            animate={{ y: [0, -4, 0] }}
-            transition={{ duration: 2.8, ease: "easeInOut", repeat: Infinity, delay: 0.6 }}
+            animate={{ y: [0, -4, 0, 6, 0] }}
+            transition={{ duration: 4.5, ease: [0.22, 1, 0.36, 1], repeat: Infinity, repeatType: "mirror" }}
           >
             <div className="opacity-70 scale-[0.65] sm:scale-[0.7] md:scale-[0.75]">
-              <PhoneFrame imageUrl={heroData.phoneImages[2]} color="#5B7FDE" />
+              <PhoneFrame imageUrl={heroData.phoneImages[2]} color="#D9491F" />
             </div>
           </motion.div>
         </div>
+      </motion.div>
+
+      <motion.div
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 1.2 }}
+      >
+        <span className="text-[10px] font-medium text-text-muted/60 tracking-[0.15em] uppercase">
+          Scroll
+        </span>
+        <motion.svg
+          width="16"
+          height="24"
+          viewBox="0 0 16 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="text-text-muted/40"
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 2, ease: [0.22, 1, 0.36, 1], repeat: Infinity }}
+        >
+          <path d="M8 4v12M8 16l-4-4M8 16l4-4" />
+        </motion.svg>
       </motion.div>
     </section>
   );

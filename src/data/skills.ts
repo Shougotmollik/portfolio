@@ -49,16 +49,16 @@ export const skillsData: SkillsData = {
     {
       title: "State Management",
       items: [
-        { name: "Bloc", icon: `${deviconBase}/flutter/flutter-original.svg` },
-        { name: "Riverpod", icon: `${deviconBase}/flutter/flutter-original.svg` },
-        { name: "Provider", icon: `${deviconBase}/flutter/flutter-original.svg` },
+        { name: "Bloc", icon: `${deviconBase}/dart/dart-original.svg` },
+        { name: "Riverpod", icon: `${deviconBase}/dart/dart-original.svg` },
+        { name: "Provider", icon: `${deviconBase}/dart/dart-original.svg` },
       ],
     },
     {
       title: "Backend & Services",
       items: [
         { name: "Firebase", icon: `${deviconBase}/firebase/firebase-plain.svg` },
-        { name: "REST APIs", icon: `${deviconBase}/nodejs/nodejs-original.svg` },
+        { name: "REST APIs", icon: `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D9491F' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4h16v16H4z'/%3E%3Cpath d='M9 9h6v6H9z'/%3E%3Cpath d='M4 12h5'/%3E%3Cpath d='M15 12h5'/%3E%3C/svg%3E` },
         { name: "GraphQL", icon: `${deviconBase}/graphql/graphql-plain.svg` },
         { name: "Supabase", icon: `${deviconBase}/supabase/supabase-original.svg` },
       ],

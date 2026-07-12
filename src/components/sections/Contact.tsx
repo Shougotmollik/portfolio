@@ -46,7 +46,7 @@ export default function Contact() {
     <section
       id="contact"
       ref={sectionRef}
-      className="section-dark py-32 md:py-44 relative overflow-hidden"
+      className="section-dark py-20 md:py-28 relative overflow-hidden"
     >
       <motion.div
         className="absolute inset-0 pointer-events-none"
@@ -64,13 +64,13 @@ export default function Contact() {
             initial={{ opacity: 0.001, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ stiffness: 200, damping: 20, mass: 1, delay: 0.1, type: "spring" }}
-            className="mb-16 md:mb-24 max-w-3xl"
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="mb-10 md:mb-14 max-w-3xl"
           >
-            <p className="text-sm font-medium text-accent tracking-wider uppercase mb-5">
+            <p className="text-xs font-semibold tracking-[0.1em] uppercase mb-5 text-accent">
               {contactData.label}
             </p>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05] text-text-dark">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-[-0.02em] leading-[1.05] text-text-dark">
               {contactData.headline}
             </h2>
           </motion.div>
@@ -88,6 +88,7 @@ export default function Contact() {
             >
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
+                  <label htmlFor="name" className="sr-only">{contactData.formPlaceholders.name}</label>
                   <input
                     id="name"
                     type="text"
@@ -99,6 +100,7 @@ export default function Contact() {
                   />
                 </div>
                 <div>
+                  <label htmlFor="email" className="sr-only">{contactData.formPlaceholders.email}</label>
                   <input
                     id="email"
                     type="email"
@@ -110,6 +112,7 @@ export default function Contact() {
                   />
                 </div>
                 <div>
+                  <label htmlFor="message" className="sr-only">{contactData.formPlaceholders.message}</label>
                   <textarea
                     id="message"
                     required
@@ -123,9 +126,9 @@ export default function Contact() {
                 <Magnetic strength={0.15}>
                   <motion.button
                     type="submit"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-text-dark text-dark-base text-sm font-semibold hover:opacity-85 transition-all duration-300"
+                    whileHover={{ scale: 1.03, boxShadow: "0 0 24px rgba(217,73,31,0.35)" }}
+                    whileTap={{ scale: 0.97 }}
+                    className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-accent text-light-base text-sm font-semibold transition-all duration-300"
                   >
                     {submitted ? "Message sent" : "Send Message"}
                   </motion.button>
@@ -179,7 +182,7 @@ export default function Contact() {
                         href={social.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-text-muted hover:text-text-dark transition-colors duration-200"
+                        className="text-text-muted hover:text-accent transition-colors duration-200"
                         aria-label={social.label}
                         whileHover={{ scale: 1.2, y: -2 }}
                         whileTap={{ scale: 0.9 }}

@@ -82,7 +82,7 @@ export const projectsData: ProjectsData = {
       github: "https://github.com",
       playStore: "https://play.google.com",
       appStore: "https://apps.apple.com",
-      color: "#5B7FDE",
+      color: "#D9491F",
     },
     {
       id: "pennywise",
@@ -107,7 +107,7 @@ export const projectsData: ProjectsData = {
       github: "https://github.com",
       playStore: "https://play.google.com",
       appStore: "https://apps.apple.com",
-      color: "#6FA88A",
+      color: "#E8834D",
     },
     {
       id: "marketnode",
@@ -157,7 +157,7 @@ export const projectsData: ProjectsData = {
       github: "https://github.com",
       playStore: "https://play.google.com",
       appStore: "https://apps.apple.com",
-      color: "#8B7EC8",
+      color: "#B83A16",
     },
   ],
 };

@@ -8,6 +8,7 @@ export default function CustomCursor() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rafRef = useRef<number>(0);
   const mouseRef = useRef({ x: -100, y: -100, px: -100, py: -100 });
+  const hoverRef = useRef(false);
   const trailRef = useRef<{ x: number; y: number }[]>(
     Array.from({ length: TRAIL_COUNT }, () => ({ x: -100, y: -100 }))
   );
@@ -37,6 +38,22 @@ export default function CustomCursor() {
     };
     window.addEventListener("mousemove", onMouse);
 
+    const target = document.body;
+    const onHoverIn = (e: MouseEvent) => {
+      const t = e.target as HTMLElement;
+      if (t && (t.matches("a, button, [role=\"button\"], input, textarea, select, [data-cursor-hover]"))) {
+        hoverRef.current = true;
+      }
+    };
+    const onHoverOut = (e: MouseEvent) => {
+      const t = e.target as HTMLElement;
+      if (t && (t.matches("a, button, [role=\"button\"], input, textarea, select, [data-cursor-hover]"))) {
+        hoverRef.current = false;
+      }
+    };
+    target.addEventListener("mouseover", onHoverIn);
+    target.addEventListener("mouseout", onHoverOut);
+
     const trail = trailRef.current;
 
     const draw = () => {
@@ -47,7 +64,8 @@ export default function CustomCursor() {
         mouseRef.current.x - mouseRef.current.px,
         mouseRef.current.y - mouseRef.current.py
       );
-      const scale = Math.min(1.8, Math.max(0.6, 1 + speed * 0.02));
+      const speedScale = Math.min(1.8, Math.max(0.6, 1 + speed * 0.02));
+      const hoverScale = hoverRef.current ? 2 : 1;
 
       for (let i = 0; i < TRAIL_COUNT; i++) {
         const target = i === 0 ? mouseRef.current : trail[i - 1];
@@ -56,8 +74,8 @@ export default function CustomCursor() {
         trail[i].y += (target.y - trail[i].y) * lerp;
 
         const t = 1 - i / TRAIL_COUNT;
-        const radius = (1.5 + t * 3.5) * (i === 0 ? scale : 1);
-        const alpha = 0.5 + t * 0.5;
+        const radius = (1.5 + t * 3.5) * (i === 0 ? speedScale : 1) * (i === 0 ? hoverScale : 1);
+        const alpha = hoverRef.current && i === 0 ? 0.8 : (0.5 + t * 0.5);
 
         ctx.beginPath();
         ctx.arc(trail[i].x, trail[i].y, radius, 0, Math.PI * 2);
@@ -67,17 +85,17 @@ export default function CustomCursor() {
             trail[i].x, trail[i].y, 0,
             trail[i].x, trail[i].y, radius * 8
           );
-          glow.addColorStop(0, `rgba(91, 127, 222, ${0.15 * alpha})`);
-          glow.addColorStop(1, "rgba(91, 127, 222, 0)");
+          glow.addColorStop(0, `rgba(217, 73, 31, ${0.15 * alpha})`);
+          glow.addColorStop(1, "rgba(217, 73, 31, 0)");
           ctx.fillStyle = glow;
           ctx.fill();
 
           ctx.beginPath();
           ctx.arc(trail[i].x, trail[i].y, radius, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(91, 127, 222, ${0.7 * alpha})`;
+          ctx.fillStyle = `rgba(217, 73, 31, ${0.7 * alpha})`;
           ctx.fill();
         } else {
-          ctx.fillStyle = `rgba(91, 127, 222, ${0.25 * alpha})`;
+          ctx.fillStyle = `rgba(217, 73, 31, ${0.25 * alpha})`;
           ctx.fill();
         }
       }
@@ -90,6 +108,8 @@ export default function CustomCursor() {
       cancelAnimationFrame(rafRef.current);
       window.removeEventListener("mousemove", onMouse);
       window.removeEventListener("resize", resize);
+      target.removeEventListener("mouseover", onHoverIn);
+      target.removeEventListener("mouseout", onHoverOut);
     };
   }, []);
 

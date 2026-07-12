@@ -62,7 +62,7 @@ export default function FloatingParticles({ count = 30 }: { count?: number }) {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(91, 127, 222, ${p.alpha})`;
+        ctx.fillStyle = `rgba(217, 73, 31, ${p.alpha})`;
         ctx.fill();
       }
 

@@ -1,8 +1,34 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
+import { motion, useScroll, useSpring, useTransform, useMotionValue, useInView, animate } from "framer-motion";
 import { aboutData } from "@/data/about";
+
+function CountUp({ value }: { value: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [display, setDisplay] = useState(0);
+  const inView = useInView(ref, { once: true, amount: 0.5 });
+  const numMatch = value.match(/^(\d+)(\+)?$/);
+  const num = numMatch ? parseInt(numMatch[1], 10) : 0;
+  const suffix = numMatch?.[2] ?? "";
+  const motionValue = useMotionValue(0);
+
+  useEffect(() => {
+    const unsubscribe = motionValue.on("change", (v) => setDisplay(Math.round(v)));
+    return unsubscribe;
+  }, [motionValue]);
+
+  useEffect(() => {
+    if (!inView) return;
+    const controls = animate(motionValue, num, {
+      duration: 1.8,
+      ease: [0.22, 1, 0.36, 1],
+    });
+    return controls.stop;
+  }, [inView, motionValue, num]);
+
+  return <span ref={ref}>{display}{suffix}</span>;
+}
 
 export default function About() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -27,7 +53,7 @@ export default function About() {
     <section
       id="about"
       ref={sectionRef}
-      className="section-dark py-32 md:py-44 relative overflow-hidden"
+      className="section-dark py-20 md:py-28 relative overflow-hidden"
     >
       <motion.div
         className="absolute inset-0 pointer-events-none"
@@ -46,12 +72,12 @@ export default function About() {
               initial={{ opacity: 0.001, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ stiffness: 200, damping: 20, mass: 1, delay: 0.1, type: "spring" }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             >
-              <p className="text-sm font-medium text-accent tracking-wider uppercase mb-5">
+              <p className="text-xs font-semibold tracking-[0.1em] uppercase mb-5 text-accent">
                 {aboutData.label}
               </p>
-              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05] text-text-dark">
+              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-[-0.02em] leading-[1.05] text-text-dark">
                 {aboutData.headline}
               </h2>
             </motion.div>
@@ -64,7 +90,7 @@ export default function About() {
               initial={{ opacity: 0.001, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ stiffness: 200, damping: 20, mass: 1, delay: 0.15, type: "spring" }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
               className="space-y-8"
             >
               {aboutData.paragraphs.map((p, i) => (
@@ -77,13 +103,13 @@ export default function About() {
                 initial={{ opacity: 0.001, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={{ stiffness: 200, damping: 20, mass: 1, delay: 0.2, type: "spring" }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
                 className="flex flex-wrap gap-8 pt-4"
               >
                 {aboutData.stats.map((stat) => (
                   <div key={stat.label}>
-                    <span className="text-3xl sm:text-4xl font-semibold text-text-dark tracking-tight">
-                      {stat.value}
+                    <span className="text-3xl sm:text-4xl font-semibold text-text-dark tracking-tight tabular-nums">
+                      <CountUp value={stat.value} />
                     </span>
                     <p className="text-sm text-text-muted mt-1">{stat.label}</p>
                   </div>

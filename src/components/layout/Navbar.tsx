@@ -37,15 +37,15 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 className="text-[13px] font-medium text-text-muted hover:text-text-light transition-colors duration-200 tracking-wide relative"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
               >
                 {link.label}
                 <motion.span
-                  className="absolute -bottom-1 left-0 right-0 h-px bg-accent origin-left"
+                  className="absolute -bottom-1 left-0 right-0 h-[1.5px] bg-accent origin-left"
                   initial={{ scaleX: 0 }}
                   whileHover={{ scaleX: 1 }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                 />
               </motion.a>
             ))}

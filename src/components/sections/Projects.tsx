@@ -49,7 +49,7 @@ function ProjectDetailModal({
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             className="glass-dark rounded-2xl overflow-hidden inner-highlight w-full max-w-5xl relative"
             onClick={(e) => e.stopPropagation()}
           >
@@ -120,7 +120,7 @@ function ProjectDetailModal({
                 {project.tech.map((t) => (
                   <div
                     key={t.name}
-                    className="tag-clay inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium"
+                    className="tag-accent inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium"
                   >
                     <img src={t.icon} alt="" className="w-3 h-3" />
                     {t.name}
@@ -213,14 +213,14 @@ export default function Projects() {
     <section
       id="projects"
       ref={sectionRef}
-      className="section-dark py-32 md:py-44 relative overflow-hidden"
+      className="section-dark py-20 md:py-28 relative overflow-hidden"
     >
       <motion.div
         className="absolute top-1/4 left-1/2 w-[600px] h-[600px] glow-accent pointer-events-none"
         style={{ y: bg1Drift, willChange: "transform" }}
       />
       <motion.div
-        className="absolute bottom-1/4 right-0 w-[400px] h-[400px] glow-clay pointer-events-none"
+        className="absolute bottom-1/4 right-0 w-[400px] h-[400px] glow-accent pointer-events-none"
         style={{ y: bg2Drift, willChange: "transform" }}
       />
 
@@ -230,13 +230,13 @@ export default function Projects() {
             initial={{ opacity: 0.001, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ damping: 20, delay: 0.1, mass: 1, stiffness: 200, type: "spring" }}
-            className="mb-16 md:mb-24"
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="mb-10 md:mb-14"
           >
-            <p className="text-sm font-medium text-accent tracking-wider uppercase mb-5">
+            <p className="text-xs font-semibold tracking-[0.1em] uppercase mb-5 text-accent">
               {projectsData.label}
             </p>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05] text-text-dark max-w-3xl">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-[-0.02em] leading-[1.05] text-text-dark max-w-3xl">
               {projectsData.headline}
             </h2>
             <p className="mt-6 text-base md:text-lg text-text-muted max-w-2xl leading-relaxed">
@@ -253,14 +253,18 @@ export default function Projects() {
               initial={{ opacity: 0.001, scale: 0.85, y: 40, rotate: -2 }}
               whileInView={{ opacity: 1, scale: 1, y: 0, rotate: 0 }}
               viewport={{ once: true, amount: 0.15 }}
-              transition={{ stiffness: 200, damping: 20, mass: 1, delay: i * 0.08, type: "spring" }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: i * 0.08 }}
             >
               <div
                 className="absolute -top-24 -right-24 w-48 h-48 rounded-full opacity-[0.1] pointer-events-none"
                 style={{ background: project.color }}
               />
               <div className="p-5 flex flex-col items-center">
-                <PhoneFrame imageUrl={project.images[0]} color={project.color} />
+                <div className="overflow-hidden rounded-[2.5rem] w-full">
+                  <div className="transition-transform duration-[0.6s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105">
+                    <PhoneFrame imageUrl={project.images[0]} color={project.color} />
+                  </div>
+                </div>
                 <h3 className="mt-4 text-lg font-semibold tracking-tight text-text-dark text-center">
                   {project.name}
                 </h3>

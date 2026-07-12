@@ -9,7 +9,7 @@ interface PhoneFrameProps {
   compact?: boolean;
 }
 
-export default function PhoneFrame({ children, gradient, color = "#5B7FDE", imageUrl, radius = "2.5rem", compact }: PhoneFrameProps) {
+export default function PhoneFrame({ children, gradient, color = "#D9491F", imageUrl, radius = "2.5rem", compact }: PhoneFrameProps) {
   const innerRadius = `calc(${radius} - 4px)`;
   const inset = compact ? "2px" : "4px";
   return (
@@ -22,7 +22,7 @@ export default function PhoneFrame({ children, gradient, color = "#5B7FDE", imag
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[110px] h-[26px] bg-white/[0.06] rounded-b-2xl z-10" />
         )}
         <div
-          className="absolute overflow-hidden bg-dark-base"
+          className="absolute overflow-hidden bg-dark-base/90"
           style={{ borderRadius: innerRadius, inset }}
         >
           {imageUrl ? (

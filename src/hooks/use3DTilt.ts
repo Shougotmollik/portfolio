@@ -18,6 +18,7 @@ export function use3DTilt<T extends HTMLElement>({
 }: TiltOptions = {}) {
   const ref = useRef<T>(null);
   const glareRef = useRef<HTMLDivElement>(null);
+  const edgeGlowRef = useRef<HTMLDivElement>(null);
 
   const reset = useCallback(() => {
     const el = ref.current;
@@ -25,6 +26,9 @@ export function use3DTilt<T extends HTMLElement>({
     el.style.transform = `perspective(${perspective}px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)`;
     if (glare && glareRef.current) {
       glareRef.current.style.opacity = "0";
+    }
+    if (edgeGlowRef.current) {
+      edgeGlowRef.current.style.opacity = "0";
     }
   }, [perspective, glare]);
 
@@ -39,8 +43,11 @@ export function use3DTilt<T extends HTMLElement>({
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
 
-      const rotateX = ((y - centerY) / centerY) * -maxTilt;
-      const rotateY = ((x - centerX) / centerX) * maxTilt;
+      const normX = (x - centerX) / centerX;
+      const normY = (y - centerY) / centerY;
+
+      const rotateX = normY * -maxTilt;
+      const rotateY = normX * maxTilt;
 
       el.style.transform = `perspective(${perspective}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(${scale},${scale},${scale})`;
 
@@ -52,6 +59,23 @@ export function use3DTilt<T extends HTMLElement>({
           radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.06) 0%, transparent 60%)
         `;
         glareRef.current.style.opacity = "1";
+      }
+
+      if (edgeGlowRef.current) {
+        const edgeX = x / rect.width;
+        const edgeY = y / rect.height;
+        const intensity = Math.min(
+          1,
+          Math.sqrt(Math.pow(normX, 2) + Math.pow(normY, 2)) * 1.2
+        );
+        edgeGlowRef.current.style.background = `
+          radial-gradient(
+            circle at ${edgeX * 100}% ${edgeY * 100}%,
+            rgba(217,73,31,${0.25 * intensity}) 0%,
+            transparent 60%
+          )
+        `;
+        edgeGlowRef.current.style.opacity = String(intensity);
       }
     },
     [maxTilt, perspective, scale, glare]
@@ -77,5 +101,5 @@ export function use3DTilt<T extends HTMLElement>({
     };
   }, [handleMouseMove, reset]);
 
-  return { ref, glareRef };
+  return { ref, glareRef, edgeGlowRef };
 }

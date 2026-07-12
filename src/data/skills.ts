@@ -49,15 +49,16 @@ export const skillsData: SkillsData = {
     {
       title: "State Management",
       items: [
-        { name: "Bloc", icon: `${deviconBase}/dart/dart-original.svg` },
-        { name: "Riverpod", icon: `${deviconBase}/dart/dart-original.svg` },
-        { name: "Provider", icon: `${deviconBase}/dart/dart-original.svg` },
+        { name: "Bloc", icon: `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D9491F' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='7' width='5' height='10' rx='1'/%3E%3Crect x='9.5' y='7' width='5' height='10' rx='1'/%3E%3Crect x='17' y='7' width='5' height='10' rx='1'/%3E%3Cpath d='M7 12h2.5'/%3E%3Cpath d='M14.5 12H17'/%3E%3C/svg%3E` },
+        { name: "Riverpod", icon: `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D9491F' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='4' width='16' height='16' rx='3'/%3E%3Cpath d='M4 14c2-3 4 2 6 0s4 3 6 0'/%3E%3Cpath d='M6 18h12'/%3E%3C/svg%3E` },
+        { name: "Provider", icon: `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D9491F' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2L2 12l10 10 10-10L12 2z'/%3E%3Cpath d='M12 7l-5 5 5 5 5-5-5-5z'/%3E%3C/svg%3E` },
       ],
     },
     {
       title: "Backend & Services",
       items: [
         { name: "Firebase", icon: `${deviconBase}/firebase/firebase-plain.svg` },
+        { name: "Node.js", icon: `${deviconBase}/nodejs/nodejs-original.svg` },
         { name: "REST APIs", icon: `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D9491F' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4h16v16H4z'/%3E%3Cpath d='M9 9h6v6H9z'/%3E%3Cpath d='M4 12h5'/%3E%3Cpath d='M15 12h5'/%3E%3C/svg%3E` },
         { name: "GraphQL", icon: `${deviconBase}/graphql/graphql-plain.svg` },
         { name: "Supabase", icon: `${deviconBase}/supabase/supabase-original.svg` },

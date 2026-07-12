@@ -168,7 +168,7 @@ type Card3DProps = React.ComponentPropsWithoutRef<typeof motion.div> & {
 };
 
 function Card3D({ children, onClick, ...props }: Card3DProps) {
-  const { ref, glareRef } = use3DTilt<HTMLDivElement>();
+  const { ref, glareRef, edgeGlowRef } = use3DTilt<HTMLDivElement>();
   return (
     <motion.div
       ref={ref}
@@ -184,6 +184,10 @@ function Card3D({ children, onClick, ...props }: Card3DProps) {
       <div
         ref={glareRef}
         className="absolute inset-0 rounded-2xl pointer-events-none z-10 opacity-0 transition-opacity duration-200"
+      />
+      <div
+        ref={edgeGlowRef}
+        className="absolute inset-0 rounded-2xl pointer-events-none z-20 opacity-0 transition-opacity duration-200"
       />
     </motion.div>
   );
@@ -281,7 +285,6 @@ export default function Projects() {
           ))}
         </div>
       </div>
-
     </section>
       {selected !== null && (
         <ProjectDetailModal

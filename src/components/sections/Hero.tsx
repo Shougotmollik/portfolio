@@ -1,11 +1,20 @@
 "use client";
 
 import { useRef } from "react";
+import dynamic from "next/dynamic";
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
-import PhoneFrame from "@/components/ui/PhoneFrame";
 import FloatingParticles from "@/components/ui/FloatingParticles";
 import Magnetic from "@/components/ui/Magnetic";
 import { heroData } from "@/data/hero";
+
+const VRMScene = dynamic(() => import("@/components/three/VRMScene"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full flex items-center justify-center">
+      <div className="w-16 h-16 rounded-full bg-accent/20 animate-pulse" />
+    </div>
+  ),
+});
 
 function splitWords(text: string) {
   const words = text.split(" ");
@@ -26,7 +35,6 @@ function splitWords(text: string) {
 
 export default function Hero() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const phoneGroupRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
@@ -38,13 +46,8 @@ export default function Hero() {
   });
 
   const bgY = useTransform(smooth, [0, 1], [0, -280]);
-  const groupY = useTransform(smooth, [0, 1], [0, -80]);
-  const groupScale = useTransform(smooth, [0, 0.5, 1], [1, 1.05, 0.75]);
-  const headlineY = useTransform(smooth, [0, 1], [0, 70]);
-
-  const phoneLeftY = useTransform(smooth, [0, 1], [0, -20]);
-  const phoneCenterY = useTransform(smooth, [0, 1], [0, -50]);
-  const phoneRightY = useTransform(smooth, [0, 1], [0, -80]);
+  const characterY = useTransform(smooth, [0, 1], [0, -60]);
+  const characterScale = useTransform(smooth, [0, 0.5, 1], [1, 1.05, 0.7]);
 
   const mouseX = useMotionValue(0.5);
   const mouseY = useMotionValue(0.5);
@@ -63,7 +66,7 @@ export default function Hero() {
       id="hero"
       ref={sectionRef}
       onMouseMove={handleMouseMove}
-      className="section-light relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
+      className="section-light relative min-h-screen flex flex-col lg:flex-row items-center overflow-hidden"
     >
       <motion.div
         className="absolute inset-0 pointer-events-none"
@@ -94,133 +97,110 @@ export default function Hero() {
       />
 
       <motion.div
-        className="flex flex-col items-center text-center px-6 sm:px-8 pt-20 pb-0 relative z-10"
-        style={{ y: headlineY, willChange: "transform" }}
-      >
-        <motion.p
-          initial={{ opacity: 0.001, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.05 }}
-          className="text-xs font-semibold tracking-[0.1em] uppercase mb-5 text-accent"
-        >
-          {heroData.roleLabel}
-        </motion.p>
+        className="absolute -inset-20 pointer-events-none"
+        style={{
+          background: `radial-gradient(600px circle at ${springMX} ${springMY}, rgba(232,131,77,0.12) 0%, transparent 60%)`,
+        }}
+      />
 
-        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-[-0.02em] leading-[0.95] text-balance max-w-5xl text-text-light relative inline-block">
-          <span className="inline-flex flex-wrap justify-center gap-x-[0.3em]">
-            <span className="inline-flex flex-wrap justify-center">
-              {splitWords(heroData.heading.first)}
-            </span>
-            <span className="inline-flex flex-wrap justify-center bg-gradient-to-r from-[#D9491F] to-[#E8834D] bg-clip-text text-transparent">
-              {splitWords(heroData.heading.accent)}
-            </span>
-          </span>
-          <motion.span
-            className="absolute inset-0 pointer-events-none bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12"
-            initial={{ x: "-100%" }}
-            animate={{ x: "200%" }}
-            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.8 }}
-            style={{ WebkitMaskImage: "linear-gradient(90deg, transparent, black, transparent)", maskImage: "linear-gradient(90deg, transparent, black, transparent)" }}
-          />
-        </h1>
-
-        <motion.p
-          initial={{ opacity: 0.001, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-          className="mt-5 text-base sm:text-lg md:text-xl text-text-muted max-w-xl leading-relaxed"
-        >
-          {heroData.subtitle}
-        </motion.p>
-
+      <div className="w-full lg:w-1/2 z-10 flex flex-col items-center lg:items-start text-center lg:text-left px-6 sm:px-8 lg:pl-12 lg:pr-6 pt-24 lg:pt-32 pb-0">
         <motion.div
-          initial={{ opacity: 0.001, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-          className="mt-8 flex flex-col sm:flex-row items-center gap-4"
+          initial={{ opacity: 0.001, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         >
-          <Magnetic>
-            <motion.a
-              href={heroData.ctaPrimary.href}
-              download
-              className="relative overflow-hidden inline-flex items-center justify-center px-8 py-3 rounded-full bg-accent text-light-base text-sm font-semibold transition-shadow duration-300"
-              whileHover={{ scale: 1.03, boxShadow: "0 0 24px rgba(217,73,31,0.35)" }}
-              whileTap={{ scale: 0.97 }}
-            >
-              {heroData.ctaPrimary.label}
-              <motion.span
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -skew-x-12 pointer-events-none"
-                initial={{ x: "-120%" }}
-                whileHover={{ x: "220%" }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              />
-            </motion.a>
-          </Magnetic>
-          <Magnetic strength={0.2}>
-            <motion.a
-              href={heroData.ctaSecondary.href}
-              className="relative overflow-hidden inline-flex items-center justify-center px-8 py-3 rounded-full border border-border-light text-text-light text-sm font-semibold transition-shadow duration-300"
-              whileHover={{ scale: 1.03, boxShadow: "0 0 24px rgba(217,73,31,0.35)" }}
-              whileTap={{ scale: 0.97 }}
-            >
-              {heroData.ctaSecondary.label}
-              <motion.span
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12 pointer-events-none"
-                initial={{ x: "-120%" }}
-                whileHover={{ x: "220%" }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              />
-            </motion.a>
-          </Magnetic>
+          <motion.p
+            initial={{ opacity: 0.001, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.05 }}
+            className="text-xs font-semibold tracking-[0.1em] uppercase mb-5 text-accent"
+          >
+            {heroData.roleLabel}
+          </motion.p>
+
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-[-0.02em] leading-[0.95] text-balance max-w-5xl text-text-light relative inline-block">
+            <span className="inline-flex flex-wrap justify-center lg:justify-start gap-x-[0.3em]">
+              <span className="inline-flex flex-wrap justify-center lg:justify-start">
+                {splitWords(heroData.heading.first)}
+              </span>
+              <span className="inline-flex flex-wrap justify-center lg:justify-start bg-gradient-to-r from-[#D9491F] to-[#E8834D] bg-clip-text text-transparent">
+                {splitWords(heroData.heading.accent)}
+              </span>
+            </span>
+            <motion.span
+              className="absolute inset-0 pointer-events-none bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12"
+              initial={{ x: "-100%" }}
+              animate={{ x: "200%" }}
+              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.8 }}
+              style={{ WebkitMaskImage: "linear-gradient(90deg, transparent, black, transparent)", maskImage: "linear-gradient(90deg, transparent, black, transparent)" }}
+            />
+          </h1>
+
+          <motion.p
+            initial={{ opacity: 0.001, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+            className="mt-5 text-base sm:text-lg md:text-xl text-text-muted max-w-xl leading-relaxed"
+          >
+            {heroData.subtitle}
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0.001, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+            className="mt-8 flex flex-col sm:flex-row items-center lg:items-start gap-4"
+          >
+            <Magnetic>
+              <motion.a
+                href={heroData.ctaPrimary.href}
+                download
+                className="relative overflow-hidden inline-flex items-center justify-center px-8 py-3 rounded-full bg-accent text-light-base text-sm font-semibold transition-shadow duration-300"
+                whileHover={{ scale: 1.03, boxShadow: "0 0 24px rgba(217,73,31,0.35)" }}
+                whileTap={{ scale: 0.97 }}
+              >
+                {heroData.ctaPrimary.label}
+                <motion.span
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -skew-x-12 pointer-events-none"
+                  initial={{ x: "-120%" }}
+                  whileHover={{ x: "220%" }}
+                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                />
+              </motion.a>
+            </Magnetic>
+            <Magnetic strength={0.2}>
+              <motion.a
+                href={heroData.ctaSecondary.href}
+                className="relative overflow-hidden inline-flex items-center justify-center px-8 py-3 rounded-full border border-border-light text-text-light text-sm font-semibold transition-shadow duration-300"
+                whileHover={{ scale: 1.03, boxShadow: "0 0 24px rgba(217,73,31,0.35)" }}
+                whileTap={{ scale: 0.97 }}
+              >
+                {heroData.ctaSecondary.label}
+                <motion.span
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12 pointer-events-none"
+                  initial={{ x: "-120%" }}
+                  whileHover={{ x: "220%" }}
+                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                />
+              </motion.a>
+            </Magnetic>
+          </motion.div>
         </motion.div>
-      </motion.div>
-
-      <div className="relative z-10" ref={phoneGroupRef}>
-        <motion.div
-          className="absolute -inset-20 pointer-events-none"
-          style={{
-            background: `radial-gradient(600px circle at ${springMX} ${springMY}, rgba(232,131,77,0.12) 0%, transparent 60%)`,
-          }}
-        />
       </div>
 
-      <motion.div
-        className="relative flex items-center justify-center mt-10 md:mt-14 mb-8 z-10"
-        style={{ y: groupY, scale: groupScale, willChange: "transform" }}
-      >
-        <div className="relative w-[220px] sm:w-[280px] md:w-[340px] lg:w-[400px] h-[160px] sm:h-[190px] md:h-[220px] lg:h-[260px]">
-          <motion.div
-            className="absolute left-0 bottom-0 w-[88px] sm:w-[110px] md:w-[130px] lg:w-[150px] z-[1]"
-            style={{ y: phoneLeftY, rotate: -8, transformOrigin: "bottom center", willChange: "transform" }}
-            animate={{ y: [0, -5, 0, 5, 0] }}
-            transition={{ duration: 5, ease: [0.22, 1, 0.36, 1], repeat: Infinity, repeatType: "mirror" }}
-          >
-            <div className="opacity-70 scale-[0.65] sm:scale-[0.7] md:scale-[0.75]">
-              <PhoneFrame imageUrl={heroData.phoneImages[0]} color="#D9491F" />
-            </div>
-          </motion.div>
-
-          <motion.div
-            className="absolute left-1/2 -translate-x-1/2 bottom-0 w-[105px] sm:w-[130px] md:w-[155px] lg:w-[180px] z-[3]"
-            style={{ y: phoneCenterY, rotate: 0, transformOrigin: "bottom center", willChange: "transform" }}
-            animate={{ y: [0, 6, 0, -4, 0] }}
-            transition={{ duration: 6, ease: [0.22, 1, 0.36, 1], repeat: Infinity, repeatType: "mirror" }}
-          >
-            <PhoneFrame imageUrl={heroData.phoneImages[1]} color="#D9491F" />
-          </motion.div>
-
-          <motion.div
-            className="absolute right-0 bottom-0 w-[88px] sm:w-[110px] md:w-[130px] lg:w-[150px] z-[1]"
-            style={{ y: phoneRightY, rotate: 8, transformOrigin: "bottom center", willChange: "transform" }}
-            animate={{ y: [0, -4, 0, 6, 0] }}
-            transition={{ duration: 4.5, ease: [0.22, 1, 0.36, 1], repeat: Infinity, repeatType: "mirror" }}
-          >
-            <div className="opacity-70 scale-[0.65] sm:scale-[0.7] md:scale-[0.75]">
-              <PhoneFrame imageUrl={heroData.phoneImages[2]} color="#D9491F" />
-            </div>
-          </motion.div>
-        </div>
-      </motion.div>
+      <div className="w-full lg:w-1/2 h-[50vh] lg:h-screen relative z-10 flex items-center justify-center">
+        <motion.div
+          className="w-full h-full max-w-lg lg:max-w-none"
+          style={{
+            y: characterY,
+            scale: characterScale,
+            willChange: "transform",
+          }}
+        >
+          <VRMScene />
+        </motion.div>
+      </div>
 
       <motion.div
         className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1"

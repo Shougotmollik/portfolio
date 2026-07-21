@@ -1,20 +1,10 @@
 "use client";
 
 import { useRef } from "react";
-import dynamic from "next/dynamic";
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import FloatingParticles from "@/components/ui/FloatingParticles";
 import Magnetic from "@/components/ui/Magnetic";
 import { heroData } from "@/data/hero";
-
-const VRMScene = dynamic(() => import("@/components/three/VRMScene"), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-full flex items-center justify-center">
-      <div className="w-16 h-16 rounded-full bg-accent/20 animate-pulse" />
-    </div>
-  ),
-});
 
 function splitWords(text: string) {
   const words = text.split(" ");
@@ -46,8 +36,6 @@ export default function Hero() {
   });
 
   const bgY = useTransform(smooth, [0, 1], [0, -280]);
-  const characterY = useTransform(smooth, [0, 1], [0, -60]);
-  const characterScale = useTransform(smooth, [0, 0.5, 1], [1, 1.05, 0.7]);
 
   const mouseX = useMotionValue(0.5);
   const mouseY = useMotionValue(0.5);
@@ -103,12 +91,13 @@ export default function Hero() {
         }}
       />
 
-      <div className="w-full lg:w-1/2 z-10 flex flex-col items-center lg:items-start text-center lg:text-left px-6 sm:px-8 lg:pl-12 lg:pr-6 pt-24 lg:pt-32 pb-0">
+      <div className="w-full z-10 flex flex-col items-center text-center px-6 sm:px-8 lg:px-12 pt-24 lg:pt-32 pb-0">
         <motion.div
           initial={{ opacity: 0.001, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-4xl"
         >
           <motion.p
             initial={{ opacity: 0.001, y: 30 }}
@@ -119,12 +108,12 @@ export default function Hero() {
             {heroData.roleLabel}
           </motion.p>
 
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-[-0.02em] leading-[0.95] text-balance max-w-5xl text-text-light relative inline-block">
-            <span className="inline-flex flex-wrap justify-center lg:justify-start gap-x-[0.3em]">
-              <span className="inline-flex flex-wrap justify-center lg:justify-start">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-[-0.02em] leading-[0.95] text-balance text-text-light relative inline-block">
+            <span className="inline-flex flex-wrap justify-center gap-x-[0.3em]">
+              <span className="inline-flex flex-wrap justify-center">
                 {splitWords(heroData.heading.first)}
               </span>
-              <span className="inline-flex flex-wrap justify-center lg:justify-start bg-gradient-to-r from-[#D9491F] to-[#E8834D] bg-clip-text text-transparent">
+              <span className="inline-flex flex-wrap justify-center bg-gradient-to-r from-[#D9491F] to-[#E8834D] bg-clip-text text-transparent">
                 {splitWords(heroData.heading.accent)}
               </span>
             </span>
@@ -141,7 +130,7 @@ export default function Hero() {
             initial={{ opacity: 0.001, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-            className="mt-5 text-base sm:text-lg md:text-xl text-text-muted max-w-xl leading-relaxed"
+            className="mt-5 text-base sm:text-lg md:text-xl text-text-muted max-w-2xl mx-auto leading-relaxed"
           >
             {heroData.subtitle}
           </motion.p>
@@ -150,7 +139,7 @@ export default function Hero() {
             initial={{ opacity: 0.001, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-            className="mt-8 flex flex-col sm:flex-row items-center lg:items-start gap-4"
+            className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <Magnetic>
               <motion.a
@@ -186,19 +175,6 @@ export default function Hero() {
               </motion.a>
             </Magnetic>
           </motion.div>
-        </motion.div>
-      </div>
-
-      <div className="w-full lg:w-1/2 h-[50vh] lg:h-screen relative z-10 flex items-center justify-center">
-        <motion.div
-          className="w-full h-full max-w-lg lg:max-w-none"
-          style={{
-            y: characterY,
-            scale: characterScale,
-            willChange: "transform",
-          }}
-        >
-          <VRMScene />
         </motion.div>
       </div>
 

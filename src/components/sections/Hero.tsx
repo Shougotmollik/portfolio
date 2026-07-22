@@ -52,11 +52,11 @@ export default function Hero() {
           </motion.div>
 
           <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl md:text-6xl lg:text-7.5xl font-black leading-[1.05] text-[#111111] mb-8 tracking-tight max-w-2xl">
-            Ship Cross-Platform Apps <span className="highlight-yellow inline-block px-1">Faster</span> With <span className="text-[#fa8f76]">Flutter</span>
+            {heroData.heading.first} <span className="highlight-yellow inline-block px-1">{heroData.heading.accent}</span> — <span className="highlight-pink inline-block px-1">App</span> <span className="highlight-orange inline-block px-1">Developer</span>
           </motion.h1>
 
           <motion.p variants={itemVariants} className="text-base sm:text-lg font-bold text-[#111111]/80 max-w-xl mb-8 leading-relaxed">
-            {heroData.subtitle} Over 4 years of engineering high-quality cross-platform applications and beautiful mobile design systems.
+            {heroData.subtitle}
           </motion.p>
 
           <motion.div variants={itemVariants} className="flex flex-wrap gap-4">
@@ -101,7 +101,7 @@ export default function Hero() {
               transition={{ delay: 0.8, duration: 0.4, ease: "easeOut" }}
             >
               <span className="w-2.5 h-2.5 rounded-full bg-[#111111] animate-ping" />
-              <span className="text-xs font-black">4+ Years Exp</span>
+              <span className="text-xs font-black">Open to Work</span>
             </motion.div>
 
             <div className="w-full bg-[#c5a9f6] border-[2.5px] border-[#111111] rounded-2xl p-6 neo-shadow-lg relative overflow-hidden flex flex-col gap-6">
@@ -118,7 +118,7 @@ export default function Hero() {
 
               <div className="bg-[#fcd567] border-[2.5px] border-[#111111] rounded-xl p-4 neo-shadow-sm flex flex-col gap-1">
                 <span className="text-xs font-black text-[#111111] tracking-wide uppercase">Shougot Mollik</span>
-                <span className="text-xs font-bold text-[#111111]/80">From CS graduate to Senior Flutter Engineer — delivering clean, scalable code.</span>
+                <span className="text-xs font-bold text-[#111111]/80">BSc in CSE · Jr. Flutter Developer at Join Venture AI · 10+ apps shipped</span>
               </div>
             </div>
 
@@ -142,10 +142,10 @@ export default function Hero() {
         variants={{ visible: { transition: { staggerChildren: 0.1, delayChildren: 0.3 } } }}
       >
         {[
-          { bg: "bg-[#f2afd1]", icon: "📱", text: "Part-time and full-time contract options" },
-          { bg: "bg-[#fcd567]", icon: "🔍", text: "100% production ready Clean Code & BLoC" },
-          { bg: "bg-[#9ee6ee]", icon: "⚙️", text: "Highly optimized multiplatform rendering" },
-          { bg: "bg-[#fa8f76]", icon: "🛡️", text: "Robust unit test coverage guaranteed" },
+          { bg: "bg-[#f2afd1]", icon: "📱", text: "10+ apps shipped — already live on stores" },
+          { bg: "bg-[#fcd567]", icon: "🔄", text: "From design to backend to deployment" },
+          { bg: "bg-[#9ee6ee]", icon: "💼", text: "Currently working at Join Venture AI" },
+          { bg: "bg-[#fa8f76]", icon: "⏱️", text: "On-time delivery with clean, scalable code" },
         ].map((pillar, i) => (
           <motion.div
             key={i}

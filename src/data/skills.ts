@@ -1,40 +1,25 @@
-// ============================================================
-// SKILLS SECTION — editable data
-// ============================================================
-// Edit skill names, add/remove groups, change icon URLs, etc.
-
 export interface SkillItem {
-  /** Display name (e.g. "Flutter", "Firebase") */
   name: string;
-  /** Full URL to a Devicon SVG or any icon image */
   icon: string;
 }
 
 export interface SkillGroup {
-  /** Group heading (e.g. "Frameworks & Languages") */
   title: string;
-  /** Skills in this group */
   items: SkillItem[];
 }
 
 export interface SkillsData {
-  /** Uppercase label above the headline */
   label: string;
-  /** Main headline */
   headline: string;
-  /** Array of skill groups that appear as columns */
   skillGroups: SkillGroup[];
 }
 
-// Base URL for Devicon icons — change to a different CDN if needed
 const deviconBase = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons";
 
 export const skillsData: SkillsData = {
   label: "Skills",
+  headline: "Technologies I use to ship production apps.",
 
-  headline: "The tools I use to ship.",
-
-  // Add/remove groups or items freely
   skillGroups: [
     {
       title: "Frameworks & Languages",
@@ -43,13 +28,12 @@ export const skillsData: SkillsData = {
         { name: "Dart", icon: `${deviconBase}/dart/dart-original.svg` },
         { name: "Swift", icon: `${deviconBase}/swift/swift-original.svg` },
         { name: "Kotlin", icon: `${deviconBase}/kotlin/kotlin-original.svg` },
-        { name: "TypeScript", icon: `${deviconBase}/typescript/typescript-original.svg` },
       ],
     },
     {
       title: "State Management",
       items: [
-        { name: "Bloc", icon: `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D9491F' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='7' width='5' height='10' rx='1'/%3E%3Crect x='9.5' y='7' width='5' height='10' rx='1'/%3E%3Crect x='17' y='7' width='5' height='10' rx='1'/%3E%3Cpath d='M7 12h2.5'/%3E%3Cpath d='M14.5 12H17'/%3E%3C/svg%3E` },
+        { name: "GetX", icon: `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D9491F' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2L2 12l10 10 10-10L12 2z'/%3E%3Cpath d='M12 7l-5 5 5 5 5-5-5-5z'/%3E%3C/svg%3E` },
         { name: "Riverpod", icon: `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D9491F' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='4' width='16' height='16' rx='3'/%3E%3Cpath d='M4 14c2-3 4 2 6 0s4 3 6 0'/%3E%3Cpath d='M6 18h12'/%3E%3C/svg%3E` },
         { name: "Provider", icon: `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D9491F' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2L2 12l10 10 10-10L12 2z'/%3E%3Cpath d='M12 7l-5 5 5 5 5-5-5-5z'/%3E%3C/svg%3E` },
       ],
@@ -58,10 +42,8 @@ export const skillsData: SkillsData = {
       title: "Backend & Services",
       items: [
         { name: "Firebase", icon: `${deviconBase}/firebase/firebase-plain.svg` },
-        { name: "Node.js", icon: `${deviconBase}/nodejs/nodejs-original.svg` },
         { name: "REST APIs", icon: `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D9491F' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4h16v16H4z'/%3E%3Cpath d='M9 9h6v6H9z'/%3E%3Cpath d='M4 12h5'/%3E%3Cpath d='M15 12h5'/%3E%3C/svg%3E` },
-        { name: "GraphQL", icon: `${deviconBase}/graphql/graphql-plain.svg` },
-        { name: "Supabase", icon: `${deviconBase}/supabase/supabase-original.svg` },
+        { name: "GoRouter", icon: `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D9491F' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4h16v16H4z'/%3E%3Cpath d='M9 9h6v6H9z'/%3E%3Cpath d='M4 12h5'/%3E%3Cpath d='M15 12h5'/%3E%3C/svg%3E` },
       ],
     },
     {
@@ -69,9 +51,9 @@ export const skillsData: SkillsData = {
       items: [
         { name: "Git", icon: `${deviconBase}/git/git-original.svg` },
         { name: "GitHub", icon: `${deviconBase}/github/github-original.svg` },
-        { name: "Android Studio", icon: `${deviconBase}/androidstudio/androidstudio-original.svg` },
+        { name: "Play Store", icon: `${deviconBase}/androidstudio/androidstudio-original.svg` },
+        { name: "App Store", icon: `${deviconBase}/figma/figma-original.svg` },
         { name: "Figma", icon: `${deviconBase}/figma/figma-original.svg` },
-        { name: "Docker", icon: `${deviconBase}/docker/docker-original.svg` },
       ],
     },
   ],

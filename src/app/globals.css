@@ -152,6 +152,13 @@
     background-position: 0 80%;
   }
 
+  .highlight-orange {
+    background: linear-gradient(120deg, #ffb07c 0%, #ffb07c 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 40%;
+    background-position: 0 80%;
+  }
+
   .noise-overlay {
     opacity: 0.03;
     mix-blend-mode: overlay;

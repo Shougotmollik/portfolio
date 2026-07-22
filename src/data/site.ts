@@ -1,20 +1,12 @@
-// ============================================================
-// SITE-WIDE CONFIG — used by Navbar, Footer, and layout
-// ============================================================
-
 export interface NavLink {
   label: string;
   href: string;
 }
 
 export interface SiteData {
-  /** Your name / brand — appears in Navbar and Footer */
   name: string;
-  /** Short description — appears in Footer */
   description: string;
-  /** Navigation links for the Navbar */
   navLinks: NavLink[];
-  /** Social links for the Footer */
   socials: {
     label: string;
     icon: "Github" | "Linkedin" | "X";
@@ -26,9 +18,8 @@ export const siteData: SiteData = {
   name: "Shougot Mollik",
 
   description:
-    "Flutter Mobile Engineer. Building cross-platform experiences with clean architecture and thoughtful design.",
+    "Jr. Flutter Developer | 10+ Published Apps on Play Store & App Store | GetX, Riverpod, Firebase",
 
-  // ─── NAVIGATION LINKS (Navbar + Footer) ───
   navLinks: [
     { label: "About", href: "#about" },
     { label: "Skills", href: "#skills" },
@@ -37,10 +28,9 @@ export const siteData: SiteData = {
     { label: "Contact", href: "#contact" },
   ],
 
-  // ─── SOCIAL LINKS (Footer) ───
   socials: [
-    { label: "GitHub", icon: "Github", href: "https://github.com" },
-    { label: "LinkedIn", icon: "Linkedin", href: "https://linkedin.com" },
-    { label: "X / Twitter", icon: "X", href: "https://twitter.com" },
+    { label: "GitHub", icon: "Github", href: "https://github.com/shougotmollik" },
+    { label: "LinkedIn", icon: "Linkedin", href: "https://linkedin.com/in/shougotmollik" },
+    { label: "X / Twitter", icon: "X", href: "https://twitter.com/shougotmollik" },
   ],
 };

@@ -17,27 +17,21 @@ export const testimonialsData: TestimonialsData = {
   testimonials: [
     {
       quote:
-        "One of the most talented Flutter developers I've worked with. His ability to translate complex designs into smooth, performant mobile experiences is exceptional.",
-      name: "Alexandra Chen",
-      role: "Product Manager, TechVista Solutions",
+        "He consistently delivered well-architected Flutter features ahead of schedule. His understanding of state management and clean code patterns made him a valuable asset to our mobile team.",
+      name: "Team Lead",
+      role: "Join Venture AI",
     },
     {
       quote:
-        "He not only delivered ahead of schedule but also suggested architectural improvements that significantly reduced our crash rate.",
-      name: "Marcus Rivera",
-      role: "CTO, AppForge Inc.",
+        "He picked up our codebase quickly and started contributing production features within his first weeks. His attention to UI detail and willingness to learn stood out.",
+      name: "Senior Developer",
+      role: "Aricho It",
     },
     {
       quote:
-        "Working with him was a game-changer for our mobile team. He established clean architecture patterns that we still use today across all our Flutter projects.",
-      name: "Sarah Kim",
-      role: "Engineering Lead, PixelCraft Studios",
-    },
-    {
-      quote:
-        "His deep understanding of Flutter internals and state management is rare to find. He consistently shipped features that exceeded our expectations.",
-      name: "James Okafor",
-      role: "Founder, StartUp Labs",
+        "As VP of our programming club, he organized tasks and mentored junior members effectively. His technical skills and leadership made our club events run smoothly.",
+      name: "Faculty Advisor",
+      role: "K@cst Programming Club",
     },
   ],
 };

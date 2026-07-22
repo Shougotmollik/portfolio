@@ -1,37 +1,27 @@
-// ============================================================
-// ABOUT SECTION — editable data
-// ============================================================
-// Edit any text below and the site will reflect it.
-
 export interface Stat {
   value: string;
   label: string;
 }
 
 export interface AboutData {
-  /** Uppercase label shown above the headline */
   label: string;
-  /** Main headline */
   headline: string;
-  /** Body paragraphs shown next to the headline */
   paragraphs: string[];
-  /** Stats row (years, projects, launches, etc.) */
   stats: Stat[];
 }
 
 export const aboutData: AboutData = {
   label: "About",
-
-  headline: "I build mobile apps that people love to use.",
+  headline: "Jr. Flutter Developer with published apps and a passion for clean code.",
 
   paragraphs: [
-    "I specialize in Flutter and Dart, building production-grade apps used by thousands of users. From crafting beautiful UIs to integrating complex backend services, I handle the full mobile development lifecycle.",
-    "My expertise spans state management (Bloc, Riverpod, Provider), Firebase, REST & GraphQL APIs, and native platform integration. I believe in clean architecture, pixel-perfect execution, and end-to-end delivery.",
+    "I'm a Flutter Developer with professional experience at Join Venture AI and Aricho It, where I built and shipped 10+ production apps. I specialize in state management (GetX, Riverpod), REST API integration, and GoRouter navigation, with a focus on writing clean, maintainable code that scales.",
+    "I've contributed to real-world development workflows end-to-end: translating Figma designs into pixel-perfect UI, integrating Firebase backends, and publishing apps on both Google Play and Apple App Store. I also placed 1st in my university programming contest and served as VP & Head of Task Management of the K@cst Programming Club for 2 years.",
   ],
 
   stats: [
-    { value: "4+", label: "Years of Experience" },
-    { value: "15+", label: "Projects Delivered" },
-    { value: "10+", label: "App Store Launches" },
+    { value: "10+", label: "Published Apps" },
+    { value: "1st", label: "Programming Contest" },
+    { value: "BSc", label: "CSE" },
   ],
 };

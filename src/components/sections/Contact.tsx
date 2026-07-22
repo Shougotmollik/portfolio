@@ -210,7 +210,7 @@ export default function Contact() {
                   initial={{ opacity: 0, x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.4 }}
+                  transition={{ delay: 0.5 }}
                 >
                   <span className="inline-block px-2.5 py-0.5 border-[1.5px] border-[#111111] bg-[#ffffff] rounded text-[10px] font-black uppercase tracking-wider mb-2">
                     Location
@@ -224,7 +224,7 @@ export default function Contact() {
                   initial={{ opacity: 0, x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.5 }}
+                  transition={{ delay: 0.6 }}
                 >
                   <span className="inline-block px-2.5 py-0.5 border-[1.5px] border-[#111111] bg-[#ffffff] rounded text-[10px] font-black uppercase tracking-wider mb-2">
                     Socials

@@ -1,6 +1,7 @@
 "use client";
 
 import { aboutData } from "@/data/about";
+import Reveal, { RevealItem, RevealStagger } from "@/components/ui/Reveal";
 
 export default function About() {
   return (
@@ -8,11 +9,11 @@ export default function About() {
       id="about"
       className="py-24 border-b-[2.5px] border-[#111111] bg-[#ffffff] relative overflow-hidden"
     >
+      <div className="absolute inset-0 z-0 noise-overlay" />
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
-          {/* Left Heading Box */}
-          <div className="lg:col-span-5">
+          <Reveal className="lg:col-span-5">
             <span className="inline-block px-3 py-1 bg-[#fcd567] border-[2px] border-[#111111] rounded-md font-bold text-xs uppercase mb-4 neo-shadow-sm">
               {aboutData.label}
             </span>
@@ -21,41 +22,44 @@ export default function About() {
             </h2>
             <div className="mt-8 p-6 bg-[#9ae2ad] border-[2.5px] border-[#111111] rounded-xl neo-shadow rotate-[-1deg] hidden lg:block">
               <p className="text-sm font-black text-[#111111]">
-                ⚡️ "Building mobile applications with clean architecture isn't just about code — it's about building scalable products that users love."
+                ⚡️ &ldquo;Building mobile applications with clean architecture isn&rsquo;t just about code — it&rsquo;s about building scalable products that users love.&rdquo;
               </p>
             </div>
-          </div>
+          </Reveal>
 
-          {/* Right Info Box */}
           <div className="lg:col-span-7 space-y-8">
-            <div className="neo-card bg-[#fdfaf2] p-8 space-y-6">
-              {aboutData.paragraphs.map((p, i) => (
-                <p key={i} className="text-base sm:text-lg font-bold text-[#111111]/80 leading-relaxed">
-                  {p}
-                </p>
-              ))}
-            </div>
+            <Reveal delay={0.1}>
+              <div className="neo-card bg-[#fdfaf2] p-8 space-y-6">
+                {aboutData.paragraphs.map((p, i) => (
+                  <p key={i} className="text-base sm:text-lg font-bold text-[#111111]/80 leading-relaxed">
+                    {p}
+                  </p>
+                ))}
+              </div>
+            </Reveal>
 
-            {/* Stats list */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
-              {aboutData.stats.map((stat, i) => {
-                const colors = ["bg-[#f2afd1]", "bg-[#9ee6ee]", "bg-[#fa8f76]"];
-                const color = colors[i % colors.length];
-                return (
-                  <div 
-                    key={stat.label} 
-                    className={`border-[2.5px] border-[#111111] rounded-xl p-4 neo-shadow-sm ${color} flex flex-col justify-between`}
-                  >
-                    <span className="text-3xl font-black text-[#111111] tracking-tight">
-                      {stat.value}
-                    </span>
-                    <p className="text-xs font-black text-[#111111]/70 uppercase tracking-wider mt-2">
-                      {stat.label}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
+            <RevealStagger>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
+                {aboutData.stats.map((stat, i) => {
+                  const colors = ["bg-[#f2afd1]", "bg-[#9ee6ee]", "bg-[#fa8f76]"];
+                  const color = colors[i % colors.length];
+                  return (
+                    <RevealItem key={stat.label}>
+                      <div 
+                        className={`border-[2.5px] border-[#111111] rounded-xl p-4 neo-shadow-sm ${color} flex flex-col justify-between hover:translate-y-[-2px] transition-transform duration-150`}
+                      >
+                        <span className="text-3xl font-black text-[#111111] tracking-tight">
+                          {stat.value}
+                        </span>
+                        <p className="text-xs font-black text-[#111111]/70 uppercase tracking-wider mt-2">
+                          {stat.label}
+                        </p>
+                      </div>
+                    </RevealItem>
+                  );
+                })}
+              </div>
+            </RevealStagger>
           </div>
 
         </div>

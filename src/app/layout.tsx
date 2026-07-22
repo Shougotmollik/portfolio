@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import LenisProvider from "@/components/LenisProvider";
-import CustomCursor from "@/components/ui/CustomCursor";
 
 export const metadata: Metadata = {
   title: "Shougot Mollik — Flutter Mobile Engineer",
@@ -18,7 +17,7 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="%23D9491F"/><text x="16" y="22" text-anchor="middle" fill="%23F3EBE4" font-size="18" font-family="system-ui" font-weight="700">S</text></svg>',
+        url: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="%23ffd866" stroke="%23000000" stroke-width="2"/><text x="16" y="22" text-anchor="middle" fill="%23000000" font-size="18" font-family="system-ui" font-weight="900">S</text></svg>',
         type: "image/svg+xml",
       },
     ],
@@ -38,9 +37,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+      </head>
       <body className="antialiased">
         <LenisProvider>
-          <CustomCursor />
           {children}
         </LenisProvider>
       </body>

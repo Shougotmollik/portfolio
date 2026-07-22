@@ -15,14 +15,14 @@ export default function PhoneFrame({ children, gradient, color = "#D9491F", imag
   return (
     <div className={`relative w-full aspect-[9/19] ${compact ? "" : "max-w-[260px]"} mx-auto`}>
       <div
-        className="absolute inset-0 border-[2px] border-border-dark overflow-hidden shadow-sm"
+        className="absolute inset-0 border-[2px] border-[#111111] overflow-hidden shadow-sm"
         style={{ borderRadius: radius }}
       >
         {!compact && (
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[110px] h-[26px] bg-white/[0.06] rounded-b-2xl z-10" />
         )}
         <div
-          className="absolute overflow-hidden bg-dark-base/90"
+          className="absolute overflow-hidden bg-[#111111]/90"
           style={{ borderRadius: innerRadius, inset }}
         >
           {imageUrl ? (

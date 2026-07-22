@@ -1,110 +1,70 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { experienceData } from "@/data/experience";
 
-const containerVariants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.06 } },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0.001, y: 30 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const } },
-};
-
 export default function Experience() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-  const smooth = useSpring(scrollYProgress, {
-    stiffness: 150,
-    damping: 20,
-    restDelta: 0.001,
-  });
-
-  const headingDrift = useTransform(smooth, [0, 1], [50, -50]);
-  const headingScale = useTransform(smooth, [0, 0.5, 1], [0.88, 1, 0.88]);
-  const itemsDrift = useTransform(smooth, [0, 1], [30, -30]);
-  const itemsScale = useTransform(smooth, [0, 0.5, 1], [0.92, 1, 0.92]);
+  const colors = [
+    "bg-[#f2afd1]", 
+    "bg-[#fcd567]", 
+    "bg-[#9ee6ee]"
+  ];
 
   return (
     <section
       id="experience"
-      ref={sectionRef}
-      className="section-dark py-20 md:py-28 relative overflow-hidden"
+      className="py-24 border-b-[2.5px] border-[#111111] bg-[#fdfaf2] relative overflow-hidden"
     >
-      <motion.div
-        className="absolute top-0 -left-32 w-[500px] h-[500px] glow-accent pointer-events-none"
-        style={{ y: headingDrift }}
-      />
-      <motion.div
-        className="absolute bottom-0 -right-32 w-[400px] h-[400px] glow-accent pointer-events-none"
-        style={{ y: itemsDrift }}
-      />
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
-        <motion.div
-          style={{ y: headingDrift, scale: headingScale, willChange: "transform" }}
-        >
-            <motion.div
-              initial={{ opacity: 0.001, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="mb-10 md:mb-14 max-w-3xl"
-          >
-            <p className="text-xs font-semibold tracking-[0.1em] uppercase mb-5 text-accent">
-              {experienceData.label}
-            </p>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-[-0.02em] leading-[1.05] text-text-dark">
-              {experienceData.headline}
-            </h2>
-          </motion.div>
-        </motion.div>
+        <div className="mb-14 max-w-3xl">
+          <span className="inline-block px-3 py-1 bg-[#ffffff] border-[2px] border-[#111111] rounded-md font-bold text-xs uppercase mb-4 neo-shadow-sm">
+            {experienceData.label}
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#111111] leading-tight">
+            {experienceData.headline}
+          </h2>
+        </div>
 
-        <motion.div
-          style={{ y: itemsDrift, scale: itemsScale, willChange: "transform" }}
-        >
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            className="space-y-8"
-          >
-            {experienceData.experiences.map((exp) => (
-              <motion.div
+        <div className="space-y-8 max-w-4xl">
+          {experienceData.experiences.map((exp, index) => {
+            const cardBg = colors[index % colors.length];
+            return (
+              <div
                 key={exp.company + exp.role}
-                variants={itemVariants}
-                className="flex flex-col md:flex-row gap-6 md:gap-12 lg:gap-20 py-8 md:py-10 border-b border-border-dark last:border-none"
+                className="neo-card bg-[#ffffff] overflow-hidden flex flex-col md:flex-row border-[2.5px] border-[#111111]"
               >
-                <div className="md:w-[200px] flex-shrink-0">
-                  <p className="text-sm text-text-muted font-medium">{exp.period}</p>
+                {/* Period Badge Left Block */}
+                <div className={`p-6 md:w-[240px] flex-shrink-0 ${cardBg} border-b-[2.5px] md:border-b-0 md:border-r-[2.5px] border-[#111111] flex flex-col justify-center items-start`}>
+                  <span className="text-xs font-black px-2 py-0.5 border-[1.5px] border-[#111111] bg-[#ffffff] rounded mb-2">
+                    TIMELINE
+                  </span>
+                  <p className="text-sm font-black text-[#111111] tracking-wide">
+                    {exp.period}
+                  </p>
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-xl md:text-2xl font-semibold text-text-dark tracking-tight">
+
+                {/* Content Block */}
+                <div className="p-6 md:p-8 flex-grow">
+                  <h3 className="text-xl sm:text-2xl font-black text-[#111111] tracking-tight">
                     {exp.role}
                   </h3>
-                  <p className="text-sm text-text-muted mt-1">{exp.company}</p>
-                  <ul className="mt-4 space-y-2">
+                  <p className="text-sm font-bold text-[#fa8f76] mt-1">{exp.company}</p>
+                  
+                  <ul className="mt-6 space-y-3">
                     {exp.highlights.map((h, j) => (
                       <li
                         key={j}
-                        className="text-sm text-text-muted leading-relaxed flex items-start gap-3"
+                        className="text-xs sm:text-sm font-bold text-[#111111]/85 leading-relaxed flex items-start gap-2.5"
                       >
-                        <span className="w-1 h-1 rounded-full bg-text-muted/50 mt-2 flex-shrink-0" />
+                        <span className="text-base leading-none text-[#111111]">⚡️</span>
                         {h}
                       </li>
                     ))}
                   </ul>
                 </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

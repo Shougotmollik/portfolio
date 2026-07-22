@@ -1,7 +1,6 @@
 "use client";
 
 import { type ComponentType } from "react";
-import { motion } from "framer-motion";
 import { GithubIcon, LinkedinIcon, XIcon } from "@/components/ui/Icons";
 import { siteData } from "@/data/site";
 
@@ -13,14 +12,15 @@ const iconMap: Record<string, ComponentType<{ size?: number }>> = {
 
 export default function Footer() {
   return (
-    <footer className="section-dark py-24">
+    <footer className="py-20 border-t-[2.5px] border-[#111111] bg-[#ffffff]">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-12">
           <div>
-            <span className="text-xl font-semibold tracking-tight text-text-dark">
+            <span className="text-xl font-black text-[#111111] flex items-center gap-2">
+              <span className="w-8 h-8 rounded-lg bg-[#fcd567] border-[2px] border-[#111111] flex items-center justify-center font-black text-sm neo-shadow-sm">S</span>
               {siteData.name}
             </span>
-            <p className="mt-3 text-sm text-text-muted max-w-sm leading-relaxed">
+            <p className="mt-4 text-sm font-bold text-[#111111]/70 max-w-sm leading-relaxed">
               {siteData.description}
             </p>
             <div className="flex gap-3 mt-6">
@@ -28,19 +28,16 @@ export default function Footer() {
                 const Icon = iconMap[social.icon];
                 if (!Icon) return null;
                 return (
-                  <motion.a
+                  <a
                     key={social.label}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-text-muted hover:text-accent transition-colors duration-200"
+                    className="w-8 h-8 border-[2px] border-[#111111] rounded bg-[#ffffff] flex items-center justify-center neo-shadow-sm hover:translate-y-[-2px] transition-transform active:translate-y-0"
                     aria-label={social.label}
-                    whileHover={{ scale: 1.2, y: -2 }}
-                    whileTap={{ scale: 0.9 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
                   >
-                    <Icon size={20} />
-                  </motion.a>
+                    <Icon size={16} />
+                  </a>
                 );
               })}
             </div>
@@ -48,7 +45,7 @@ export default function Footer() {
 
           <div className="flex flex-wrap gap-8">
             <div className="space-y-3">
-              <h4 className="text-xs font-semibold text-text-muted tracking-widest uppercase">
+              <h4 className="text-xs font-black text-[#111111] tracking-widest uppercase">
                 Navigate
               </h4>
               <ul className="space-y-2">
@@ -56,7 +53,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="text-sm text-text-muted hover:text-text-dark transition-colors duration-200"
+                      className="text-sm font-bold text-[#111111]/70 hover:text-[#fa8f76] transition-colors duration-200"
                     >
                       {link.label}
                     </a>
@@ -67,9 +64,9 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 pt-6 border-t border-border-dark">
-          <p className="text-xs text-text-muted/60">
-            &copy; {new Date().getFullYear()} {siteData.name}.
+        <div className="mt-16 pt-6 border-t-[2px] border-[#111111]/10">
+          <p className="text-xs font-bold text-[#111111]/40">
+            &copy; {new Date().getFullYear()} {siteData.name}. All rights reserved.
           </p>
         </div>
       </div>

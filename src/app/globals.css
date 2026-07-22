@@ -1,24 +1,18 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-dark-base: #120D0A;
-  --color-dark-alt: #1A1410;
-  --color-light-base: #FBF6F1;
-  --color-light-alt: #F5EFE8;
+  --color-neo-bg: #fdfaf2;
+  --color-neo-border: #111111;
+  --color-neo-pink: #f2afd1;
+  --color-neo-yellow: #fcd567;
+  --color-neo-blue: #9ee6ee;
+  --color-neo-red: #fa8f76;
+  --color-neo-purple: #c5a9f6;
+  --color-neo-green: #9ae2ad;
 
-  --color-text-dark: #F3EBE4;
-  --color-text-dark-muted: #A69A8F;
-  --color-text-light: #1C1310;
-  --color-text-light-muted: #6B5E54;
-
-  --color-accent: #D9491F;
-  --color-accent-hover: #B83A16;
-  --color-accent-subtle: #E8834D;
-
-  --color-border-dark: rgba(217, 73, 31, 0.15);
-  --color-border-light: rgba(217, 73, 31, 0.12);
-
-  --font-sans: -apple-system, "SF Pro Display", "SF Pro Text", "Inter", "Helvetica Neue", sans-serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, sans-serif;
+  --font-display: "Outfit", sans-serif;
+  --font-mono-custom: "SF Mono", "Fira Code", monospace;
 }
 
 @layer base {
@@ -35,22 +29,23 @@
   }
 
   body {
-    background-color: var(--color-light-base);
-    color: var(--color-text-light);
+    background-color: var(--color-neo-bg);
+    color: #111111;
     font-family: var(--font-sans);
     overflow-x: hidden;
     line-height: 1.6;
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    html, body, body * {
-      cursor: none !important;
-    }
+    background-image: radial-gradient(rgba(17, 17, 17, 0.05) 1px, transparent 1px);
+    background-size: 24px 24px;
   }
 
   ::selection {
-    background-color: var(--color-accent);
-    color: var(--color-text-dark);
+    background-color: var(--color-neo-yellow);
+    color: #111111;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 800;
   }
 
   img {
@@ -60,90 +55,105 @@
 }
 
 @layer utilities {
-  .section-dark {
-    background-color: var(--color-dark-base);
-    color: var(--color-text-dark);
-    --color-text-muted: var(--color-text-dark-muted);
+  .neo-border {
+    border: 2.5px solid #111111;
   }
 
-  .section-light {
-    background-color: var(--color-light-base);
-    color: var(--color-text-light);
-    --color-text-muted: var(--color-text-light-muted);
+  .neo-shadow-sm {
+    box-shadow: 2.5px 2.5px 0px #111111;
   }
 
-  .text-balance {
-    text-wrap: balance;
+  .neo-shadow {
+    box-shadow: 5px 5px 0px #111111;
   }
 
-  .glass-dark {
-    background: rgba(217, 73, 31, 0.07);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(217, 73, 31, 0.2);
-    position: relative;
+  .neo-shadow-lg {
+    box-shadow: 8px 8px 0px #111111;
   }
 
-  .glass-dark::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(217, 73, 31, 0.15), transparent);
-    pointer-events: none;
+  .neo-shadow-xl {
+    box-shadow: 12px 12px 0px #111111;
   }
 
-  .glass-light {
-    background: rgba(217, 73, 31, 0.06);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(217, 73, 31, 0.15);
-    position: relative;
+  .neo-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 2.5px solid #111111;
+    font-weight: 700;
+    font-size: 0.875rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 4px 4px 0px #111111;
+    transition: all 0.15s ease;
+    cursor: pointer;
   }
 
-  .glass-light::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(217, 73, 31, 0.12), transparent);
-    pointer-events: none;
+  .neo-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px #111111;
   }
 
-  .glass-chip {
-    background: rgba(217, 73, 31, 0.08);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(217, 73, 31, 0.15);
+  .neo-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #111111;
   }
 
-  .glass-chip-light {
-    background: rgba(217, 73, 31, 0.05);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(217, 73, 31, 0.1);
+  .neo-btn-primary {
+    background-color: var(--color-neo-yellow);
+    color: #111111;
   }
 
-  .glow-accent {
-    background: radial-gradient(ellipse at center, rgba(232, 131, 77, 0.18) 0%, transparent 70%);
+  .neo-btn-white {
+    background-color: #ffffff;
+    color: #111111;
   }
 
-  .inner-highlight {
-    box-shadow: inset 0 1px 0 rgba(243, 235, 228, 0.06);
+  .neo-btn-pink {
+    background-color: var(--color-neo-pink);
+    color: #111111;
   }
 
-  .tag-accent {
-    background: rgba(217, 73, 31, 0.1);
-    color: var(--color-accent);
-    border: 1px solid rgba(217, 73, 31, 0.2);
+  .neo-btn-purple {
+    background-color: var(--color-neo-purple);
+    color: #111111;
+  }
+
+  .neo-card {
+    background-color: #ffffff;
+    border: 2.5px solid #111111;
+    border-radius: 12px;
+    box-shadow: 6px 6px 0px #111111;
+  }
+
+  .neo-arch {
+    border: 2.5px solid #111111;
+    border-radius: 120px 120px 20px 20px;
+    box-shadow: 5px 5px 0px #111111;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .neo-arch:hover {
+    transform: translateY(-4px);
+    box-shadow: 8px 8px 0px #111111;
+  }
+
+  .highlight-yellow {
+    background: linear-gradient(120deg, var(--color-neo-yellow) 0%, var(--color-neo-yellow) 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 40%;
+    background-position: 0 80%;
+  }
+
+  .highlight-pink {
+    background: linear-gradient(120deg, var(--color-neo-pink) 0%, var(--color-neo-pink) 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 40%;
+    background-position: 0 80%;
   }
 
   .noise-overlay {
-    opacity: 0.06;
+    opacity: 0.03;
     mix-blend-mode: overlay;
     pointer-events: none;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -151,32 +161,15 @@
     background-size: 256px 256px;
   }
 
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
-
-  .cursor-blink {
-    animation: blink 1s step-end infinite;
-  }
-
-  .code-grid {
-    background-image: linear-gradient(rgba(217, 73, 31, 0.03) 1px, transparent 1px);
-    background-size: 100% 32px;
-  }
-
-  .font-mono-custom {
-    font-family: "SF Mono", "Fira Code", "Cascadia Code", "JetBrains Mono", monospace;
-  }
-
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 10px;
   }
   ::-webkit-scrollbar-track {
-    background: transparent;
+    background: var(--color-neo-bg);
+    border-left: 2.5px solid #111111;
   }
   ::-webkit-scrollbar-thumb {
-    background: var(--color-accent);
-    border-radius: 3px;
+    background: var(--color-neo-yellow);
+    border: 2.5px solid #111111;
   }
 }

@@ -12,8 +12,10 @@ export const metadata: Metadata = {
     "Dart",
     "Portfolio",
     "Software Engineer",
+    "Cross-platform",
   ],
   authors: [{ name: "Shougot Mollik" }],
+  creator: "Shougot Mollik",
   icons: {
     icon: [
       {
@@ -27,7 +29,23 @@ export const metadata: Metadata = {
     description:
       "Flutter Mobile Engineer building cross-platform applications.",
     type: "website",
+    locale: "en_US",
   },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Shougot Mollik",
+  url: "https://shougot.dev",
+  jobTitle: "Flutter Mobile Engineer",
+  knowsAbout: ["Flutter", "Dart", "Mobile Development", "Cross-platform"],
+  description:
+    "Flutter Mobile Engineer building cross-platform applications with clean architecture and thoughtful design.",
 };
 
 export default function RootLayout({
@@ -41,6 +59,10 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body className="antialiased">
         <LenisProvider>

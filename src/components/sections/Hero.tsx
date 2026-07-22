@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { heroData } from "@/data/hero";
 import FloatingParticles from "@/components/ui/FloatingParticles";
@@ -105,10 +106,12 @@ export default function Hero() {
 
             <div className="w-full bg-[#c5a9f6] border-[2.5px] border-[#111111] rounded-2xl p-6 neo-shadow-lg relative overflow-hidden flex flex-col gap-6">
               <div className="w-full aspect-[4/3] bg-[#ffffff] border-[2.5px] border-[#111111] rounded-xl overflow-hidden relative group">
-                <img
+                <Image
                   src="/HeroImage.jpg"
                   alt="Shougot Mollik"
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 420px"
+                  className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                 />
                 <div className="absolute inset-0 bg-[#fcd567]/10 mix-blend-multiply pointer-events-none" />
               </div>

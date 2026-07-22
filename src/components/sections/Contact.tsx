@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type ComponentType } from "react";
+import { useForm } from "@formspree/react";
 import { motion } from "framer-motion";
 import { GithubIcon, LinkedinIcon, XIcon } from "@/components/ui/Icons";
 import { contactData } from "@/data/contact";
@@ -23,8 +24,8 @@ interface FormErrors {
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState<FormErrors>({});
-  const [submitted, setSubmitted] = useState(false);
   const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [state, handleSubmit] = useForm("mvzebagv");
 
   const validate = (): FormErrors => {
     const errs: FormErrors = {};
@@ -47,19 +48,18 @@ export default function Contact() {
     setErrors(validate());
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     const errs = validate();
     setErrors(errs);
     setTouched({ name: true, email: true, message: true });
     if (Object.keys(errs).length > 0) return;
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setForm({ name: "", email: "", message: "" });
-      setTouched({});
-      setErrors({});
-    }, 3000);
+    handleSubmit(e).then(() => {
+      if (state.succeeded) {
+        setForm({ name: "", email: "", message: "" });
+        setTouched({});
+        setErrors({});
+      }
+    });
   };
 
   return (
@@ -77,7 +77,7 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
           <Reveal delay={0.1}>
             <div className="neo-card bg-[#ffffff] p-6 sm:p-8">
-              <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+              <form onSubmit={onSubmit} className="space-y-6" noValidate>
                 <div>
                   <label htmlFor="name" className="block text-xs font-black uppercase text-[#111111] mb-2">
                     Your Name
@@ -168,13 +168,13 @@ export default function Contact() {
                 <Magnetic strength={0.12}>
                   <button
                     type="submit"
-                    disabled={submitted}
+                    disabled={state.submitting}
                     className="neo-btn neo-btn-primary w-full text-sm py-3 px-6 shadow-[4px_4px_0px_#111111] hover:shadow-[5px_5px_0px_#111111] disabled:opacity-70 disabled:cursor-not-allowed"
                   >
-                    {submitted ? (
-                      <span className="flex items-center justify-center gap-2">
-                        Message sent! <span className="text-base">✨</span>
-                      </span>
+                    {state.submitting ? (
+                      <span className="flex items-center justify-center gap-2">Sending...</span>
+                    ) : state.succeeded ? (
+                      <span className="flex items-center justify-center gap-2">Message sent! ✨</span>
                     ) : (
                       "Send Message"
                     )}

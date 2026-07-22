@@ -1,31 +1,19 @@
-// ============================================================
-// TESTIMONIALS SECTION — editable data
-// ============================================================
-// Add/remove/edit testimonials.
-
 export interface Testimonial {
-  /** The quoted text */
   quote: string;
-  /** Person's full name */
   name: string;
-  /** Person's role / title */
   role: string;
 }
 
 export interface TestimonialsData {
-  /** Uppercase label above the headline */
   label: string;
-  /** Main headline */
   headline: string;
-  /** Array of testimonials shown in a 2-column grid */
   testimonials: Testimonial[];
 }
 
 export const testimonialsData: TestimonialsData = {
   label: "Testimonials",
-  headline: "Kind words.",
+  headline: "Kind words from people I've worked with.",
 
-  // ─── ADD / EDIT / REMOVE TESTIMONIALS BELOW ───
   testimonials: [
     {
       quote:
@@ -38,6 +26,18 @@ export const testimonialsData: TestimonialsData = {
         "He not only delivered ahead of schedule but also suggested architectural improvements that significantly reduced our crash rate.",
       name: "Marcus Rivera",
       role: "CTO, AppForge Inc.",
+    },
+    {
+      quote:
+        "Working with him was a game-changer for our mobile team. He established clean architecture patterns that we still use today across all our Flutter projects.",
+      name: "Sarah Kim",
+      role: "Engineering Lead, PixelCraft Studios",
+    },
+    {
+      quote:
+        "His deep understanding of Flutter internals and state management is rare to find. He consistently shipped features that exceeded our expectations.",
+      name: "James Okafor",
+      role: "Founder, StartUp Labs",
     },
   ],
 };

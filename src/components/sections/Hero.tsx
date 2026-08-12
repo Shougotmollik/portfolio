@@ -84,7 +84,7 @@ export default function Hero() {
           className="lg:col-span-5 flex justify-center"
           variants={itemVariants}
         >
-          <div className="relative w-full max-w-[420px]">
+          <div className="relative w-full max-w-[480px]">
             <motion.div
               className="absolute -top-8 -left-8 z-30 bg-[#9ae2ad] border-[2.5px] border-[#111111] rounded-lg p-2.5 rotate-[-12deg] neo-shadow-sm w-14 h-14 flex items-center justify-center font-bold text-xl"
               initial={{ opacity: 0, scale: 0.5, rotate: -20 }}
@@ -104,16 +104,16 @@ export default function Hero() {
               <span className="text-xs font-black">Open to Work</span>
             </motion.div>
 
-            <div className="w-full bg-[#c5a9f6] border-[2.5px] border-[#111111] rounded-2xl p-6 neo-shadow-lg relative overflow-hidden flex flex-col gap-6">
-              <div className="w-full aspect-[4/3] bg-[#ffffff] border-[2.5px] border-[#111111] rounded-xl overflow-hidden relative group">
+            <div className="w-full bg-[#fa8f76] border-[2.5px] border-[#111111] rounded-2xl p-6 neo-shadow-lg relative overflow-hidden flex flex-col gap-6 rotate-[-2deg] hover:rotate-0 hover:-translate-y-1.5 transition-all duration-300">
+              <div className="w-full aspect-square bg-[#ffffff] border-[2.5px] border-[#111111] rounded-2xl overflow-hidden relative group">
                 <Image
-                  src="/HeroImage.jpg"
+                  src="/HeroImageStylized.jpg"
                   alt="Shougot Mollik"
                   fill
-                  sizes="(max-width: 1024px) 100vw, 420px"
-                  className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                  sizes="(max-width: 1024px) 100vw, 480px"
+                  className="object-cover"
                 />
-                <div className="absolute inset-0 bg-[#fcd567]/10 mix-blend-multiply pointer-events-none" />
+                <div className="absolute inset-0 bg-[#fa8f76]/10 mix-blend-multiply pointer-events-none" />
               </div>
 
               <div className="bg-[#fcd567] border-[2.5px] border-[#111111] rounded-xl p-4 neo-shadow-sm flex flex-col gap-1">

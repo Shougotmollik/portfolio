@@ -122,30 +122,36 @@ function ProjectDetailModal({
           </div>
 
           <div className="flex flex-wrap gap-2 pt-6">
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="neo-btn neo-btn-white text-xs py-2 px-4 flex items-center gap-1.5 shadow-[2px_2px_0px_#111111]"
-            >
-              <GithubIcon size={12} /> GitHub
-            </a>
-            <a
-              href={project.playStore}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="neo-btn neo-btn-primary text-xs py-2 px-4 flex items-center gap-1.5 shadow-[2px_2px_0px_#111111]"
-            >
-              <PlayStoreIcon size={12} /> Google Play
-            </a>
-            <a
-              href={project.appStore}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="neo-btn neo-btn-purple text-xs py-2 px-4 flex items-center gap-1.5 shadow-[2px_2px_0px_#111111]"
-            >
-              <AppStoreIcon size={12} /> App Store
-            </a>
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="neo-btn neo-btn-white text-xs py-2 px-4 flex items-center gap-1.5 shadow-[2px_2px_0px_#111111]"
+              >
+                <GithubIcon size={12} /> GitHub
+              </a>
+            )}
+            {project.playStore && (
+              <a
+                href={project.playStore}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="neo-btn neo-btn-primary text-xs py-2 px-4 flex items-center gap-1.5 shadow-[2px_2px_0px_#111111]"
+              >
+                <PlayStoreIcon size={12} /> Google Play
+              </a>
+            )}
+            {project.appStore && (
+              <a
+                href={project.appStore}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="neo-btn neo-btn-purple text-xs py-2 px-4 flex items-center gap-1.5 shadow-[2px_2px_0px_#111111]"
+              >
+                <AppStoreIcon size={12} /> App Store
+              </a>
+            )}
           </div>
         </div>
       </motion.div>

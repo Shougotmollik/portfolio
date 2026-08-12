@@ -11,9 +11,9 @@ export interface Project {
   built: string;
   tech: ProjectTech[];
   images: [string, string, string, string];
-  github: string;
-  playStore: string;
-  appStore: string;
+  github?: string;
+  playStore?: string;
+  appStore?: string;
   color: string;
 }
 
@@ -44,17 +44,22 @@ export const projectsData: ProjectsData = {
       tech: [
         { name: "Flutter", icon: `${deviconBase}/flutter/flutter-original.svg` },
         { name: "Dart", icon: `${deviconBase}/dart/dart-original.svg` },
-        { name: "GetX", icon: `${deviconBase}/flutter/flutter-original.svg` },
+        { name: "Riverpod", icon: `${deviconBase}/dart/dart-original.svg` },
+        { name: "Django Rest Framework", icon: `${deviconBase}/django/django-original.svg` },
+        { name: 'Lottie', icon: 'https://www.vectorlogo.zone/logos/lottiefiles/lottiefiles-icon.svg' },
+        { name: 'Stripe', icon: 'https://www.vectorlogo.zone/logos/stripe/stripe-icon.svg' },
+        { name: "Firebase Authentication", icon: "https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" },
+        { name: "RevenueCat", icon: "https://www.vectorlogo.zone/logos/revenuecat/revenuecat-icon.svg" }
       ],
       images: [
-        "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=800&fit=crop",
-        "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=800&fit=crop",
-        "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=400&h=800&fit=crop",
-        "https://images.unsplash.com/photo-1461896836934-bd45ba8fcf9b?w=400&h=800&fit=crop",
+        "/projects/milkmix/screen-1.png",
+        "/projects/milkmix/screen-2.png",
+        "/projects/milkmix/screen-3.png",
+        "/projects/milkmix/screen-4.png",
       ],
-      github: "https://github.com/shougotmollik",
-      playStore: "https://play.google.com",
-      appStore: "https://apps.apple.com",
+      // github: "https://github.com/shougotmollik",
+      playStore: "https://play.google.com/store/apps/details?id=com.carbonanik.milkmix&hl=en",
+      appStore: "https://apps.apple.com/us/app/milkmix/id6754192786",
       color: "#4CAF50",
     },
     {
@@ -68,18 +73,22 @@ export const projectsData: ProjectsData = {
       tech: [
         { name: "Flutter", icon: `${deviconBase}/flutter/flutter-original.svg` },
         { name: "Dart", icon: `${deviconBase}/dart/dart-original.svg` },
-        { name: "Firebase", icon: `${deviconBase}/firebase/firebase-plain.svg` },
-        { name: "Riverpod", icon: `${deviconBase}/flutter/flutter-original.svg` },
+        { name: "GetX", icon: `${deviconBase}/flutter/flutter-original.svg` },
+        { name: "Firebase Authentication", icon: `${deviconBase}/firebase/firebase-plain.svg` },
+        { name: "Django Rest Framework", icon: `${deviconBase}/django/django-original.svg` },
+        { name: "Stripe", icon: "https://www.vectorlogo.zone/logos/stripe/stripe-icon.svg" },
+        { name: "PayPal", icon: "https://www.vectorlogo.zone/logos/paypal/paypal-icon.svg" }
+
       ],
       images: [
-        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=800&fit=crop",
-        "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=800&fit=crop",
-        "https://images.unsplash.com/photo-1565514020179-026b92b84bb6?w=400&h=800&fit=crop",
-        "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=400&h=800&fit=crop",
+        "/projects/walkingwitness/screen-1.png",
+        "/projects/walkingwitness/screen-2.png",
+        "/projects/walkingwitness/screen-3.png",
+        "/projects/walkingwitness/screen-4.png",
       ],
-      github: "https://github.com/shougotmollik",
-      playStore: "https://play.google.com",
-      appStore: "https://apps.apple.com",
+      // github: "https://github.com/shougotmollik",
+      playStore: "https://play.google.com/store/apps/details?id=com.bridgesofglory.app&pcampaignid=web_share",
+      appStore: "https://apps.apple.com/us/app/walking-witness/id6761861433",
       color: "#5C6BC0",
     },
     {
@@ -93,18 +102,21 @@ export const projectsData: ProjectsData = {
       tech: [
         { name: "Flutter", icon: `${deviconBase}/flutter/flutter-original.svg` },
         { name: "Dart", icon: `${deviconBase}/dart/dart-original.svg` },
-        { name: "GetX", icon: `${deviconBase}/flutter/flutter-original.svg` },
+        { name: "Riverpod Generator", icon: `${deviconBase}/flutter/flutter-original.svg` },
         { name: "Firebase", icon: `${deviconBase}/firebase/firebase-plain.svg` },
+        { name: "Django Rest Framework", icon: `${deviconBase}/django/django-original.svg` },
+        { name: "Stripe", icon: "https://www.vectorlogo.zone/logos/stripe/stripe-icon.svg" },
+        { name: "PayPal", icon: "https://www.vectorlogo.zone/logos/paypal/paypal-icon.svg" },
       ],
       images: [
-        "https://images.unsplash.com/photo-1556742111-a301076d9d18?w=400&h=800&fit=crop",
-        "https://images.unsplash.com/photo-1553729459-afe8f2e2a7a4?w=400&h=800&fit=crop",
-        "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&h=800&fit=crop",
-        "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=800&fit=crop",
+        "/projects/covenanthearts/screen-1.png",
+        "/projects/covenanthearts/screen-2.png",
+        "/projects/covenanthearts/screen-3.png",
+        "/projects/covenanthearts/screen-4.png",
       ],
-      github: "https://github.com/shougotmollik",
-      playStore: "https://play.google.com",
-      appStore: "https://apps.apple.com",
+      // github: "https://github.com/shougotmollik",
+      playStore: "https://play.google.com/store/apps/details?id=com.ch.covenanthearts&pcampaignid=web_share",
+      // appStore: "https://apps.apple.com",
       color: "#E91E63",
     },
   ],

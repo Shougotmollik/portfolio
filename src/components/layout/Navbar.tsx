@@ -42,10 +42,10 @@ export default function Navbar() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className={`relative px-3 py-2 text-sm font-bold transition-colors duration-200 rounded-lg ${
+                  className={`relative px-3 py-1.5 text-sm font-black transition-all duration-200 rounded-lg border-[2px] ${
                     isActive
-                      ? "text-[#111111] bg-[#fcd567]/40"
-                      : "text-[#111111]/70 hover:text-[#111111] hover:bg-[#111111]/5"
+                      ? "text-[#111111] bg-[#fcd567] border-[#111111] neo-shadow-sm scale-105"
+                      : "text-[#111111]/70 hover:text-[#111111] hover:bg-[#111111]/5 border-transparent"
                   }`}
                 >
                   {link.label}

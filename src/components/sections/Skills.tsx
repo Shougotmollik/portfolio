@@ -42,22 +42,26 @@ export default function Skills() {
                     </div>
 
                     <div className="p-6 flex flex-wrap gap-3 bg-[#ffffff] flex-grow">
-                      {group.items.map((skill) => (
-                        <div
-                          key={skill.name}
-                          className="inline-flex items-center gap-2 px-3 py-1.5 border-[2px] border-[#111111] bg-[#fdfaf2] rounded-lg neo-shadow-sm hover:translate-y-[-2px] hover:shadow-[4px_4px_0px_#111111] transition-all duration-150"
-                        >
-                          <img
-                            src={skill.icon}
-                            alt={skill.name}
-                            className="w-4 h-4 flex-shrink-0"
-                            loading="lazy"
-                          />
-                          <span className="text-xs font-black text-[#111111]">
-                            {skill.name}
-                          </span>
-                        </div>
-                      ))}
+                      {group.items.map((skill, skillIdx) => {
+                        const tilts = ["hover:rotate-[-3deg]", "hover:rotate-[3deg]", "hover:rotate-[-2deg]", "hover:rotate-[2deg]", "hover:rotate-[-4deg]", "hover:rotate-[4deg]"];
+                        const tilt = tilts[(groupIndex + skillIdx) % tilts.length];
+                        return (
+                          <div
+                            key={skill.name}
+                            className={`inline-flex items-center gap-2 px-3 py-1.5 border-[2px] border-[#111111] bg-[#fdfaf2] rounded-lg neo-shadow-sm hover:translate-y-[-3px] hover:shadow-[4px_4px_0px_#111111] ${tilt} transition-all duration-150`}
+                          >
+                            <img
+                              src={skill.icon}
+                              alt={skill.name}
+                              className="w-4 h-4 flex-shrink-0"
+                              loading="lazy"
+                            />
+                            <span className="text-xs font-black text-[#111111]">
+                              {skill.name}
+                            </span>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 </RevealItem>

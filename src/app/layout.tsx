@@ -48,6 +48,8 @@ const jsonLd = {
     "Flutter Mobile Engineer building cross-platform applications with clean architecture and thoughtful design.",
 };
 
+import CustomCursor from "@/components/ui/CustomCursor";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -66,6 +68,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <LenisProvider>
+          <CustomCursor />
           {children}
         </LenisProvider>
       </body>

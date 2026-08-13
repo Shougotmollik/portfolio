@@ -40,7 +40,7 @@ export const projectsData: ProjectsData = {
       problem:
         "Dairy farmers in Poland had no simple tool to estimate daily milk production, calculate costs versus profit, or analyze potential output of products like cheese and butter for smarter business decisions.",
       built:
-        "Built a Flutter calculator with offline-first architecture for use in rural areas. Implemented dynamic cost-benefit modeling for raw milk and derivative products. Designed a clean, intuitive interface tailored for farmers with no technical background.",
+        "Built a cross-platform mobile app for dairy production planning with offline-first architecture for use in rural areas. Implemented dynamic cost-benefit modeling for raw milk and derivative products. Designed a clean, intuitive interface tailored for farmers with no technical background — live on both iOS and Android.",
       tech: [
         { name: "Flutter", icon: `${deviconBase}/flutter/flutter-original.svg` },
         { name: "Dart", icon: `${deviconBase}/dart/dart-original.svg` },
@@ -69,7 +69,7 @@ export const projectsData: ProjectsData = {
       problem:
         "Donors had no transparency into how their contributions were used. Traditional platforms lacked real-time impact tracking and direct communication between donors and the communities they supported.",
       built:
-        "Developed a Flutter app enabling transparent sponsorship of community projects — livestock, small businesses, education. Features real-time progress tracking, secure donor-to-village leader messaging, and verified project photo updates.",
+        "Developed a cross-platform mobile app enabling transparent sponsorship of community projects — livestock, small businesses, education. Features real-time progress tracking, secure donor-to-village leader messaging, and verified project photo updates — available on both iOS and Android.",
       tech: [
         { name: "Flutter", icon: `${deviconBase}/flutter/flutter-original.svg` },
         { name: "Dart", icon: `${deviconBase}/dart/dart-original.svg` },
@@ -98,7 +98,7 @@ export const projectsData: ProjectsData = {
       problem:
         "Christian singles lacked a dating platform aligned with their values. Mainstream apps prioritize casual dating, leaving a gap for marriage-focused connections with scripture and faith at the center.",
       built:
-        "Built a Flutter dating platform with faith-based matching, verified profiles, scripture sharing, prayer interaction, and secure messaging. Designed for marriage-focused relationships with community-driven trust and safety features.",
+        "Built a faith-centered mobile app with verified profiles, scripture sharing, prayer interaction, and secure messaging. Designed for marriage-focused relationships with community-driven trust and safety features — available on both iOS and Android.",
       tech: [
         { name: "Flutter", icon: `${deviconBase}/flutter/flutter-original.svg` },
         { name: "Dart", icon: `${deviconBase}/dart/dart-original.svg` },
@@ -118,6 +118,31 @@ export const projectsData: ProjectsData = {
       playStore: "https://play.google.com/store/apps/details?id=com.ch.covenanthearts&pcampaignid=web_share",
       // appStore: "https://apps.apple.com",
       color: "#E91E63",
+    },
+    {
+      id: "crewsh",
+      name: "Crewsh",
+      tagline: "Dating app for cruise ship members — matched by nationality & age, with a privacy mode.",
+      problem:
+        "Cruise ship communities lacked a dating platform built for life at sea. Mainstream apps rely on geolocation, leaving a gap for private matching filtered by nationality and age rather than location.",
+      built:
+        "Built a dating mobile app for cruise ship members with database matching by nationality and age, a privacy mode that only reveals profiles to mutual likes, and text-only chat for secure, simple conversations. Designed with a free-trial subscription model and admin controls to add new ships as they launch — available on both iOS and Android.",
+      tech: [
+        { name: "Flutter", icon: `${deviconBase}/flutter/flutter-original.svg` },
+        { name: "Dart", icon: `${deviconBase}/dart/dart-original.svg` },
+        { name: "Riverpod Generator", icon: `${deviconBase}/flutter/flutter-original.svg` },
+        { name: "Firebase Auth", icon: `${deviconBase}/firebase/firebase-plain.svg` },
+        { name: "Stripe", icon: "https://www.vectorlogo.zone/logos/stripe/stripe-icon.svg" },
+        { name: "Django REST Framework", icon: `${deviconBase}/django/django-original.svg` },
+      ],
+      images: [
+        "/projects/crewsh/screen-1.png",
+        "/projects/crewsh/screen-2.png",
+        "/projects/crewsh/screen-3.png",
+        "/projects/crewsh/screen-4.png",
+      ],
+      playStore: "https://play.google.com/store/apps/details?id=com.sabbir.crewsh&pcampaignid=web_share",
+      color: "#2196F3",
     },
   ],
 };

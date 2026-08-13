@@ -3,14 +3,22 @@ export interface ProjectTech {
   icon: string;
 }
 
+export interface ProjectScreenshot {
+  src: string;
+  caption: string;
+}
+
 export interface Project {
   id: string;
   name: string;
   tagline: string;
+  role: string;
   problem: string;
   built: string;
+  techDetail: string;
+  outcome: string;
   tech: ProjectTech[];
-  images: [string, string, string, string];
+  screenshots: ProjectScreenshot[];
   github?: string;
   playStore?: string;
   appStore?: string;
@@ -37,10 +45,15 @@ export const projectsData: ProjectsData = {
       id: "milkmix",
       name: "MilkMix",
       tagline: "Daily farm calculator for dairy production and cost-profit analysis.",
+      role: "Solo Mobile Developer",
       problem:
         "Dairy farmers in Poland had no simple tool to estimate daily milk production, calculate costs versus profit, or analyze potential output of products like cheese and butter for smarter business decisions.",
       built:
         "Built a cross-platform mobile app for dairy production planning with offline-first architecture for use in rural areas. Implemented dynamic cost-benefit modeling for raw milk and derivative products. Designed a clean, intuitive interface tailored for farmers with no technical background — live on both iOS and Android.",
+      techDetail:
+        "Riverpod state management, offline-first persistence for rural areas, Firebase Authentication, and Stripe + RevenueCat billing for premium features.",
+      outcome:
+        "Shipped to Google Play and the App Store for dairy farmers across Poland, focused on a simple interface for non-technical users.",
       tech: [
         { name: "Flutter", icon: `${deviconBase}/flutter/flutter-original.svg` },
         { name: "Dart", icon: `${deviconBase}/dart/dart-original.svg` },
@@ -51,11 +64,11 @@ export const projectsData: ProjectsData = {
         { name: "Firebase Authentication", icon: "https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" },
         { name: "RevenueCat", icon: "https://www.vectorlogo.zone/logos/revenuecat/revenuecat-icon.svg" }
       ],
-      images: [
-        "/projects/milkmix/screen-1.png",
-        "/projects/milkmix/screen-2.png",
-        "/projects/milkmix/screen-3.png",
-        "/projects/milkmix/screen-4.png",
+      screenshots: [
+        { src: "/projects/milkmix/screen-1.png", caption: "Onboarding" },
+        { src: "/projects/milkmix/screen-2.png", caption: "Cost vs profit analysis per product" },
+        { src: "/projects/milkmix/screen-3.png", caption: "History of calculations" },
+        { src: "/projects/milkmix/screen-4.png", caption: "Recipe summary" },
       ],
       // github: "https://github.com/shougotmollik",
       playStore: "https://play.google.com/store/apps/details?id=com.carbonanik.milkmix&hl=en",
@@ -66,10 +79,15 @@ export const projectsData: ProjectsData = {
       id: "walkingwitness",
       name: "Walking Witness",
       tagline: "Donation platform connecting U.S. donors with Ugandan communities.",
+      role: "Solo Mobile Developer",
       problem:
         "Donors had no transparency into how their contributions were used. Traditional platforms lacked real-time impact tracking and direct communication between donors and the communities they supported.",
       built:
         "Developed a cross-platform mobile app enabling transparent sponsorship of community projects — livestock, small businesses, education. Features real-time progress tracking, secure donor-to-village leader messaging, and verified project photo updates — available on both iOS and Android.",
+      techDetail:
+        "GetX state management, Firebase Authentication, Django REST Framework APIs, and Stripe and PayPal donation checkout.",
+      outcome:
+        "Connected U.S. donors with Ugandan communities through verified sponsorship and transparent, real-time impact tracking.",
       tech: [
         { name: "Flutter", icon: `${deviconBase}/flutter/flutter-original.svg` },
         { name: "Dart", icon: `${deviconBase}/dart/dart-original.svg` },
@@ -78,13 +96,12 @@ export const projectsData: ProjectsData = {
         { name: "Django Rest Framework", icon: `${deviconBase}/django/django-original.svg` },
         { name: "Stripe", icon: "https://www.vectorlogo.zone/logos/stripe/stripe-icon.svg" },
         { name: "PayPal", icon: "https://www.vectorlogo.zone/logos/paypal/paypal-icon.svg" }
-
       ],
-      images: [
-        "/projects/walkingwitness/screen-1.png",
-        "/projects/walkingwitness/screen-2.png",
-        "/projects/walkingwitness/screen-3.png",
-        "/projects/walkingwitness/screen-4.png",
+      screenshots: [
+        { src: "/projects/walkingwitness/screen-1.png", caption: "Onboarding" },
+        { src: "/projects/walkingwitness/screen-2.png", caption: "Project category explorer" },
+        { src: "/projects/walkingwitness/screen-3.png", caption: "Home screen — listed projects" },
+        { src: "/projects/walkingwitness/screen-4.png", caption: "Project details" },
       ],
       // github: "https://github.com/shougotmollik",
       playStore: "https://play.google.com/store/apps/details?id=com.bridgesofglory.app&pcampaignid=web_share",
@@ -95,10 +112,15 @@ export const projectsData: ProjectsData = {
       id: "covenanthearts",
       name: "Covenant Hearts",
       tagline: "Christ-centered dating app for faith-based matching and relationships.",
+      role: "Solo Mobile Developer",
       problem:
         "Christian singles lacked a dating platform aligned with their values. Mainstream apps prioritize casual dating, leaving a gap for marriage-focused connections with scripture and faith at the center.",
       built:
         "Built a faith-centered mobile app with verified profiles, scripture sharing, prayer interaction, and secure messaging. Designed for marriage-focused relationships with community-driven trust and safety features — available on both iOS and Android.",
+      techDetail:
+        "Riverpod Generator state management, Firebase for auth and data, Django REST Framework backend, and Stripe and PayPal subscription payments.",
+      outcome:
+        "Shipped a faith-centered dating platform with verified profiles and community-driven trust and safety features.",
       tech: [
         { name: "Flutter", icon: `${deviconBase}/flutter/flutter-original.svg` },
         { name: "Dart", icon: `${deviconBase}/dart/dart-original.svg` },
@@ -108,11 +130,11 @@ export const projectsData: ProjectsData = {
         { name: "Stripe", icon: "https://www.vectorlogo.zone/logos/stripe/stripe-icon.svg" },
         { name: "PayPal", icon: "https://www.vectorlogo.zone/logos/paypal/paypal-icon.svg" },
       ],
-      images: [
-        "/projects/covenanthearts/screen-1.png",
-        "/projects/covenanthearts/screen-2.png",
-        "/projects/covenanthearts/screen-3.png",
-        "/projects/covenanthearts/screen-4.png",
+      screenshots: [
+        { src: "/projects/covenanthearts/screen-1.png", caption: "Onboarding" },
+        { src: "/projects/covenanthearts/screen-2.png", caption: "Home screen — discovering" },
+        { src: "/projects/covenanthearts/screen-3.png", caption: "Matched list" },
+        { src: "/projects/covenanthearts/screen-4.png", caption: "Matched" },
       ],
       // github: "https://github.com/shougotmollik",
       playStore: "https://play.google.com/store/apps/details?id=com.ch.covenanthearts&pcampaignid=web_share",
@@ -123,10 +145,15 @@ export const projectsData: ProjectsData = {
       id: "crewsh",
       name: "Crewsh",
       tagline: "Dating app for cruise ship members — matched by nationality & age, with a privacy mode.",
+      role: "Solo Mobile Developer",
       problem:
         "Cruise ship communities lacked a dating platform built for life at sea. Mainstream apps rely on geolocation, leaving a gap for private matching filtered by nationality and age rather than location.",
       built:
         "Built a dating mobile app for cruise ship members with database matching by nationality and age, a privacy mode that only reveals profiles to mutual likes, and text-only chat for secure, simple conversations. Designed with a free-trial subscription model and admin controls to add new ships as they launch — available on both iOS and Android.",
+      techDetail:
+        "Riverpod Generator state management, Firebase Auth for secure login, a Django REST Framework backend with nationality/age filtering, and Stripe subscription billing.",
+      outcome:
+        "Live on Google Play — a private matching experience for cruise ship members with subscription-based monetization.",
       tech: [
         { name: "Flutter", icon: `${deviconBase}/flutter/flutter-original.svg` },
         { name: "Dart", icon: `${deviconBase}/dart/dart-original.svg` },
@@ -135,11 +162,12 @@ export const projectsData: ProjectsData = {
         { name: "Stripe", icon: "https://www.vectorlogo.zone/logos/stripe/stripe-icon.svg" },
         { name: "Django REST Framework", icon: `${deviconBase}/django/django-original.svg` },
       ],
-      images: [
-        "/projects/crewsh/screen-1.png",
-        "/projects/crewsh/screen-2.png",
-        "/projects/crewsh/screen-3.png",
-        "/projects/crewsh/screen-4.png",
+screenshots: [
+        { src: "/projects/crewsh/screen-1.png", caption: "Onboarding" },
+        { src: "/projects/crewsh/screen-2.png", caption: "Home — discovering people" },
+        { src: "/projects/crewsh/screen-3.png", caption: "Matched" },
+        { src: "/projects/crewsh/screen-4.png", caption: "Cruise marketplace" },
+        { src: "/projects/crewsh/screen-5.png", caption: "Messaging" },
       ],
       playStore: "https://play.google.com/store/apps/details?id=com.sabbir.crewsh&pcampaignid=web_share",
       color: "#2196F3",

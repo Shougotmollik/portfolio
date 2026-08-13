@@ -22,6 +22,15 @@ export function XIcon({ size = 24 }: { size?: number }) {
   );
 }
 
+export function DeveloperIcon({ size = 16 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" />
+      <path d="M12 2l2 20h-4l2-20z" strokeWidth="1.5" />
+    </svg>
+  );
+}
+
 export function PlayStoreIcon({ size = 16 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">

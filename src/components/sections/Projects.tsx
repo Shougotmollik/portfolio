@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { GithubIcon, PlayStoreIcon, AppStoreIcon } from "@/components/ui/Icons";
+import { GithubIcon, PlayStoreIcon, AppStoreIcon, DeveloperIcon } from "@/components/ui/Icons";
 import PhoneFrame from "@/components/ui/PhoneFrame";
 import { projectsData } from "@/data/projects";
 import { use3DTilt } from "@/hooks/use3DTilt";
@@ -45,7 +45,7 @@ function ProjectDetailModal({
       transition={{ duration: 0.2 }}
     >
       <motion.div
-        className="w-full max-w-4xl bg-[#fdfaf2] border-[3px] border-[#111111] rounded-2xl neo-shadow-xl overflow-hidden flex flex-col md:flex-row relative"
+        className="w-full max-w-6xl bg-[#fdfaf2] border-[3px] border-[#111111] rounded-2xl neo-shadow-xl overflow-hidden flex flex-col md:flex-row relative"
         onClick={(e) => e.stopPropagation()}
         initial={{ scale: 0.92, opacity: 0, y: 20 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -60,31 +60,35 @@ function ProjectDetailModal({
           ✕
         </button>
 
-        <div className="w-full md:w-1/2 p-6 bg-[#fa8f76] border-b-[3px] md:border-b-0 md:border-r-[3px] border-[#111111] flex flex-col items-center justify-center gap-6">
+        <div className="w-full md:w-[42%] p-6 bg-[#fa8f76] border-b-[3px] md:border-b-0 md:border-r-[3px] border-[#111111] flex flex-col items-center justify-center gap-4">
           <motion.div
-            className="w-full max-w-[220px]"
+            className="w-full max-w-[190px]"
             key={selectedImage}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.2 }}
           >
-            <PhoneFrame imageUrl={project.images[selectedImage]} color={project.color} />
+            <PhoneFrame imageUrl={project.screenshots[selectedImage].src} color={project.color} />
           </motion.div>
+          <p className="text-xs font-black text-[#111111] text-center max-w-[220px] leading-relaxed">
+            {project.screenshots[selectedImage].caption}
+          </p>
           <div className="flex gap-2 justify-center flex-wrap">
-            {project.images.map((img, i) => (
+            {project.screenshots.map((shot, i) => (
               <button
                 key={i}
                 onClick={() => setSelectedImage(i)}
                 className={`w-10 h-16 rounded-md overflow-hidden border-[2px] border-[#111111] transition-all duration-150 ${selectedImage === i ? "scale-110 border-[#fcd567] neo-shadow-sm" : "opacity-50 hover:opacity-80"}`}
+                aria-label={shot.caption}
               >
-                <img src={img} alt="" className="w-full h-full object-cover" />
+                <img src={shot.src} alt={shot.caption} className="w-full h-full object-cover" />
               </button>
             ))}
           </div>
         </div>
 
-        <div className="w-full md:w-1/2 p-6 md:p-8 flex flex-col justify-between">
-          <div className="space-y-4">
+        <div className="w-full md:w-[58%] p-6 md:p-7 flex flex-col justify-between">
+          <div className="space-y-3">
             <div>
               <span className="text-xs font-black text-[#111111]/60 uppercase tracking-widest block mb-1">
                 Project {String(index + 1).padStart(2, "0")}
@@ -95,17 +99,38 @@ function ProjectDetailModal({
               <p className="text-sm font-bold text-[#fa8f76] mt-1">
                 {project.tagline}
               </p>
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 border-[1.5px] border-[#111111] bg-[#fcd567] rounded-md text-[10px] font-black text-[#111111] mt-2">
+                <DeveloperIcon size={12} /> {project.role}
+              </span>
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-1.5">
               <h4 className="text-[11px] font-black text-[#111111]/70 uppercase tracking-wider">
-                The Problem & Built Solution
+                The Problem
               </h4>
-              <p className="text-xs font-bold text-[#111111]/80 leading-relaxed">
+              <p className="text-xs font-bold text-[#111111]/80 leading-relaxed bg-[#9ee6ee]/25 p-3 border-[2px] border-[#111111] rounded-lg">
                 {project.problem}
               </p>
-              <p className="text-xs font-bold text-[#111111]/80 leading-relaxed bg-[#9ae2ad] p-3 border-[2px] border-[#111111] rounded-lg">
+            </div>
+
+            <div className="space-y-1.5">
+              <h4 className="text-[11px] font-black text-[#111111]/70 uppercase tracking-wider">
+                What I Built
+              </h4>
+              <p className="text-xs font-bold text-[#111111]/85 leading-relaxed bg-[#f2afd1]/20 p-3 border-[2px] border-[#111111] rounded-lg">
                 {project.built}
+              </p>
+              <p className="text-xs font-bold text-[#111111]/90 leading-relaxed bg-[#fcd567]/50 p-3 border-[2px] border-[#111111] rounded-lg">
+                ⚡️ {project.techDetail}
+              </p>
+            </div>
+
+            <div className="space-y-1.5">
+              <h4 className="text-[11px] font-black text-[#111111]/70 uppercase tracking-wider">
+                Outcome
+              </h4>
+              <p className="text-xs font-bold text-[#111111]/90 leading-relaxed bg-[#9ae2ad]/50 p-3 border-[2px] border-[#111111] rounded-lg">
+                ✓ {project.outcome}
               </p>
             </div>
 
@@ -121,7 +146,7 @@ function ProjectDetailModal({
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-2 pt-6">
+          <div className="flex flex-wrap gap-2 pt-4">
             {project.github && (
               <a
                 href={project.github}
@@ -188,7 +213,7 @@ function ProjectCard({ project, index, onClick }: {
 
       <div className="p-6 flex flex-col items-center flex-grow bg-[#ffffff] relative z-20">
         <div className="w-full max-w-[150px] mb-4">
-          <PhoneFrame imageUrl={project.images[0]} color={project.color} />
+          <PhoneFrame imageUrl={project.screenshots[0]?.src} color={project.color} />
         </div>
         <h3 className="text-base font-black text-[#111111] text-center leading-tight">
           {project.name}

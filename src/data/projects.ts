@@ -350,5 +350,32 @@ screenshots: [
       ],
       color: "#FFB300",
     },
+    {
+      id: "cleanbeats",
+      name: "CleanBeats",
+      tagline: "Simple app that uses AI to remove bad words from music so anyone can enjoy it.",
+      role: "Solo Mobile Developer",
+      problem:
+        "Parents and teachers can't easily give kids access to popular music — explicit lyrics are everywhere and radio edits don't exist for most songs. Users needed a simple app that cleans profanity automatically so any song is safe for anyone to listen to.",
+      built:
+        "Built a simple cross-platform music app powered by an AI model that detects bad words in a track and removes them, producing a clean version anyone can listen to. Features easy one-tap cleaning, a clean playback library, and instant results — available on both iOS and Android.",
+      techDetail:
+        "GetX state management, an AI model for profanity detection and removal, a FastAPI backend, and Stripe for subscriptions.",
+      outcome:
+        "Delivered as a working MVP — one tap turns any song family-friendly for everyone to enjoy.",
+      tech: [
+        { name: "Flutter", icon: `${deviconBase}/flutter/flutter-original.svg` },
+        { name: "GetX", icon: `${deviconBase}/flutter/flutter-original.svg` },
+        { name: "FastAPI", icon: `${deviconBase}/fastapi/fastapi-original.svg` },
+        { name: "Stripe", icon: "https://www.vectorlogo.zone/logos/stripe/stripe-icon.svg" },
+      ],
+      screenshots: [
+        { src: "/projects/cleanbeats/home.png", caption: "Home" },
+        { src: "/projects/cleanbeats/upload music.png", caption: "Upload music" },
+        { src: "/projects/cleanbeats/profanity remover.png", caption: "Profanity remover" },
+        { src: "/projects/cleanbeats/subscription.jpg", caption: "Subscription" },
+      ],
+      color: "#00B8D4",
+    },
   ],
 };

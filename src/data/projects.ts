@@ -143,6 +143,39 @@ export const projectsData: ProjectsData = {
       color: "#FF9800",
     },
     {
+      id: "famka",
+      name: "Famka",
+      tagline: "Audio learning app that trains focus and active listening through multi-speaker sessions.",
+      role: "Solo Mobile Developer",
+      problem:
+        "Few people can truly focus while listening to multi-speaker conversations, and almost no tools train active listening in a structured, measurable way. Existing audio apps lacked difficulty levels, comprehension quizzes, and progress tracking to turn passive listening into a real skill.",
+      built:
+        "Built a cross-platform audio learning mobile app with three difficulty chapters and 15 multi-speaker listening sessions. Features a background audio player with lock-screen controls, interactive quizzes with instant feedback, daily streaks, achievement badges, and a statistics dashboard — with a Django-powered admin panel for managing content — available on both iOS and Android.",
+      techDetail:
+        "Riverpod Generator state management, Lottie animations for an engaging learning experience, a Django REST Framework backend, and Firebase for authentication and push notifications.",
+      outcome:
+        "Delivered as a complete MVP — 3 chapters, 15 sessions, gamified progress tracking, and an admin panel ready for content expansion.",
+      tech: [
+        { name: "Flutter", icon: `${deviconBase}/flutter/flutter-original.svg` },
+        { name: "Dart", icon: `${deviconBase}/dart/dart-original.svg` },
+        { name: "Riverpod Generator", icon: `${deviconBase}/flutter/flutter-original.svg` },
+        { name: "Lottie", icon: "https://www.vectorlogo.zone/logos/lottiefiles/lottiefiles-icon.svg" },
+        { name: "Firebase Auth", icon: `${deviconBase}/firebase/firebase-plain.svg` },
+        { name: "Django REST Framework", icon: `${deviconBase}/django/django-original.svg` },
+      ],
+      screenshots: [
+        { src: "/projects/famka/onboarding.png", caption: "Onboarding" },
+        { src: "/projects/famka/home screen.png", caption: "Home screen — chapters & sessions" },
+        { src: "/projects/famka/quiz level.png", caption: "Quiz level selection" },
+        { src: "/projects/famka/audio session.png", caption: "Audio session — multi-speaker player" },
+        { src: "/projects/famka/quiz screen.png", caption: "Quiz — instant feedback" },
+        { src: "/projects/famka/quiz summary.png", caption: "Quiz summary" },
+        { src: "/projects/famka/quiz result.png", caption: "Quiz results" },
+        { src: "/projects/famka/statistics.png", caption: "Statistics dashboard" },
+      ],
+      color: "#26A69A",
+    },
+    {
       id: "crewsh",
       name: "Crewsh",
       tagline: "Dating app for cruise ship members — matched by nationality & age, with a privacy mode.",

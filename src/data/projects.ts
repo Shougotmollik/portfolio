@@ -316,5 +316,39 @@ screenshots: [
       ],
       color: "#F44336",
     },
+    {
+      id: "chefjunior",
+      name: "Chef Junior",
+      tagline: "Interactive educational cooking app with recipe guidance, an avatar chef, and cooking games.",
+      role: "Solo Mobile Developer",
+      problem:
+        "Cooking apps mostly dump recipes and text instructions, which is intimidating for beginners and kids. Users had no engaging way to learn step-by-step with visual and voice guidance, ingredient knowledge, and games all in one place.",
+      built:
+        "Built a cross-platform educational cooking mobile app combining recipe discovery, step-by-step cooking guidance with an interactive avatar, and engaging cooking games. Features voice-assisted instructions, ingredient history and fun facts, favorite recipes, a materials and shopping checklist, and multilingual support — with an admin panel for recipe, user, and game management — available on both iOS and Android.",
+      techDetail:
+        "GetX state management, Lottie animations for the cooking avatar, a Django REST Framework backend with admin analytics, Firebase Auth, and multilingual content support.",
+      outcome:
+        "Delivered as a family-friendly MVP — educational, multilingual, and designed for both beginners and experienced cooks.",
+      tech: [
+        { name: "Flutter", icon: `${deviconBase}/flutter/flutter-original.svg` },
+        { name: "Dart", icon: `${deviconBase}/dart/dart-original.svg` },
+        { name: "GetX", icon: `${deviconBase}/flutter/flutter-original.svg` },
+        { name: "Lottie", icon: "https://www.vectorlogo.zone/logos/lottiefiles/lottiefiles-icon.svg" },
+        { name: "Django REST Framework", icon: `${deviconBase}/django/django-original.svg` },
+        { name: "Firebase Auth", icon: `${deviconBase}/firebase/firebase-plain.svg` },
+      ],
+      screenshots: [
+        { src: "/projects/chefjunior/Home page.png", caption: "Home — recipe discovery" },
+        { src: "/projects/chefjunior/See all.png", caption: "See all recipes" },
+        { src: "/projects/chefjunior/Ingredient page.png", caption: "Ingredient page" },
+        { src: "/projects/chefjunior/Ingredient details page.png", caption: "Ingredient details" },
+        { src: "/projects/chefjunior/my favourite.png", caption: "My favorites" },
+        { src: "/projects/chefjunior/Avatar.png", caption: "Avatar guide" },
+        { src: "/projects/chefjunior/Game.png", caption: "Game" },
+        { src: "/projects/chefjunior/Crossword puzzle.png", caption: "Crossword puzzle" },
+        { src: "/projects/chefjunior/Word search game.png", caption: "Word search game" },
+      ],
+      color: "#FFB300",
+    },
   ],
 };

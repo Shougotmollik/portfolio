@@ -278,5 +278,43 @@ screenshots: [
       ],
       color: "#9C27B0",
     },
+    {
+      id: "vybin",
+      name: "Vybin",
+      tagline: "Social connection app for real-life meetups based on shared interests and proximity.",
+      role: "Solo Mobile Developer",
+      problem:
+        "Digital social and dating apps rarely lead to real-life interaction, and safety concerns keep strangers from meeting nearby. Users had no privacy-first way to show they were open to connect and to verify each other in person before chatting.",
+      built:
+        "Built a cross-platform social connection mobile app with a live, privacy-focused map showing active users within a 500m radius. Features Vibe statuses, a Wave feature for nearby interaction, mutual QR-code scanning to unlock chats, respect scores, communities with events, and geofenced event vibes — available on both iOS and Android.",
+      techDetail:
+        "GetX state management, Google Maps for live privacy-focused location, a Django REST Framework backend, Lottie animations, Firebase Auth, and Stripe and PayPal payments.",
+      outcome:
+        "Built privacy-first — no location history stored — with safe mode, reporting, and an admin console for moderation.",
+      tech: [
+        { name: "Flutter", icon: `${deviconBase}/flutter/flutter-original.svg` },
+        { name: "Dart", icon: `${deviconBase}/dart/dart-original.svg` },
+        { name: "GetX", icon: `${deviconBase}/flutter/flutter-original.svg` },
+        { name: "Google Maps", icon: "https://www.vectorlogo.zone/logos/google_maps/google_maps-icon.svg" },
+        { name: "Django REST Framework", icon: `${deviconBase}/django/django-original.svg` },
+        { name: "Lottie", icon: "https://www.vectorlogo.zone/logos/lottiefiles/lottiefiles-icon.svg" },
+        { name: "Firebase Auth", icon: `${deviconBase}/firebase/firebase-plain.svg` },
+        { name: "Stripe", icon: "https://www.vectorlogo.zone/logos/stripe/stripe-icon.svg" },
+        { name: "PayPal", icon: "https://www.vectorlogo.zone/logos/paypal/paypal-icon.svg" },
+      ],
+      screenshots: [
+        { src: "/projects/vybin/splash.png", caption: "Splash screen" },
+        { src: "/projects/vybin/home.png", caption: "Home — vibes nearby" },
+        { src: "/projects/vybin/vibe.png", caption: "Vibe status" },
+        { src: "/projects/vybin/notification.png", caption: "Notifications" },
+        { src: "/projects/vybin/community and event choose.png", caption: "Community & event choose" },
+        { src: "/projects/vybin/community.png", caption: "Community" },
+        { src: "/projects/vybin/events.png", caption: "Events" },
+        { src: "/projects/vybin/qr code scan.png", caption: "QR code scan" },
+        { src: "/projects/vybin/qr vrification.png", caption: "QR verification" },
+        { src: "/projects/vybin/Chats.png", caption: "Chats" },
+      ],
+      color: "#F44336",
+    },
   ],
 };

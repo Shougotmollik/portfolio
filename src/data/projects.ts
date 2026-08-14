@@ -239,5 +239,44 @@ screenshots: [
       // appStore: "https://apps.apple.com",
       color: "#E91E63",
     },
+    {
+      id: "vocamatch",
+      name: "Voca Match",
+      tagline: "AI-powered matchmaking app where voice and personality matter more than photos.",
+      role: "Solo Mobile Developer",
+      problem:
+        "Mainstream dating apps prioritize photos over personality, leading to shallow matches and fleeting connections. Users had no way to be judged on their voice, values, or conversation before revealing their appearance.",
+      built:
+        "Built a cross-platform AI matchmaking mobile app with voice-based onboarding, AI-driven compatibility scoring, and swipe-based discovery. Features voice introductions instead of photos, photo reveal after matched conversation, in-chat mini-games like Two Truths and a Lie, and a React admin dashboard for user and policy management — available on both iOS and Android.",
+      techDetail:
+        "GetX state management, Firebase Auth, an AI compatibility engine for matching, a Django REST Framework backend, Lottie animations, and Google Maps integration — with a React admin dashboard.",
+      outcome:
+        "Delivered as a full product — AI voice-first matching, a complete admin control panel, and a deployable mobile app for both stores.",
+      tech: [
+        { name: "Flutter", icon: `${deviconBase}/flutter/flutter-original.svg` },
+        { name: "Dart", icon: `${deviconBase}/dart/dart-original.svg` },
+        { name: "GetX", icon: `${deviconBase}/flutter/flutter-original.svg` },
+        { name: "Firebase Auth", icon: `${deviconBase}/firebase/firebase-plain.svg` },
+        { name: "Django REST Framework", icon: `${deviconBase}/django/django-original.svg` },
+        { name: "Lottie", icon: "https://www.vectorlogo.zone/logos/lottiefiles/lottiefiles-icon.svg" },
+        { name: "Google Maps", icon: "https://www.vectorlogo.zone/logos/google_maps/google_maps-icon.svg" },
+      ],
+      screenshots: [
+        { src: "/projects/vocamatch/Splash.png", caption: "Splash screen" },
+        { src: "/projects/vocamatch/Home.png", caption: "Home" },
+        { src: "/projects/vocamatch/Voice intro.png", caption: "Voice intro" },
+        { src: "/projects/vocamatch/Match Request.png", caption: "Match request" },
+        { src: "/projects/vocamatch/Match.jpg", caption: "Match" },
+        { src: "/projects/vocamatch/Matches.png", caption: "Matches" },
+        { src: "/projects/vocamatch/Favorites.png", caption: "Favorites" },
+        { src: "/projects/vocamatch/inbox.png", caption: "Inbox" },
+        { src: "/projects/vocamatch/inbox-2.png", caption: "Inbox — chat" },
+        { src: "/projects/vocamatch/Choose Game.png", caption: "Choose game" },
+        { src: "/projects/vocamatch/Game 1 Page 6.jpg", caption: "Game — Two Truths and a Lie" },
+        { src: "/projects/vocamatch/Game 2 Page 2.jpg", caption: "Game — Would You Rather" },
+        { src: "/projects/vocamatch/Game Over 1.jpg", caption: "Game over" },
+      ],
+      color: "#9C27B0",
+    },
   ],
 };

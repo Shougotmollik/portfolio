@@ -377,5 +377,36 @@ screenshots: [
       ],
       color: "#00B8D4",
     },
+    {
+      id: "familyside",
+      name: "FamilySide",
+      tagline: "Community platform that helps families discover trusted local places, activities, services, and events.",
+      role: "Solo Mobile Developer",
+      problem:
+        "Modern parents struggle to find reliable, family-friendly services, activities, events, and recommendations in one place. Existing apps weren't built for families, lacked trusted community reviews, and gave local providers no structured way to reach the right audience.",
+      built:
+        "Built a mobile-first community platform connecting families with trusted local places, activities, services, and events. Features personalized discovery, map and list exploration, reviews and bookmarking, provider profiles, advanced filters, multilingual support, and an admin moderation system — available on both iOS and Android.",
+      techDetail:
+        "Riverpod Generator state management, Firebase Auth, Google Maps for location-based discovery, and a FastAPI backend with admin moderation.",
+      outcome:
+        "Delivered as a scalable MVP — trusted local discovery for families and a structured ecosystem for service providers.",
+      tech: [
+        { name: "Flutter", icon: `${deviconBase}/flutter/flutter-original.svg` },
+        { name: "Dart", icon: `${deviconBase}/dart/dart-original.svg` },
+        { name: "Riverpod Generator", icon: `${deviconBase}/flutter/flutter-original.svg` },
+        { name: "FastAPI", icon: `${deviconBase}/fastapi/fastapi-original.svg` },
+        { name: "Firebase Auth", icon: `${deviconBase}/firebase/firebase-plain.svg` },
+      ],
+      screenshots: [
+        { src: "/projects/familyside/onboarding.png", caption: "Onboarding" },
+        { src: "/projects/familyside/Home.png", caption: "Home discovery feed" },
+        { src: "/projects/familyside/Search.png", caption: "Search" },
+        { src: "/projects/familyside/exploere.png", caption: "Explore" },
+        { src: "/projects/familyside/explorer map.png", caption: "Explore map" },
+        { src: "/projects/familyside/creation.png", caption: "Creation" },
+        { src: "/projects/familyside/analytics.png", caption: "Analytics" },
+      ],
+      color: "#455A64",
+    },
   ],
 };

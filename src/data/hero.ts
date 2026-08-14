@@ -18,7 +18,7 @@ export interface HeroData {
 }
 
 export const heroData: HeroData = {
-  roleLabel: "App Developer",
+  roleLabel: "Mobile App Developer",
 
   heading: {
     first: "Hi, I'm",
@@ -26,7 +26,7 @@ export const heroData: HeroData = {
   },
 
   subtitle:
-    "I build cross-platform mobile apps that solve real problems. 10+ apps published on Google Play and App Store — from dairy farming calculators to donation platforms and faith-based apps.",
+    "I'm a mobile app developer with 10+ apps published on Google Play and the App Store. I build for iOS and Android with Flutter, using GetX and Riverpod for state management and Firebase or Django REST Framework/FastAPI backends.",
 
   resumeUrl: "/resume.pdf",
 

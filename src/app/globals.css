@@ -59,6 +59,14 @@
     border: 2.5px solid #111111;
   }
 
+  .marquee-track {
+    animation: marquee 45s linear infinite;
+  }
+
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
   .neo-shadow-sm {
     box-shadow: 2.5px 2.5px 0px #111111;
   }
@@ -178,5 +186,14 @@
   ::-webkit-scrollbar-thumb {
     background: var(--color-neo-yellow);
     border: 2.5px solid #111111;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
   }
 }

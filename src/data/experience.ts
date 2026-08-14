@@ -21,9 +21,9 @@ export const experienceData: ExperienceData = {
       company: "Join Venture AI",
       period: "Nov 2025 — Present",
       highlights: [
-        "Developed and shipped 10+ Flutter applications published on Google Play and App Store",
-        "Awarded Employee of the Month for outstanding performance and meaningful contributions to product delivery",
-        "Contributed to R&D initiatives, helping evaluate and adopt new tools and patterns across the mobile team",
+        "Developed and shipped 10+ production mobile apps to Google Play and the App Store, across dairy farming, health, education, and social discovery domains",
+        "Awarded Employee of the Month for shipping features on schedule and picking up work beyond my assigned scope",
+        "Worked in the R&D team, evaluating state management and backend tooling before adopting it on client projects",
       ],
     },
     {
@@ -31,8 +31,8 @@ export const experienceData: ExperienceData = {
       company: "Aricho It",
       period: "Apr 2025 — Oct 2025",
       highlights: [
-        "Built production features using GetX state management and REST API integration, translating Figma designs into pixel-perfect Flutter UI",
-        "Collaborated with senior developers in real project workflows — code reviews, sprint planning, and feature delivery",
+        "Built production features using GetX state management and REST API integration, converting Figma designs into working, responsive UI",
+        "Worked in a senior-led team across code reviews, sprint planning, and end-to-end feature delivery",
       ],
     },
   ],

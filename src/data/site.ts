@@ -18,7 +18,7 @@ export const siteData: SiteData = {
   name: "Shougot Mollik",
 
   description:
-    "Jr. Flutter Developer | 10+ Published Apps on Play Store & App Store | GetX, Riverpod, Firebase",
+    "Jr. Mobile App Developer | 10+ Published Apps on Play Store & App Store | GetX, Riverpod, Firebase",
 
   navLinks: [
     { label: "About", href: "#about" },

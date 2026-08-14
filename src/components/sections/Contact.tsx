@@ -94,7 +94,7 @@ export default function Contact() {
                         ? "border-[#fa8f76] bg-[#fa8f76]/5"
                         : "border-[#111111] focus:bg-[#ffffff]"
                     }`}
-                    placeholder="Enter your name"
+                    placeholder={contactData.formPlaceholders.name}
                   />
                   {touched.name && errors.name && (
                     <motion.p
@@ -123,7 +123,7 @@ export default function Contact() {
                         ? "border-[#fa8f76] bg-[#fa8f76]/5"
                         : "border-[#111111] focus:bg-[#ffffff]"
                     }`}
-                    placeholder="Enter your email"
+                    placeholder={contactData.formPlaceholders.email}
                   />
                   {touched.email && errors.email && (
                     <motion.p
@@ -152,7 +152,7 @@ export default function Contact() {
                         ? "border-[#fa8f76] bg-[#fa8f76]/5"
                         : "border-[#111111] focus:bg-[#ffffff]"
                     }`}
-                    placeholder="Enter your message..."
+                    placeholder={contactData.formPlaceholders.message}
                   />
                   {touched.message && errors.message && (
                     <motion.p
@@ -194,25 +194,6 @@ export default function Contact() {
                   transition={{ delay: 0.3 }}
                 >
                   <span className="inline-block px-2.5 py-0.5 border-[1.5px] border-[#111111] bg-[#ffffff] rounded text-[10px] font-black uppercase tracking-wider mb-2">
-                    Email
-                  </span>
-                  <p>
-                    <a
-                      href={`mailto:${contactData.emailAddress}`}
-                      className="text-lg sm:text-xl font-black text-[#111111] hover:text-[#fa8f76] transition-colors"
-                    >
-                      {contactData.emailAddress}
-                    </a>
-                  </p>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.5 }}
-                >
-                  <span className="inline-block px-2.5 py-0.5 border-[1.5px] border-[#111111] bg-[#ffffff] rounded text-[10px] font-black uppercase tracking-wider mb-2">
                     Location
                   </span>
                   <p className="text-lg sm:text-xl font-black text-[#111111]/80">
@@ -224,7 +205,7 @@ export default function Contact() {
                   initial={{ opacity: 0, x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.6 }}
+                  transition={{ delay: 0.5 }}
                 >
                   <span className="inline-block px-2.5 py-0.5 border-[1.5px] border-[#111111] bg-[#ffffff] rounded text-[10px] font-black uppercase tracking-wider mb-2">
                     Socials

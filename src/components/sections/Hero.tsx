@@ -52,7 +52,7 @@ export default function Hero() {
           </motion.div>
 
           <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl md:text-6xl lg:text-7.5xl font-black leading-[1.05] text-[#111111] mb-8 tracking-tight max-w-2xl">
-            {heroData.heading.first} <span className="highlight-yellow inline-block px-1">{heroData.heading.accent}</span> — <span className="highlight-pink inline-block px-1">App</span> <span className="highlight-orange inline-block px-1">Developer</span>
+            {heroData.heading.first} <span className="highlight-yellow inline-block px-1">{heroData.heading.accent}</span> — <span className="highlight-pink inline-block px-1">Mobile App</span> <span className="highlight-orange inline-block px-1">Developer</span>
           </motion.h1>
 
           <motion.p variants={itemVariants} className="text-base sm:text-lg font-bold text-[#111111]/80 max-w-xl mb-8 leading-relaxed">
@@ -118,7 +118,7 @@ export default function Hero() {
 
               <div className="bg-[#fcd567] border-[2.5px] border-[#111111] rounded-xl p-4 neo-shadow-sm flex flex-col gap-1">
                 <span className="text-xs font-black text-[#111111] tracking-wide uppercase">Shougot Mollik</span>
-                <span className="text-xs font-bold text-[#111111]/80">BSc in CSE · Jr. Flutter Developer at Join Venture AI · 10+ apps shipped</span>
+                <span className="text-xs font-bold text-[#111111]/80">BSc in CSE · Jr. Mobile App Developer at Join Venture AI · 10+ apps shipped</span>
               </div>
             </div>
 
@@ -142,10 +142,10 @@ export default function Hero() {
         variants={{ visible: { transition: { staggerChildren: 0.1, delayChildren: 0.3 } } }}
       >
         {[
-          { bg: "bg-[#f2afd1]", icon: "📱", text: "10+ apps shipped — already live on stores" },
-          { bg: "bg-[#fcd567]", icon: "🔄", text: "From design to backend to deployment" },
-          { bg: "bg-[#9ee6ee]", icon: "💼", text: "Currently working at Join Venture AI" },
-          { bg: "bg-[#fa8f76]", icon: "⏱️", text: "On-time delivery with clean, scalable code" },
+          { bg: "bg-[#f2afd1]", icon: "📱", text: "10+ apps live on Google Play & App Store" },
+          { bg: "bg-[#fcd567]", icon: "🏗️", text: "Build & ship: Flutter, Firebase, REST APIs" },
+          { bg: "bg-[#9ee6ee]", icon: "💼", text: "Mobile app development experience" },
+          { bg: "bg-[#fa8f76]", icon: "🏆", text: "1st place in university programming contest" },
         ].map((pillar, i) => (
           <motion.div
             key={i}

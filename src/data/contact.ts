@@ -12,7 +12,6 @@ export interface ContactData {
     email: string;
     message: string;
   };
-  emailAddress: string;
   location: string;
   socials: SocialLink[];
   footerText: string;
@@ -20,15 +19,13 @@ export interface ContactData {
 
 export const contactData: ContactData = {
   label: "Contact",
-  headline: "Let's build something together.",
+  headline: "Have an app idea or an open role? Let's talk.",
 
   formPlaceholders: {
     name: "Your name",
     email: "Your email",
     message: "Tell me about your project or opportunity",
   },
-
-  emailAddress: "Shougotmollik@gmail.com",
 
   location: "Mohakhali, Dhaka-1212",
 
@@ -39,5 +36,5 @@ export const contactData: ContactData = {
   ],
 
   footerText:
-    "Open to Jr. Flutter Developer roles, freelance projects, and contract work. I typically respond within 24 hours.",
+    "Open to Jr. Mobile App Developer roles, freelance projects, and contract work. I typically respond within 24 hours.",
 };

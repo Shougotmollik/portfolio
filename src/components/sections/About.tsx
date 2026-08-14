@@ -22,7 +22,7 @@ export default function About() {
             </h2>
             <div className="mt-8 p-6 bg-[#9ae2ad] border-[2.5px] border-[#111111] rounded-xl neo-shadow rotate-[-1deg] hidden lg:block">
               <p className="text-sm font-black text-[#111111]">
-                ⚡️ &ldquo;Building mobile applications with clean architecture isn&rsquo;t just about code — it&rsquo;s about building scalable products that users love.&rdquo;
+                ⚡️ &ldquo;I focus on shipping working apps end to end — from Figma to production — and writing code the next developer can pick up easily.&rdquo;
               </p>
             </div>
           </Reveal>

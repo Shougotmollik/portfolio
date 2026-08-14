@@ -9,9 +9,9 @@ interface PhoneFrameProps {
   compact?: boolean;
 }
 
-export default function PhoneFrame({ children, gradient, color = "#D9491F", imageUrl, radius = "2.5rem", compact }: PhoneFrameProps) {
-  const innerRadius = `calc(${radius} - 4px)`;
-  const inset = compact ? "2px" : "4px";
+export default function PhoneFrame({ children, gradient, color = "#D9491F", imageUrl, radius = "1.25rem", compact }: PhoneFrameProps) {
+  const innerRadius = `calc(${radius} - 3px)`;
+  const inset = compact ? "2px" : "2px";
   return (
     <div className={`relative w-full aspect-[9/19] ${compact ? "" : "max-w-[260px]"} mx-auto`}>
       <div

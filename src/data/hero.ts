@@ -14,6 +14,10 @@ export interface HeroData {
     label: string;
     href: string;
   };
+  socials: {
+    github: string;
+    linkedin: string;
+  };
   phoneImages: [string, string, string];
 }
 
@@ -28,16 +32,21 @@ export const heroData: HeroData = {
   subtitle:
     "I'm a mobile app developer with 10+ apps published on Google Play and the App Store. I build for iOS and Android with Flutter, using GetX and Riverpod for state management and Firebase or Django REST Framework/FastAPI backends.",
 
-  resumeUrl: "/resume.pdf",
+  resumeUrl: "/shougot%20mollik.pdf",
 
   ctaPrimary: {
     label: "Download Resume",
-    href: "/resume.pdf",
+    href: "/shougot%20mollik.pdf",
   },
 
   ctaSecondary: {
     label: "Contact Me",
     href: "#contact",
+  },
+
+  socials: {
+    github: "https://github.com/shougotmollik",
+    linkedin: "https://linkedin.com/in/shougotmollik",
   },
 
   phoneImages: [

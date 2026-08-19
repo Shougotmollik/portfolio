@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { heroData } from "@/data/hero";
 import FloatingParticles from "@/components/ui/FloatingParticles";
 import Magnetic from "@/components/ui/Magnetic";
+import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -59,11 +60,11 @@ export default function Hero() {
             {heroData.subtitle}
           </motion.p>
 
-          <motion.div variants={itemVariants} className="flex flex-wrap gap-4">
+          <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-3.5">
             <Magnetic strength={0.15}>
               <a
                 href="#projects"
-                className="neo-btn neo-btn-white text-sm font-black px-8 py-3.5"
+                className="neo-btn neo-btn-white text-sm font-black px-6 sm:px-8 py-3.5"
               >
                 View Projects
               </a>
@@ -72,11 +73,37 @@ export default function Hero() {
               <a
                 href={heroData.ctaPrimary.href}
                 download
-                className="neo-btn neo-btn-primary text-sm font-black px-8 py-3.5"
+                className="neo-btn neo-btn-primary text-sm font-black px-6 sm:px-8 py-3.5"
               >
                 Get Resume
               </a>
             </Magnetic>
+            <div className="flex items-center gap-2.5">
+              <Magnetic strength={0.15}>
+                <a
+                  href={heroData.socials.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="neo-btn bg-[#0a66c2] text-white hover:bg-[#084e96] p-3.5 flex items-center justify-center gap-2 text-sm font-black transition-all"
+                  aria-label="LinkedIn Profile"
+                >
+                  <LinkedinIcon size={18} />
+                  <span className="hidden sm:inline">LinkedIn</span>
+                </a>
+              </Magnetic>
+              <Magnetic strength={0.15}>
+                <a
+                  href={heroData.socials.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="neo-btn bg-[#181717] text-white hover:bg-[#333333] p-3.5 flex items-center justify-center gap-2 text-sm font-black transition-all"
+                  aria-label="GitHub Profile"
+                >
+                  <GithubIcon size={18} />
+                  <span className="hidden sm:inline">GitHub</span>
+                </a>
+              </Magnetic>
+            </div>
           </motion.div>
         </div>
 
